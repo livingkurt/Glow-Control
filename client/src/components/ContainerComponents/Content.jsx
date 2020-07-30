@@ -16,6 +16,14 @@ const Content = (props) => {
 					<button>Off</button>
 				</div>
 				<ColorPicker />
+
+				<label for="red">Red</label>
+				<input type="range" min="0" max="255" defaultValue="50" className="slider" name="red" />
+				<label for="green">Green</label>
+				<input type="range" min="0" max="255" defaultValue="50" className="slider" name="green" />
+				<label for="blue">Blue</label>
+				<input type="range" min="0" max="255" defaultValue="50" className="slider" name="blue" />
+
 				<label for="brightness">Brightness</label>
 				<input type="range" min="0" max="255" defaultValue="50" className="slider" name="brightness" />
 				<label for="autoplay_duration">Autoplay Duration</label>
