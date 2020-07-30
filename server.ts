@@ -3,18 +3,20 @@ import express from 'express';
 import path from 'path';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+const PORT = 3001;
 // import config from './config';
 // const config = require('./config');
 // import { user_routes, product_routes, order_routes, email_routes } from './routes/index';
 // import Product from './models/product';
 
-// mongoose
-// 	.connect(config.RESTORED_MONGODB_URI, {
-// 		useNewUrlParser: true,
-// 		useUnifiedTopology: true,
-// 		useCreateIndex: true
-// 	})
-// 	.catch((error: { reason: any }) => console.log(error.reason));
+mongoose
+	.connect('mongodb://localhost/glow_leds_db' || process.env.MONGODB_URI, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useCreateIndex: true
+	})
+	.catch((error: { reason: any }) => console.log(error.reason));
 
 const app = express();
 app.use(bodyParser.json());
@@ -49,6 +51,6 @@ app.get('*', (request, response) => {
 	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
-app.listen(3001, () => {
+app.listen(PORT, () => {
 	console.log('Server started at http://localhost:5000');
 });
