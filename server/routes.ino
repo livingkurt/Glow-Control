@@ -18,7 +18,7 @@ void run_server()
     webServer.send(200, "text/json", json);
   });
 
-  webServer.on("/whoami", HTTP_GET, []() {
+  webServer.on("/device", HTTP_GET, []() {
     cors_set_access_control_headers();
     String json = "{\"name\":\"" + String(MY_NAME) + "\"}";
     webServer.send(200, "text/json", json);

@@ -3,16 +3,30 @@ import { ColorPicker } from '../ColorComponents';
 import API from '../../util/API';
 
 const Content = (props) => {
+	const query_url = '192.168.0.152';
+	// const query_url = '192.168.0.219';
+	// const query_url = '192.168.0.60';
+
+	useEffect(() => {
+		get_all_settings();
+		return () => {};
+	}, []);
 	const [ brightness, set_brightness ] = useState(255);
 	const [ autoplay, set_autoplay ] = useState(true);
 	const [ speed, set_speed ] = useState(50);
 
 	const update_leds = async (field_name, value) => {
 		try {
-			// const query_url = '192.168.0.219';
-			// const query_url = '192.168.0.60';
-			const query_url = '192.168.0.152';
 			const res = await API.update_leds(query_url, field_name, value);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const get_all_settings = async () => {
+		try {
+			const res = await API.get_all_settings();
+			console.log(res.data);
 		} catch (err) {
 			console.log(err);
 		}
@@ -20,9 +34,6 @@ const Content = (props) => {
 
 	const update_solid_color = async (red_value, green_value, blue_value) => {
 		try {
-			// const query_url = '192.168.0.219';
-			// const query_url = '192.168.0.60';
-			const query_url = '192.168.0.152';
 			const res = await API.update_solid_color(query_url, red_value, green_value, blue_value);
 		} catch (err) {
 			console.log(err);
