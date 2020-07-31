@@ -16,5 +16,8 @@ export default {
 	},
 	get_device_name: (query_url: string) => {
 		return axios.get(`http://${query_url}/device`);
+	},
+	reset_device: (query_url: string) => {
+		return axios.post(`http://${query_url}/reset`);
 	}
 };
