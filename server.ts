@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 const PORT = 3001;
+
 // import config from './config';
 // const config = require('./config');
 // import { user_routes, product_routes, order_routes, email_routes } from './routes/index';
@@ -19,6 +20,8 @@ mongoose
 	.catch((error: { reason: any }) => console.log(error.reason));
 
 const app = express();
+const cors = require('cors');
+app.use(cors());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

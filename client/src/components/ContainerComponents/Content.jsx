@@ -9,27 +9,76 @@ const Content = (props) => {
 
 	const update_leds = async (field_name, value) => {
 		try {
-			const query_url = '192.168.0.219';
+			// const query_url = '192.168.0.219';
+			// const query_url = '192.168.0.60';
+			const query_url = '192.168.0.152';
 			const res = await API.update_leds(query_url, field_name, value);
-			console.log(res);
-			// set_pet_state(res.data);
 		} catch (err) {
 			console.log(err);
 		}
 	};
+
+	const update_solid_color = async (red_value, green_value, blue_value) => {
+		try {
+			// const query_url = '192.168.0.219';
+			// const query_url = '192.168.0.60';
+			const query_url = '192.168.0.152';
+			const res = await API.update_solid_color(query_url, red_value, green_value, blue_value);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const patterns = [
+		'Pride',
+		'Cycle Rainbow Desaturated',
+		'Color Waves',
+		'Rainbow Twinkles',
+		'Snow Twinkles',
+		'Cloud Twinkles',
+		'Incandescent Twinkles',
+		'Solid Rainbow',
+		'Confetti',
+		'Sinelon',
+		'Beat',
+		'Juggle',
+		'Fire',
+		'Water',
+		'Solid Color'
+	];
+
+	const palettes = [
+		'Rainbow',
+		'Rainbow Stripe',
+		'Cloud',
+		'Lava',
+		'Ocean',
+		'Forest',
+		'Party',
+		'Heat',
+		'Ocean Sunset'
+	];
 
 	return (
 		<div className="content">
 			<div className="flex column">
 				<div>
 					<label>Power</label>
-					<button>On</button>
-					<button>Off</button>
+					<button name="power" onClick={(e) => update_leds(e.target.name, 1)}>
+						On
+					</button>
+					<button name="power" onClick={(e) => update_leds(e.target.name, 0)}>
+						Off
+					</button>
 				</div>
 				<div>
 					<label>Autoplay</label>
-					<button>On</button>
-					<button>Off</button>
+					<button name="autoplay" onClick={(e) => update_leds(e.target.name, 1)}>
+						On
+					</button>
+					<button name="autoplay" onClick={(e) => update_leds(e.target.name, 0)}>
+						Off
+					</button>
 				</div>
 				<ColorPicker />
 
@@ -48,16 +97,48 @@ const Content = (props) => {
 					defaultValue={brightness}
 					className="slider"
 					name="brightness"
-					onChange={(e) => update_leds(e.target.name, e.target.value)}
+					onMouseOut={(e) => update_leds(e.target.name, e.target.value)}
 				/>
 				<label for="autoplay_duration">Autoplay Duration</label>
-				<input type="range" min="0" max="255" defaultValue="50" className="slider" name="autoplay_duration" />
+				<input
+					type="range"
+					min="0"
+					max="255"
+					defaultValue="50"
+					className="slider"
+					name="autoplay_duration"
+					onMouseOut={(e) => update_leds(e.target.name, e.target.value)}
+				/>
 				<label for="speed">Speed</label>
-				<input type="range" min="0" max="255" defaultValue="50" className="slider" name="speed" />
+				<input
+					type="range"
+					min="0"
+					max="255"
+					defaultValue="50"
+					className="slider"
+					name="speed"
+					onMouseOut={(e) => update_leds(e.target.name, e.target.value)}
+				/>
 				<label for="pattern">Pattern</label>
-				<select type="range" min="0" max="255" defaultValue="50" className="slider" name="pattern" />
+				<select name="pattern" onChange={(e) => update_leds(e.target.name, e.target.value)}>
+					{patterns.map((pattern, index) => {
+						return (
+							<option value={index} key={index}>
+								{pattern}
+							</option>
+						);
+					})}
+				</select>
 				<label for="palette">Palette</label>
-				<select type="range" min="0" max="255" defaultValue="50" className="slider" name="palette" />
+				<select name="palette" onChange={(e) => update_leds(e.target.name, e.target.value)}>
+					{palettes.map((pattern, index) => {
+						return (
+							<option defaultValue={index} key={index}>
+								{pattern}
+							</option>
+						);
+					})}
+				</select>
 				<button>Reset</button>
 			</div>
 		</div>
