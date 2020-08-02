@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ColorPicker } from '../ColorComponents';
+import { ColorPicker, SettingSlider, RGBSlider, DropdownSelector } from '../ColorComponents';
 import API from '../../util/API';
+import { ToggleSwitch } from '../UtilityComponents';
 
 const Content = (props) => {
 	const query_url = '192.168.0.152';
@@ -12,25 +13,6 @@ const Content = (props) => {
 		return () => {};
 	}, []);
 
-	// const [ brightness, set_brightness ] = useState(255);
-	// const [ autoplay, set_autoplay ] = useState(true);
-	// const [ speed, set_speed ] = useState(50);
-	// const [ settings, set_settings ] = useState({
-	// 	power: 1,
-	// 	brightness: 255,
-	// 	pattern: 0,
-	// 	palette: 0,
-	// 	speed: 50,
-	// 	autoplay: 1,
-	// 	autoplayDuration: 0,
-	// 	solidColor: '255,128,0',
-	// 	fire: 50,
-	// 	cooling: 50,
-	// 	sparking: 120,
-	// 	twinkles: 120,
-	// 	twinkleSpeed: 120,
-	// 	twinkleDensity: 120
-	// });
 	const [ settings, set_settings ] = useState({});
 	const [ patterns, set_patterns ] = useState([]);
 	const [ palettes, set_palettes ] = useState([]);
@@ -38,6 +20,14 @@ const Content = (props) => {
 	const [ loading, set_loading ] = useState(true);
 
 	const update_leds = async (field_name, value) => {
+		try {
+			const res = await API.update_leds(query_url, field_name, value);
+			set_settings(res);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+	const update_rgb = async (field_name, value) => {
 		try {
 			const res = await API.update_leds(query_url, field_name, value);
 		} catch (err) {
@@ -84,120 +74,78 @@ const Content = (props) => {
 	console.log({ settings });
 
 	return (
-		<div className="content">
+		<div className="content w-100">
 			{loading ? (
 				<h1>Loading...</h1>
 			) : (
 				settings && (
-					<div className="flex column">
-						<div>
-							<label>Power</label>
-							<button name="power" onClick={(e) => update_leds(e.target.name, 1)}>
-								On
-							</button>
-							<button name="power" onClick={(e) => update_leds(e.target.name, 0)}>
-								Off
-							</button>
-						</div>
-						<div>
-							<label>Autoplay</label>
-							<button name="autoplay" onClick={(e) => update_leds(e.target.name, 1)}>
-								On
-							</button>
-							<button name="autoplay" onClick={(e) => update_leds(e.target.name, 0)}>
-								Off
-							</button>
-						</div>
+					<div className="column w-100">
+						<ToggleSwitch
+							display_name="Power"
+							setting_name="power"
+							update_function={update_leds}
+							settings={settings}
+						/>
+						<ToggleSwitch
+							display_name="Autoplay"
+							setting_name="autoplay"
+							update_function={update_leds}
+							settings={settings}
+						/>
 						<ColorPicker />
-
-						<label for="red">Red</label>
-						<input
-							type="range"
-							min="0"
-							max="255"
-							defaultValue={solid_color.red}
-							className="slider"
-							name="red"
+						<RGBSlider
+							display_name="Red"
+							setting_name="red"
+							update_function={update_rgb}
+							solid_color={solid_color.red}
 						/>
-						{console.log(solid_color.red)}
-						<label for="green">Green</label>
-						<input
-							type="range"
-							min="0"
-							max="255"
-							defaultValue={solid_color.green}
-							className="slider"
-							name="green"
+						<RGBSlider
+							display_name="Green"
+							setting_name="green"
+							update_function={update_rgb}
+							solid_color={solid_color.green}
 						/>
-						<label for="blue">Blue</label>
-						<input
-							type="range"
-							min="0"
-							max="255"
-							defaultValue={solid_color.blue}
-							className="slider"
-							name="blue"
+						<RGBSlider
+							display_name="Blue"
+							setting_name="blue"
+							update_function={update_rgb}
+							solid_color={solid_color.blue}
 						/>
-
-						<label for="brightness">Brightness</label>
-						<input
-							type="range"
-							min="0"
-							max="255"
-							defaultValue={settings.brightness}
-							className="slider"
-							name="brightness"
-							onMouseOut={(e) => update_leds(e.target.name, e.target.value)}
+						<SettingSlider
+							display_name="Brightness"
+							setting_name="brightness"
+							update_function={update_leds}
+							settings={settings}
 						/>
-						<label for="autoplay_duration">Autoplay Duration</label>
-						<input
-							type="range"
-							min="0"
-							max="255"
-							defaultValue={settings.autoplayDuration}
-							className="slider"
-							name="autoplay_duration"
-							onMouseOut={(e) => update_leds(e.target.name, e.target.value)}
+						<SettingSlider
+							display_name="Autoplay Duration"
+							setting_name="autoplayDuration"
+							update_function={update_leds}
+							settings={settings}
 						/>
-						<label for="speed">Speed</label>
-						<input
-							type="range"
-							min="0"
-							max="255"
-							defaultValue={settings.speed}
-							className="slider"
-							name="speed"
-							onMouseOut={(e) => update_leds(e.target.name, e.target.value)}
+						<SettingSlider
+							display_name="Speed"
+							setting_name="speed"
+							update_function={update_leds}
+							settings={settings}
 						/>
-						<label for="pattern">Pattern</label>
-						<select
-							name="pattern"
-							defaultValue={settings.pattern}
-							onChange={(e) => update_leds(e.target.name, e.target.value)}
-						>
-							{patterns.map((pattern, index) => {
-								return (
-									<option value={index} key={index}>
-										{pattern}
-									</option>
-								);
-							})}
-						</select>
-						<label for="palette">Palette</label>
-						<select
-							name="palette"
-							defaultValue={settings.palette}
-							onChange={(e) => update_leds(e.target.name, e.target.value)}
-						>
-							{palettes.map((pattern, index) => {
-								return (
-									<option value={index} key={index}>
-										{pattern}
-									</option>
-								);
-							})}
-						</select>
-						<button onClick={() => reset_device()}>Reset</button>
+						<DropdownSelector
+							display_name="Pattern"
+							setting_name="pattern"
+							update_function={update_leds}
+							data={patterns}
+							settings={settings}
+						/>
+						<DropdownSelector
+							display_name="Palette"
+							setting_name="palette"
+							update_function={update_leds}
+							data={palettes}
+							settings={settings}
+						/>
+						<button className="button primary" onClick={() => reset_device()}>
+							Reset
+						</button>
 					</div>
 				)
 			)}

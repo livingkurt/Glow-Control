@@ -44,7 +44,7 @@ ESP8266HTTPUpdateServer httpUpdateServer;
 
 // #define NUM_LEDS SYSTEM_MAX_LEDS //try to sync everything
 
-#define NUM_LEDS 200
+#define NUM_LEDS 500
 #define HALF_LEDS NUM_LEDS / 2
 
 #define HALF_SYSTEM_MAX_LEDS HALF_LEDS
