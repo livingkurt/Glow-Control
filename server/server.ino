@@ -81,6 +81,10 @@ uint8_t sparking = 120;
 
 uint8_t speed = 30;
 
+uint8_t strobeLength = 30;
+uint8_t gapLength = 30;
+uint8_t groupLength = 30;
+
 ///////////////////////////////////////////////////////////////////////
 
 // Forward declarations of an array of cpt-city gradient palettes, and
@@ -136,6 +140,7 @@ PatternAndNameList patterns = {
     // {shooting_star_rainbow_mirror, "Shooting Star Rainbow Mirror"},
     {cycle_rainbow_desaturated, "Cycle Rainbow Desaturated"},
     {colorWaves, "Color Waves"},
+    {strobe, "Strobe"},
 
     // twinkle patterns
     {rainbowTwinkles, "Rainbow Twinkles"},

@@ -26,7 +26,8 @@ uint8_t brightness = brightnessMap[brightnessIndex];
 //  return String(power);
 //}
 
-String getPower() {
+String getPower()
+{
   return String(power);
 }
 
@@ -37,18 +38,22 @@ String getPower() {
 //  return String(brightness);
 //}
 
-String getBrightness() {
+String getBrightness()
+{
   return String(brightness);
 }
 
-String getPattern() {
+String getPattern()
+{
   return String(currentPatternIndex);
 }
 
-String getPatterns() {
+String getPatterns()
+{
   String json = "";
 
-  for (uint8_t i = 0; i < patternCount; i++) {
+  for (uint8_t i = 0; i < patternCount; i++)
+  {
     json += "\"" + patterns[i].name + "\"";
     if (i < patternCount - 1)
       json += ",";
@@ -57,14 +62,17 @@ String getPatterns() {
   return json;
 }
 
-String getPalette() {
+String getPalette()
+{
   return String(currentPaletteIndex);
 }
 
-String getPalettes() {
+String getPalettes()
+{
   String json = "";
 
-  for (uint8_t i = 0; i < paletteCount; i++) {
+  for (uint8_t i = 0; i < paletteCount; i++)
+  {
     json += "\"" + paletteNames[i] + "\"";
     if (i < paletteCount - 1)
       json += ",";
@@ -73,55 +81,73 @@ String getPalettes() {
   return json;
 }
 
-String getAutoplay() {
+String getAutoplay()
+{
   return String(autoplay);
 }
 
-String getAutoplayDuration() {
+String getAutoplayDuration()
+{
   return String(autoplayDuration);
 }
 
-String getSolidColor() {
+String getSolidColor()
+{
   return String(solidColor.r) + "," + String(solidColor.g) + "," + String(solidColor.b);
 }
 
-String getCooling() {
+String getCooling()
+{
   return String(cooling);
 }
 
-String getSparking() {
+String getSparking()
+{
   return String(sparking);
 }
 
-String getSpeed() {
+String getSpeed()
+{
   return String(speed);
 }
+String getStrobeLength()
+{
+  return String(strobeLength);
+}
+String getGapLength()
+{
+  return String(gapLength);
+}
 
-String getTwinkleSpeed() {
+String getTwinkleSpeed()
+{
   return String(twinkleSpeed);
 }
 
-String getTwinkleDensity() {
+String getTwinkleDensity()
+{
   return String(twinkleDensity);
 }
 
 FieldList fields = {
-  { "power", "Power", BooleanFieldType, 0, 1, getPower },
-  { "brightness", "Brightness", NumberFieldType, 1, 255, getBrightness },
-  { "pattern", "Pattern", SelectFieldType, 0, patternCount, getPattern, getPatterns },
-  { "palette", "Palette", SelectFieldType, 0, paletteCount, getPalette, getPalettes },
-  { "speed", "Speed", NumberFieldType, 1, 255, getSpeed },
-  { "autoplay", "Autoplay", SectionFieldType },
-  { "autoplay", "Autoplay", BooleanFieldType, 0, 1, getAutoplay },
-  { "autoplayDuration", "Autoplay Duration", NumberFieldType, 0, 255, getAutoplayDuration },
-  { "solidColor", "Solid Color", SectionFieldType },
-  { "solidColor", "Color", ColorFieldType, 0, 255, getSolidColor },
-  { "fire", "Fire & Water", SectionFieldType },
-  { "cooling", "Cooling", NumberFieldType, 0, 255, getCooling },
-  { "sparking", "Sparking", NumberFieldType, 0, 255, getSparking },
-  { "twinkles", "Twinkles", SectionFieldType },
-  { "twinkleSpeed", "Twinkle Speed", NumberFieldType, 0, 8, getTwinkleSpeed },
-  { "twinkleDensity", "Twinkle Density", NumberFieldType, 0, 8, getTwinkleDensity },
+    {"power", "Power", BooleanFieldType, 0, 1, getPower},
+    {"brightness", "Brightness", NumberFieldType, 1, 255, getBrightness},
+    {"pattern", "Pattern", SelectFieldType, 0, patternCount, getPattern, getPatterns},
+    {"palette", "Palette", SelectFieldType, 0, paletteCount, getPalette, getPalettes},
+    {"speed", "Speed", NumberFieldType, 1, 255, getSpeed},
+    {"strobeLength", "Strobe Length", NumberFieldType, 0, 255, getStrobeLength},
+    {"gapLength", "Gap Length", NumberFieldType, 0, 255, getGapLength},
+    {"autoplay", "Autoplay", SectionFieldType},
+    {"autoplay", "Autoplay", BooleanFieldType, 0, 1, getAutoplay},
+    {"autoplayDuration", "Autoplay Duration", NumberFieldType, 0, 255, getAutoplayDuration},
+    {"solidColor", "Solid Color", SectionFieldType},
+    {"solidColor", "Color", ColorFieldType, 0, 255, getSolidColor},
+    {"fire", "Fire & Water", SectionFieldType},
+    {"cooling", "Cooling", NumberFieldType, 0, 255, getCooling},
+    {"sparking", "Sparking", NumberFieldType, 0, 255, getSparking},
+    {"twinkles", "Twinkles", SectionFieldType},
+    {"twinkleSpeed", "Twinkle Speed", NumberFieldType, 0, 8, getTwinkleSpeed},
+    {"twinkleDensity", "Twinkle Density", NumberFieldType, 0, 8, getTwinkleDensity},
 };
 
 uint8_t fieldCount = ARRAY_SIZE(fields);

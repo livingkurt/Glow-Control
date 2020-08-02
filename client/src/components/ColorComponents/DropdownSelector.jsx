@@ -3,10 +3,10 @@ import React, { useState, useEffect } from 'react';
 const DropdownSelector = (props) => {
 	return (
 		<div className="column m-v-s">
-			<label htmlFor={props.setting_name}>{props.display_name}</label>
+			<label htmlFor={props.setting.name}>{props.setting.label}</label>
 			<select
-				name={props.setting_name}
-				defaultValue={props.settings.pattern}
+				name={props.setting.name}
+				defaultValue={props.setting.value}
 				onChange={(e) => props.update_function(e.target.name, e.target.value)}
 			>
 				{props.data.map((item, index) => {

@@ -51,8 +51,8 @@ const Content = (props) => {
 			});
 			console.log(saved_settings.autoplay.value);
 			set_settings(saved_settings);
-			set_patterns(settings[2].options);
-			set_palettes(settings[3].options);
+			// set_patterns(settings[2].options);
+			// set_palettes(settings[3].options);
 			// let color = saved_settings.solidColor.split(',');
 			// set_solid_color({ red: parseInt(color[0]), blue: parseInt(color[1]), green: parseInt(color[2]) });
 			// console.log({ saved_settings });
@@ -182,7 +182,21 @@ const Content = (props) => {
 								path="/pattern"
 								component={() => (
 									<PatternPage>
-										
+										<h1 className="t-a-c">Pattern</h1>
+										<DropdownSelector
+											display_name="Pattern"
+											setting_name="pattern"
+											update_function={update_leds}
+											data={patterns}
+											setting={settings}
+										/>
+										<DropdownSelector
+											display_name="Palette"
+											setting_name="palette"
+											update_function={update_leds}
+											data={palettes}
+											setting={settings}
+										/>
 										<ToggleSwitch
 											display_name="Blend"
 											setting_name="blend"
@@ -205,70 +219,13 @@ const Content = (props) => {
 									</ShootingStarPage>
 								)}
 							/> */}
-							{/* <h1 className="t-a-c">Pattern</h1> */}
-							<DropdownSelector
-								update_function={update_leds}
-								data={patterns}
-								setting={settings.pattern}
-								settings={settings}
-							/>
-							<DropdownSelector
-								update_function={update_leds}
-								data={palettes}
-								setting={settings.palette}
-								settings={settings}
-							/>
-							<h1 className="t-a-c">Strobe</h1>
-							<SettingSlider
-								update_function={update_leds}
-								set_settings={set_settings}
-								setting={settings.strobeLength}
-								settings={settings}
-							/>
-							<SettingSlider
-								update_function={update_leds}
-								set_settings={set_settings}
-								setting={settings.gapLength}
-								settings={settings}
-							/>
-							<SettingSlider
-								update_function={update_leds}
-								set_settings={set_settings}
-								setting={settings}
-								settings={settings}
-							/>
-							{/* <h1 className="t-a-c">Macro Controls</h1> */}
-							<ToggleSwitch
-								update_function={update_leds}
-								set_settings={set_settings}
-								setting={settings.power}
-								settings={settings}
-							/>
-							<SettingSlider
-								update_function={update_leds}
-								set_settings={set_settings}
-								setting={settings.brightness}
-								settings={settings}
-							/>
-							<SettingSlider
-								update_function={update_leds}
-								set_settings={set_settings}
-								setting={settings.speed}
-								settings={settings}
-							/>
-							{/* <SettingSlider update_function={update_leds} set_settings={set_settings} setting={settings.colorDensity} /> */}
-							<ToggleSwitch
-								update_function={update_leds}
-								set_settings={set_settings}
-								setting={settings.autoplay}
-								settings={settings}
-							/>
-							<SettingSlider
-								update_function={update_leds}
-								set_settings={set_settings}
-								setting={settings.autoplayDuration}
-								settings={settings}
-							/>
+							<h1 className="t-a-c">Macro Controls</h1>
+							<ToggleSwitch update_function={update_leds} setting={settings.power} />
+							<SettingSlider update_function={update_leds} setting={settings.brightness} />
+							<SettingSlider update_function={update_leds} setting={settings.speed} />
+							{/* <SettingSlider update_function={update_leds} setting={settings.colorDensity} /> */}
+							<ToggleSwitch update_function={update_leds} setting={settings.autoplay} />
+							<SettingSlider update_function={update_leds} setting={settings.autoplayDuration} />
 							<button className="button primary" onClick={() => reset_device()}>
 								Reset
 							</button>
