@@ -11,6 +11,7 @@
 @import './width.scss';
 @import './margin.scss';
 @import './text-align.scss';
+@import './button.scss';
 
 $background_color: #272727;
 $content_bg_color: #272727;
@@ -718,68 +719,6 @@ video {
 	margin-top: 17px;
 	display: flex;
 	font-family: $heading_font;
-}
-
-// Button
-
-.button {
-	box-shadow: $bs_shallow;
-	// background-color: transparent;
-	color: $font_color;
-	border: 0px;
-	font-family: $main_font;
-	border-radius: $br_small_containers;
-	transition: all .5s ease;
-	padding: 10px;
-}
-
-.button:hover {
-	box-shadow: $bs_deep;
-	background-color: #bebcbc;
-}
-
-.button.primary {
-	background-color: #888888;
-}
-
-.button.primary:hover {
-	box-shadow: $bs_deep;
-	background-color: #a5a5a5;
-}
-
-.button.secondary {
-	background-color: #686767;
-}
-
-.button.secondary:hover {
-	box-shadow: $bs_deep;
-	background-color: #7c7c7c;
-}
-
-.button.nav {
-	background-color: transparent;
-	box-shadow: unset;
-}
-
-.button.icon {
-	box-shadow: unset;
-	padding: 6px 10px;
-}
-
-.button.icon:hover {
-	background-color: gray;
-	box-shadow: $bs_deep;
-}
-
-.button.mobile.nav {
-	background-color: transparent;
-	box-shadow: unset;
-}
-
-.button.nav:hover,
-.button.mobile.nav:hover {
-	box-shadow: $bs_deep;
-	background-color: gray;
 }
 
 /* Home Page */

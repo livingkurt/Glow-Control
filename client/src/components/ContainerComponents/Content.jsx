@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { ColorPicker, SettingSlider, RGBSlider, DropdownSelector } from '../ColorComponents';
+import { Route, BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import API from '../../util/API';
 import { ToggleSwitch } from '../UtilityComponents';
+import { StrobePage, SparklePage, PatternPage, ShootingStarPage, SolidColorPage } from '../pages';
 
 const Content = (props) => {
 	const query_url = '192.168.0.152';
@@ -74,82 +76,192 @@ const Content = (props) => {
 	console.log({ settings });
 
 	return (
-		<div className="content w-100">
-			{loading ? (
-				<h1>Loading...</h1>
-			) : (
-				settings && (
-					<div className="column w-100">
-						<ToggleSwitch
-							display_name="Power"
-							setting_name="power"
-							update_function={update_leds}
-							settings={settings}
-						/>
-						<ToggleSwitch
-							display_name="Autoplay"
-							setting_name="autoplay"
-							update_function={update_leds}
-							settings={settings}
-						/>
-						<ColorPicker />
-						<RGBSlider
-							display_name="Red"
-							setting_name="red"
-							update_function={update_rgb}
-							solid_color={solid_color.red}
-						/>
-						<RGBSlider
-							display_name="Green"
-							setting_name="green"
-							update_function={update_rgb}
-							solid_color={solid_color.green}
-						/>
-						<RGBSlider
-							display_name="Blue"
-							setting_name="blue"
-							update_function={update_rgb}
-							solid_color={solid_color.blue}
-						/>
-						<SettingSlider
-							display_name="Brightness"
-							setting_name="brightness"
-							update_function={update_leds}
-							settings={settings}
-						/>
-						<SettingSlider
-							display_name="Autoplay Duration"
-							setting_name="autoplayDuration"
-							update_function={update_leds}
-							settings={settings}
-						/>
-						<SettingSlider
-							display_name="Speed"
-							setting_name="speed"
-							update_function={update_leds}
-							settings={settings}
-						/>
-						<DropdownSelector
-							display_name="Pattern"
-							setting_name="pattern"
-							update_function={update_leds}
-							data={patterns}
-							settings={settings}
-						/>
-						<DropdownSelector
-							display_name="Palette"
-							setting_name="palette"
-							update_function={update_leds}
-							data={palettes}
-							settings={settings}
-						/>
-						<button className="button primary" onClick={() => reset_device()}>
-							Reset
-						</button>
-					</div>
-				)
-			)}
-		</div>
+		<Router>
+			<div className="content w-100">
+				{loading ? (
+					<h1>Loading...</h1>
+				) : (
+					settings && (
+						<div className="column w-100">
+							<div className="jc-e">
+								<Link to="/pattern">
+									<button className="btn btn-nav">Pattern</button>
+								</Link>
+								<Link to="/strobe">
+									<button className="btn btn-nav">Strobe</button>
+								</Link>
+								<Link to="/solid">
+									<button className="btn btn-nav">Solid Color</button>
+								</Link>
+								<Link to="/shootingstar">
+									<button className="btn btn-nav">Shooting Star</button>
+								</Link>
+								<Link to="/sparkle">
+									<button className="btn btn-nav">Sparkle</button>
+								</Link>
+							</div>
+
+							<Route
+								path="/strobe"
+								component={() => (
+									<StrobePage>
+										<h1 className="t-a-c">Strobe</h1>
+										<SettingSlider
+											display_name="Strobe Length"
+											setting_name="strobe"
+											update_function={update_leds}
+											settings={settings}
+										/>
+										<SettingSlider
+											display_name="Gap Length"
+											setting_name="gap"
+											update_function={update_leds}
+											settings={settings}
+										/>
+										<SettingSlider
+											display_name="Group Gap Length"
+											setting_name="gap"
+											update_function={update_leds}
+											settings={settings}
+										/>
+									</StrobePage>
+								)}
+							/>
+							<Route
+								path="/solid"
+								component={() => (
+									<SolidColorPage>
+										<h1 className="t-a-c">Solid Color</h1>
+										<ColorPicker />
+										<RGBSlider
+											display_name="Red"
+											setting_name="red"
+											update_function={update_rgb}
+											solid_color={solid_color.red}
+										/>
+										<RGBSlider
+											display_name="Green"
+											setting_name="green"
+											update_function={update_rgb}
+											solid_color={solid_color.green}
+										/>
+										<RGBSlider
+											display_name="Blue"
+											setting_name="blue"
+											update_function={update_rgb}
+											solid_color={solid_color.blue}
+										/>
+									</SolidColorPage>
+								)}
+							/>
+							<Route
+								path="/sparkle"
+								component={() => (
+									<SparklePage>
+										<h1 className="t-a-c">Sparkle</h1>
+										<SettingSlider
+											display_name="Sparkle Speed"
+											setting_name="sparkleSpeed"
+											update_function={update_leds}
+											settings={settings}
+										/>
+										<SettingSlider
+											display_name="Sparkle Density"
+											setting_name="sparkleDensity"
+											update_function={update_leds}
+											settings={settings}
+										/>
+									</SparklePage>
+								)}
+							/>
+							<Route
+								path="/pattern"
+								component={() => (
+									<PatternPage>
+										<h1 className="t-a-c">Pattern</h1>
+										<DropdownSelector
+											display_name="Pattern"
+											setting_name="pattern"
+											update_function={update_leds}
+											data={patterns}
+											settings={settings}
+										/>
+										<DropdownSelector
+											display_name="Palette"
+											setting_name="palette"
+											update_function={update_leds}
+											data={palettes}
+											settings={settings}
+										/>
+										<ToggleSwitch
+											display_name="Blend"
+											setting_name="blend"
+											update_function={update_leds}
+											settings={settings}
+										/>
+									</PatternPage>
+								)}
+							/>
+							<Route
+								path="/shootingstar"
+								component={() => (
+									<ShootingStarPage>
+										<SettingSlider
+											display_name="Tail Length"
+											setting_name="tailLength"
+											update_function={update_leds}
+											settings={settings}
+										/>
+									</ShootingStarPage>
+								)}
+							/>
+							<h1 className="t-a-c">Macro Controls</h1>
+							<ToggleSwitch
+								display_name="Power"
+								setting_name="power"
+								update_function={update_leds}
+								settings={settings}
+							/>
+							<SettingSlider
+								display_name="Brightness"
+								setting_name="brightness"
+								update_function={update_leds}
+								settings={settings}
+							/>
+							<SettingSlider
+								display_name="Speed"
+								setting_name="speed"
+								update_function={update_leds}
+								settings={settings}
+							/>
+							<SettingSlider
+								display_name="Color Density"
+								setting_name="colorDensity"
+								update_function={update_leds}
+								settings={settings}
+							/>
+
+							<ToggleSwitch
+								display_name="Autoplay"
+								setting_name="autoplay"
+								update_function={update_leds}
+								settings={settings}
+							/>
+							<SettingSlider
+								display_name="Autoplay Duration"
+								setting_name="autoplayDuration"
+								update_function={update_leds}
+								settings={settings}
+							/>
+
+							<button className="button primary" onClick={() => reset_device()}>
+								Reset
+							</button>
+						</div>
+					)
+				)}
+			</div>
+		</Router>
 	);
 };
 
