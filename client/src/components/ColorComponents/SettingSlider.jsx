@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const SettingSlider = (props) => {
 	const [ value, set_value ] = useState(props.setting.value);
 	return (
-		<div className="m-v-s">
+		<div className="m-v-s w-100">
 			<div className="row">
 				<label className="m-t-s w-16rem" htmlFor={props.setting.name}>
 					{props.setting.label}

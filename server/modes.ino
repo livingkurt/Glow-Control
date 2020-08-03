@@ -37,10 +37,44 @@ void rainbowWithGlitter()
   addGlitter(80);
 }
 
-void rainbowSolid()
+void cycle()
 {
-  fill_solid(leds, NUM_LEDS, CHSV(gHue, 255, 255));
+  // int start_index;
+  // start_index = -1 * millis() / colorSpeed;
+  // fill_solid(leds, NUM_LEDS, CHSV(start_index, 255, 255));
+  // start_index += colorDensity;
+
+  int start_index;
+  start_index = -1 * millis() / colorSpeed;
+  for (int i = 0; i < NUM_LEDS; i++)
+  {
+    // leds[i] = CHSV(start_hue, 255, 255);
+    leds[i] = ColorFromPalette(palettes[currentPaletteIndex], start_index, 255, blendMode == 0 ? NOBLEND : LINEARBLEND);
+    start_index += colorDensity;
+  };
+  // fill_solid(leds, NUM_LEDS, CHSV(start_index, 255, beatsin16(speed, 50, 255))); // Set all to Off.
+
+  // FastLED.show();
 }
+
+// void strobe_mode()
+// {
+//   int start_index;
+//   start_index = -1 * millis() / colorSpeed;
+//   for (int i = 0; i < NUM_LEDS; i++)
+//   {
+//     // leds[i] = CHSV(start_hue, 255, 255);
+//     leds[i] = ColorFromPalette(palettes[currentPaletteIndex], start_index, 255, blendMode == 0 ? NOBLEND : LINEARBLEND);
+//     start_index += colorDensity;
+//   };
+
+//   // FastLED.show();
+//   // hold(strobe);
+//   // fill_solid(leds, NUM_LEDS, CHSV(0, 0, 0));
+
+//   // FastLED.show();
+//   // hold(blank);
+// }
 
 void confetti()
 {
@@ -470,18 +504,8 @@ void pulse()
 {
   int start_index;
   start_index = -1 * millis() / colorSpeed;
-  // fill_solid(leds, NUM_LEDS, CHSV(0, 0, beat8(speed))); // Set all to Off.
-  // // fill_solid(leds, NUM_LEDS, ColorFromPalette(palettes[currentPaletteIndex], start_index, beatsin8(speed, 10, 255), NOBLEND)); // Set all to Off.
-  // // leds[i] = ColorFromPalette(palettes[currentPaletteIndex], start_index, beatsin16(10, 50, 150), blendMode == 0 ? NOBLEND : LINEARBLEND);
-
-  // // hold(speed);
-  // // FastLED.show();
-  // int strobe = 10;
-  // fill_solid(leds, NUM_LEDS, CHSV(0, 0, beatsin16(speed, 50, 255))); // Set all to Off.
   fill_solid(leds, NUM_LEDS, CHSV(start_index, 255, beatsin16(speed, 50, 255))); // Set all to Off.
   start_index += colorDensity;
-  // fill_solid(leds, NUM_LEDS, CHSV(0, 0, triwave8(speed))); // Set all to Off.
-  // hold(speed);
   FastLED.show();
 }
 

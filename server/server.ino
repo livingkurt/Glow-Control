@@ -39,13 +39,13 @@ ESP8266HTTPUpdateServer httpUpdateServer;
 
 #define MY_NAME "String Lights" //burn kitchen
 #define DATA_PIN D2
-#define SYSTEM_MAX_LEDS 9 * 50
+#define SYSTEM_MAX_LEDS 50
 #define LED_TYPE WS2811 //LED String
 #define COLOR_ORDER RGB // LED String
 
-// #define NUM_LEDS SYSTEM_MAX_LEDS //try to sync everything
+#define NUM_LEDS SYSTEM_MAX_LEDS //try to sync everything
 
-#define NUM_LEDS 500
+// #define NUM_LEDS 500
 #define HALF_LEDS NUM_LEDS / 2
 
 #define HALF_SYSTEM_MAX_LEDS HALF_LEDS
@@ -143,41 +143,18 @@ typedef PatternAndName PatternAndNameList[];
 // List of patterns to cycle through.  Each is defined as a separate function below.
 
 PatternAndNameList patterns = {
-    {pride, "Pride"},
-    //  { prideScaled,            "Pride Scaled" },
-    // {shooting_star_rainbow_mirror, "Shooting Star Rainbow Mirror"},
-    {cycle_rainbow_desaturated, "Cycle Rainbow Desaturated"},
-    {colorWaves, "Color Waves"},
     {strobe_mode, "Strobe"},
     {pulse, "Pulse"},
-
+    {cycle, "Cycle"},
+    {pride, "Pride"},
+    {rainbowWithGlitter, "Rainbow With Glitter"},
+    {cycle_rainbow_desaturated, "Cycle Rainbow Desaturated"},
+    {colorWaves, "Color Waves"},
     // twinkle patterns
     {rainbowTwinkles, "Rainbow Twinkles"},
     {snowTwinkles, "Snow Twinkles"},
     {cloudTwinkles, "Cloud Twinkles"},
     {incandescentTwinkles, "Incandescent Twinkles"},
-
-    // TwinkleFOX patterns
-    // {retroC9Twinkles, "Retro C9 Twinkles"},
-    // {redWhiteTwinkles, "Red & White Twinkles"},
-    // {redWhiteGreenTwinkles, "Red, White, & Green Twinkles"},
-    // {blueWhiteTwinkles, "Blue & White Twinkles"},
-    // {redGreenWhiteTwinkles, "Red, Green & White Twinkles"},
-    // {whiteTwinkles, "White Twinkles"},
-    // {fairyLightTwinkles, "Fairy Light Twinkles"},
-    // {snow2Twinkles, "Snow 2 Twinkles"},
-    // {hollyTwinkles, "Holly Twinkles"},
-    // {iceTwinkles, "Ice Twinkles"},
-    // {partyTwinkles, "Party Twinkles"},
-    // {forestTwinkles, "Forest Twinkles"},
-    // {lavaTwinkles, "Lava Twinkles"},
-    // {fireTwinkles, "Fire Twinkles"},
-    // {cloud2Twinkles, "Cloud 2 Twinkles"},
-    // {oceanTwinkles, "Ocean Twinkles"},
-    //
-    //  { rainbow,                "Rainbow" },
-    //  { rainbowWithGlitter,     "Rainbow With Glitter" },
-    {rainbowSolid, "Solid Rainbow"},
     {confetti, "Confetti"},
     {sinelon, "Sinelon"},
     {bpm, "Beat"},
