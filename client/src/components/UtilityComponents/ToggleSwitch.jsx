@@ -3,7 +3,7 @@ import React from 'react';
 const ToggleSwitch = (props) => {
 	return (
 		<div className="m-v-s ai-c">
-			<label className="w-10">{props.setting.label}</label>
+			<label className="w-14rem">{props.setting.label}</label>
 			<label className="switch">
 				<input
 					type="checkbox"

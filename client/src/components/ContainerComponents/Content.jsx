@@ -34,14 +34,10 @@ const Content = (props) => {
 	const update_leds = async (field_name, value) => {
 		try {
 			const res = await API.update_leds(query_url, field_name, value);
-			// set_settings(res);
-
 			if (field_name === 'pattern') {
 				let pattern = camelize(patterns[value]);
 				console.log(pattern);
 				set_mode_specific_settings(pattern);
-				// history.push(link);
-				// document.location = link;
 			}
 		} catch (err) {
 			console.log(err);
@@ -72,14 +68,8 @@ const Content = (props) => {
 			set_settings(saved_settings);
 			set_patterns(settings[2].options);
 			set_palettes(settings[3].options);
-
-			// let color = saved_settings.solidColor.split(',');
-			// set_solid_color({ red: parseInt(color[0]), blue: parseInt(color[1]), green: parseInt(color[2]) });
-			// console.log({ saved_settings });
-			// let pattern = camelize(saved_settings.pattern.value);
-
+			set_mode_specific_settings(camelize(saved_settings.pattern.options[saved_settings.pattern.value]));
 			set_loading(false);
-			set_mode_specific_settings(saved_settings.pattern.value);
 		} catch (err) {
 			console.log(err);
 		}
@@ -142,6 +132,34 @@ const Content = (props) => {
 								settings={settings}
 							/>
 
+							{settings.pattern.options
+								.map((pattern) => {
+									return camelize(pattern);
+								})
+								.includes(mode_specific_settings) && (
+								<div>
+									<h2 className="t-a-c">Macro Controls</h2>
+									<SettingSlider
+										update_function={update_leds}
+										set_settings={set_settings}
+										setting={settings.brightness}
+										settings={settings}
+									/>
+									<ToggleSwitch
+										update_function={update_leds}
+										set_settings={set_settings}
+										setting={settings.autoplay}
+										settings={settings}
+									/>
+									<SettingSlider
+										update_function={update_leds}
+										set_settings={set_settings}
+										setting={settings.autoplayDuration}
+										settings={settings}
+									/>
+								</div>
+							)}
+
 							{/* {mode_specific_settings === 'strobe' ||
 								(mode_specific_settings === 'confetti' && (
 									<div>
@@ -186,12 +204,12 @@ const Content = (props) => {
 									/>
 								</div>
 							)}
-
+							{console.log(mode_specific_settings)}
 							{[ 'rainbowTwinkles', 'snowTwinkles', 'cloudTwinkles', 'incandescentTwinkles' ].includes(
 								mode_specific_settings
 							) && (
 								<div>
-									<h1 className="t-a-c">Sparkle</h1>
+									<h2 className="t-a-c">Sparkle</h2>
 									<SettingSlider
 										update_function={update_leds}
 										setting={settings.twinkleSpeed}
@@ -241,33 +259,7 @@ const Content = (props) => {
 									/>
 								</div>
 							)}
-							<h1 className="t-a-c">Macro Controls</h1>
-							{settings.pattern.options
-								.map((pattern) => {
-									return camelize(pattern);
-								})
-								.includes(mode_specific_settings) && (
-								<div>
-									<SettingSlider
-										update_function={update_leds}
-										set_settings={set_settings}
-										setting={settings.brightness}
-										settings={settings}
-									/>
-									<ToggleSwitch
-										update_function={update_leds}
-										set_settings={set_settings}
-										setting={settings.autoplay}
-										settings={settings}
-									/>
-									<SettingSlider
-										update_function={update_leds}
-										set_settings={set_settings}
-										setting={settings.autoplayDuration}
-										settings={settings}
-									/>
-								</div>
-							)}
+
 							{/* <SettingSlider
 								update_function={update_leds}
 								set_settings={set_settings}
@@ -277,7 +269,7 @@ const Content = (props) => {
 
 							{mode_specific_settings === 'strobe' && (
 								<div>
-									<h1 className="t-a-c">Strobe</h1>
+									<h2 className="t-a-c">Strobe</h2>
 									<SettingSlider
 										update_function={update_leds}
 										set_settings={set_settings}
@@ -300,7 +292,7 @@ const Content = (props) => {
 							)}
 							{mode_specific_settings === 'solidColor' && (
 								<div>
-									<h1 className="t-a-c">Solid Color</h1>
+									<h2 className="t-a-c">Solid Color</h2>
 									<ColorPicker />
 									<RGBSlider
 										display_name="Red"

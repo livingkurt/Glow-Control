@@ -4,17 +4,17 @@ const SettingSlider = (props) => {
 	const [ value, set_value ] = useState(props.setting.value);
 	return (
 		<div className="m-v-s">
-			<label className="m-t-s" htmlFor={props.setting.name}>
-				{props.setting.label}
-			</label>
 			<div className="row">
+				<label className="m-t-s w-16rem" htmlFor={props.setting.name}>
+					{props.setting.label}
+				</label>
 				<input
 					type="number"
 					min={props.setting.min}
 					max={props.setting.max}
 					step={props.setting.step}
 					value={value}
-					className="w-6rem m-r-l"
+					className="w-8rem m-r-l"
 					name={props.setting.name}
 					onMouseUp={(e) => props.update_function(e.target.name, e.target.value)}
 					// onChange={(e) =>
@@ -34,6 +34,7 @@ const SettingSlider = (props) => {
 					className="w-90"
 					name={props.setting.name}
 					onMouseUp={(e) => props.update_function(e.target.name, e.target.value)}
+					onBlur={(e) => props.update_function(e.target.name, e.target.value)}
 					// onChange={(e) =>
 					// 	props.set_settings({
 					// 		...props.settings,
