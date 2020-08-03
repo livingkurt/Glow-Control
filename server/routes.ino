@@ -181,6 +181,13 @@ void run_server()
     sendInt(brightness);
   });
 
+  webServer.on("/blendMode", HTTP_POST, []() {
+    cors_set_access_control_headers();
+    String value = webServer.arg("value");
+    setBlendMode(value.toInt());
+    sendInt(blendMode);
+  });
+
   webServer.on("/autoplay", HTTP_POST, []() {
     cors_set_access_control_headers();
     String value = webServer.arg("value");

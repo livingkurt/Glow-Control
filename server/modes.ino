@@ -250,7 +250,7 @@ void radialPaletteShift()
   for (uint16_t i = 0; i < NUM_LEDS; i++)
   {
     // leds[i] = ColorFromPalette( gCurrentPalette, gHue + sin8(i*16), brightness);
-    leds[i] = ColorFromPalette(gCurrentPalette, i + gHue, 255, LINEARBLEND);
+    leds[i] = ColorFromPalette(gCurrentPalette, i + gHue, 255, blendMode == 0 ? NOBLEND : LINEARBLEND);
   }
 }
 
@@ -408,7 +408,7 @@ void palettetest(CRGB *ledarray, uint16_t numleds, const CRGBPalette16 &gCurrent
 {
   static uint8_t startindex = 0;
   startindex--;
-  fill_palette(ledarray, numleds, startindex, (256 / NUM_LEDS) + 1, gCurrentPalette, 255, LINEARBLEND);
+  fill_palette(ledarray, numleds, startindex, (256 / NUM_LEDS) + 1, gCurrentPalette, 255, blendMode == 0 ? NOBLEND : LINEARBLEND);
 }
 
 void shooting_star_rainbow_mirror()
@@ -454,7 +454,7 @@ void strobe_mode()
   for (int i = 0; i < NUM_LEDS; i++)
   {
     // leds[i] = CHSV(start_hue, 255, 255);
-    leds[i] = ColorFromPalette(palettes[currentPaletteIndex], start_index, 255, LINEARBLEND);
+    leds[i] = ColorFromPalette(palettes[currentPaletteIndex], start_index, 255, blendMode == 0 ? NOBLEND : LINEARBLEND);
     start_index += colorDensity;
   };
 
@@ -472,7 +472,7 @@ void pulse()
   start_index = -1 * millis() / colorSpeed;
   // fill_solid(leds, NUM_LEDS, CHSV(0, 0, beat8(speed))); // Set all to Off.
   // // fill_solid(leds, NUM_LEDS, ColorFromPalette(palettes[currentPaletteIndex], start_index, beatsin8(speed, 10, 255), NOBLEND)); // Set all to Off.
-  // // leds[i] = ColorFromPalette(palettes[currentPaletteIndex], start_index, beatsin16(10, 50, 150), LINEARBLEND);
+  // // leds[i] = ColorFromPalette(palettes[currentPaletteIndex], start_index, beatsin16(10, 50, 150), blendMode == 0 ? NOBLEND : LINEARBLEND);
 
   // // hold(speed);
   // // FastLED.show();
@@ -497,8 +497,8 @@ void pulse()
 //   for (int i = 0; i < NUM_LEDS / 2; i++)
 
 //   {
-//     leds[i] = ColorFromPalette(currentPalette, start_index, BRIGHTNESS, LINEARBLEND);
-//     leds[NUM_LEDS - 1 - i] = ColorFromPalette(currentPalette, start_index, BRIGHTNESS, LINEARBLEND);
+//     leds[i] = ColorFromPalette(currentPalette, start_index, BRIGHTNESS, blendMode == 0 ? NOBLEND : LINEARBLEND);
+//     leds[NUM_LEDS - 1 - i] = ColorFromPalette(currentPalette, start_index, BRIGHTNESS, blendMode == 0 ? NOBLEND : LINEARBLEND);
 //     start_index += index_interval;
 //   };
 //   FastLED.show();

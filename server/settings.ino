@@ -63,6 +63,16 @@ void setAutoplay(uint8_t value)
   broadcastInt("autoplay", autoplay);
 }
 
+void setBlendMode(uint8_t value)
+{
+  blendMode = value == 0 ? 0 : 1;
+
+  EEPROM.write(9, blendMode);
+  EEPROM.commit();
+
+  broadcastInt("blendMode", blendMode);
+}
+
 void setAutoplayDuration(uint8_t value)
 {
   autoplayDuration = value;

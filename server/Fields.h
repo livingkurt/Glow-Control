@@ -85,6 +85,10 @@ String getAutoplay()
 {
   return String(autoplay);
 }
+String getBlendMode()
+{
+  return String(blendMode);
+}
 
 String getAutoplayDuration()
 {
@@ -154,6 +158,7 @@ FieldList fields = {
     {"colorSpeed", "Color Speed", NumberFieldType, 1, 110, 1, getColorSpeed},
     {"autoplay", "Autoplay", SectionFieldType},
     {"autoplay", "Autoplay", BooleanFieldType, 0, 1, 1, getAutoplay},
+    {"blendMode", "Blend", BooleanFieldType, 0, 1, 1, getBlendMode},
     {"autoplayDuration", "Autoplay Duration", NumberFieldType, 0, 255, 1, getAutoplayDuration},
     {"solidColor", "Solid Color", SectionFieldType},
     {"solidColor", "Color", ColorFieldType, 0, 255, 1, getSolidColor},

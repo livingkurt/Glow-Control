@@ -153,7 +153,7 @@ const Content = (props) => {
 										/>
 									</div>
 								))} */}
-							{[ 'strobe', 'confetti' ].includes(mode_specific_settings) && (
+							{[ 'strobe', 'confetti', 'sinelon' ].includes(mode_specific_settings) && (
 								<div>
 									<DropdownSelector
 										update_function={update_leds}
@@ -164,7 +164,7 @@ const Content = (props) => {
 									<ToggleSwitch
 										update_function={update_leds}
 										set_settings={set_settings}
-										setting={settings.blend}
+										setting={settings.blendMode}
 										settings={settings}
 									/>
 								</div>
