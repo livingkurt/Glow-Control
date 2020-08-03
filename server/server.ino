@@ -81,9 +81,13 @@ uint8_t sparking = 120;
 
 uint8_t speed = 30;
 
-uint8_t strobeLength = 30;
-uint8_t gapLength = 30;
-uint8_t groupLength = 30;
+uint8_t strobe = 30;
+uint8_t gap = 30;
+uint8_t blank = 30;
+
+uint8_t rate = 10;
+uint8_t colorDensity = 10;
+// uint8_t start_index = -1 * millis() / rate;
 
 ///////////////////////////////////////////////////////////////////////
 
@@ -140,7 +144,7 @@ PatternAndNameList patterns = {
     // {shooting_star_rainbow_mirror, "Shooting Star Rainbow Mirror"},
     {cycle_rainbow_desaturated, "Cycle Rainbow Desaturated"},
     {colorWaves, "Color Waves"},
-    {strobe, "Strobe"},
+    {strobe_mode, "Strobe"},
 
     // twinkle patterns
     {rainbowTwinkles, "Rainbow Twinkles"},

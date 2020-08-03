@@ -77,19 +77,33 @@ void run_server()
     sendInt(speed);
   });
 
-  webServer.on("/strobeLength", HTTP_POST, []() {
+  webServer.on("/strobe", HTTP_POST, []() {
     cors_set_access_control_headers();
     String value = webServer.arg("value");
-    strobeLength = value.toInt();
-    broadcastInt("strobeLength", strobeLength);
-    sendInt(strobeLength);
+    strobe = value.toInt();
+    broadcastInt("strobe", strobe);
+    sendInt(strobe);
   });
-  webServer.on("/gapLength", HTTP_POST, []() {
+  webServer.on("/blank", HTTP_POST, []() {
     cors_set_access_control_headers();
     String value = webServer.arg("value");
-    gapLength = value.toInt();
-    broadcastInt("gapLength", gapLength);
-    sendInt(gapLength);
+    blank = value.toInt();
+    broadcastInt("blank", blank);
+    sendInt(blank);
+  });
+  webServer.on("/gap", HTTP_POST, []() {
+    cors_set_access_control_headers();
+    String value = webServer.arg("value");
+    gap = value.toInt();
+    broadcastInt("gap", gap);
+    sendInt(gap);
+  });
+  webServer.on("/colorDensity", HTTP_POST, []() {
+    cors_set_access_control_headers();
+    String value = webServer.arg("value");
+    colorDensity = value.toInt();
+    broadcastInt("colorDensity", colorDensity);
+    sendInt(colorDensity);
   });
 
   webServer.on("/twinkleSpeed", HTTP_POST, []() {

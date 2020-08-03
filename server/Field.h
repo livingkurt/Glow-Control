@@ -25,12 +25,14 @@ const String SelectFieldType = "Select";
 const String ColorFieldType = "Color";
 const String SectionFieldType = "Section";
 
-typedef struct Field {
+typedef struct Field
+{
   String name;
   String label;
   String type;
   uint8_t min;
   uint8_t max;
+  uint8_t step;
   FieldGetter getValue;
   FieldGetter getOptions;
   FieldSetter setValue;
@@ -38,55 +40,70 @@ typedef struct Field {
 
 typedef Field FieldList[];
 
-Field getField(String name, FieldList fields, uint8_t count) {
-  for (uint8_t i = 0; i < count; i++) {
+Field getField(String name, FieldList fields, uint8_t count)
+{
+  for (uint8_t i = 0; i < count; i++)
+  {
     Field field = fields[i];
-    if (field.name == name) {
+    if (field.name == name)
+    {
       return field;
     }
   }
   return Field();
 }
 
-String getFieldValue(String name, FieldList fields, uint8_t count) {
+String getFieldValue(String name, FieldList fields, uint8_t count)
+{
   Field field = getField(name, fields, count);
-  if (field.getValue) {
+  if (field.getValue)
+  {
     return field.getValue();
   }
   return String();
 }
 
-String setFieldValue(String name, String value, FieldList fields, uint8_t count) {
+String setFieldValue(String name, String value, FieldList fields, uint8_t count)
+{
   Field field = getField(name, fields, count);
-  if (field.setValue) {
+  if (field.setValue)
+  {
     return field.setValue(value);
   }
   return String();
 }
 
-String getFieldsJson(FieldList fields, uint8_t count) {
+String getFieldsJson(FieldList fields, uint8_t count)
+{
   String json = "[";
 
-  for (uint8_t i = 0; i < count; i++) {
+  for (uint8_t i = 0; i < count; i++)
+  {
     Field field = fields[i];
 
     json += "{\"name\":\"" + field.name + "\",\"label\":\"" + field.label + "\",\"type\":\"" + field.type + "\"";
 
-    if(field.getValue) {
-      if (field.type == ColorFieldType || field.type == "String") {
+    if (field.getValue)
+    {
+      if (field.type == ColorFieldType || field.type == "String")
+      {
         json += ",\"value\":\"" + field.getValue() + "\"";
       }
-      else {
+      else
+      {
         json += ",\"value\":" + field.getValue();
       }
     }
 
-    if (field.type == NumberFieldType) {
+    if (field.type == NumberFieldType)
+    {
       json += ",\"min\":" + String(field.min);
       json += ",\"max\":" + String(field.max);
+      json += ",\"step\":" + String(field.step);
     }
 
-    if (field.getOptions) {
+    if (field.getOptions)
+    {
       json += ",\"options\":[";
       json += field.getOptions();
       json += "]";

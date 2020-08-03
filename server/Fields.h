@@ -110,13 +110,21 @@ String getSpeed()
 {
   return String(speed);
 }
-String getStrobeLength()
+String getStrobe()
 {
-  return String(strobeLength);
+  return String(strobe);
 }
-String getGapLength()
+String getBlank()
 {
-  return String(gapLength);
+  return String(blank);
+}
+String getGap()
+{
+  return String(gap);
+}
+String getColorDensity()
+{
+  return String(colorDensity);
 }
 
 String getTwinkleSpeed()
@@ -130,24 +138,26 @@ String getTwinkleDensity()
 }
 
 FieldList fields = {
-    {"power", "Power", BooleanFieldType, 0, 1, getPower},
-    {"brightness", "Brightness", NumberFieldType, 1, 255, getBrightness},
-    {"pattern", "Pattern", SelectFieldType, 0, patternCount, getPattern, getPatterns},
-    {"palette", "Palette", SelectFieldType, 0, paletteCount, getPalette, getPalettes},
-    {"speed", "Speed", NumberFieldType, 1, 255, getSpeed},
-    {"strobeLength", "Strobe Length", NumberFieldType, 0, 255, getStrobeLength},
-    {"gapLength", "Gap Length", NumberFieldType, 0, 255, getGapLength},
+    {"power", "Power", BooleanFieldType, 0, 1, 1, getPower},
+    {"brightness", "Brightness", NumberFieldType, 1, 255, 1, getBrightness},
+    {"pattern", "Pattern", SelectFieldType, 0, patternCount, 1, getPattern, getPatterns},
+    {"palette", "Palette", SelectFieldType, 0, paletteCount, 1, getPalette, getPalettes},
+    {"speed", "Speed", NumberFieldType, 1, 255, 1, getSpeed},
+    {"strobe", "Strobe", NumberFieldType, 0, 255, 1, getStrobe},
+    {"blank", "Blank", NumberFieldType, 0, 255, 1, getBlank},
+    {"gap", "Gap", NumberFieldType, 0, 255, 1, getGap},
+    {"colorDensity", "Color Density", NumberFieldType, 0, 30, 1, getColorDensity},
     {"autoplay", "Autoplay", SectionFieldType},
-    {"autoplay", "Autoplay", BooleanFieldType, 0, 1, getAutoplay},
-    {"autoplayDuration", "Autoplay Duration", NumberFieldType, 0, 255, getAutoplayDuration},
+    {"autoplay", "Autoplay", BooleanFieldType, 0, 1, 1, getAutoplay},
+    {"autoplayDuration", "Autoplay Duration", NumberFieldType, 0, 255, 1, getAutoplayDuration},
     {"solidColor", "Solid Color", SectionFieldType},
-    {"solidColor", "Color", ColorFieldType, 0, 255, getSolidColor},
+    {"solidColor", "Color", ColorFieldType, 0, 255, 1, getSolidColor},
     {"fire", "Fire & Water", SectionFieldType},
-    {"cooling", "Cooling", NumberFieldType, 0, 255, getCooling},
-    {"sparking", "Sparking", NumberFieldType, 0, 255, getSparking},
+    {"cooling", "Cooling", NumberFieldType, 0, 255, 1, getCooling},
+    {"sparking", "Sparking", NumberFieldType, 0, 255, 1, getSparking},
     {"twinkles", "Twinkles", SectionFieldType},
-    {"twinkleSpeed", "Twinkle Speed", NumberFieldType, 0, 8, getTwinkleSpeed},
-    {"twinkleDensity", "Twinkle Density", NumberFieldType, 0, 8, getTwinkleDensity},
+    {"twinkleSpeed", "Twinkle Speed", NumberFieldType, 0, 8, 1, getTwinkleSpeed},
+    {"twinkleDensity", "Twinkle Density", NumberFieldType, 0, 8, 1, getTwinkleDensity},
 };
 
 uint8_t fieldCount = ARRAY_SIZE(fields);

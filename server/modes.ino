@@ -448,29 +448,47 @@ void cycle_rainbow_desaturated()
   // FastLED.show();
 }
 
-void strobe()
+void strobe_mode()
 {
-  int rate = 10;
-  int strobe = 5;
-  int gap = 10;
+  // int rate = 10;
 
-  int start_hue;
-  int delta_hue = 5;
+  int start_index;
+  // int colorDensity = 5;
 
-  start_hue = -1 * millis() / rate;
+  start_index = -1 * millis() / rate;
   for (int i = 0; i < NUM_LEDS; i++)
   {
-    leds[i] = CHSV(start_hue, 255, 255);
-    start_hue += delta_hue;
+    // leds[i] = CHSV(start_hue, 255, 255);
+    leds[i] = ColorFromPalette(palettes[currentPaletteIndex], start_index, 255, LINEARBLEND);
+    start_index += colorDensity;
   };
 
   FastLED.show();
-  hold(strobeLength);
+  hold(strobe);
   fill_solid(leds, NUM_LEDS, CHSV(0, 0, 0));
 
   FastLED.show();
-  hold(gapLength);
+  hold(blank);
 }
+
+// void split_color_palette_2()
+// {
+//   int rate = 10;
+
+//   int start_index;
+//   int index_interval = 5;
+
+//   CRGBPalette16 currentPalette = jet_gp;
+//   start_index = -1 * millis() / rate;
+//   for (int i = 0; i < NUM_LEDS / 2; i++)
+
+//   {
+//     leds[i] = ColorFromPalette(currentPalette, start_index, BRIGHTNESS, LINEARBLEND);
+//     leds[NUM_LEDS - 1 - i] = ColorFromPalette(currentPalette, start_index, BRIGHTNESS, LINEARBLEND);
+//     start_index += index_interval;
+//   };
+//   FastLED.show();
+// }
 
 // void shooting_star_rainbow_mirror()
 // {

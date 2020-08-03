@@ -11,6 +11,7 @@ const SettingSlider = (props) => {
 					type="number"
 					min={props.setting.min}
 					max={props.setting.max}
+					step={props.setting.step}
 					defaultValue={props.setting.value}
 					className="w-6rem m-r-l"
 					name={props.setting.name}
@@ -25,6 +26,7 @@ const SettingSlider = (props) => {
 					type="range"
 					min={props.setting.min}
 					max={props.setting.max}
+					step={props.setting.step}
 					defaultValue={props.setting.value}
 					className="w-90"
 					name={props.setting.name}
