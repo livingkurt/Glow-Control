@@ -134,6 +134,10 @@ String getColorSpeed()
 {
   return String(colorSpeed);
 }
+String getColorFade()
+{
+  return String(colorFade);
+}
 
 String getTwinkleSpeed()
 {
@@ -156,6 +160,7 @@ FieldList fields = {
     {"gap", "Gap", NumberFieldType, 0, 255, 1, getGap},
     {"colorDensity", "Color Density", NumberFieldType, 1, 30, 1, getColorDensity},
     {"colorSpeed", "Color Speed", NumberFieldType, 1, 110, 1, getColorSpeed},
+    {"colorFade", "Color Fade", NumberFieldType, 1, 150, 1, getColorFade},
     {"autoplay", "Autoplay", SectionFieldType},
     {"autoplay", "Autoplay", BooleanFieldType, 0, 1, 1, getAutoplay},
     {"blendMode", "Blend", BooleanFieldType, 0, 1, 1, getBlendMode},

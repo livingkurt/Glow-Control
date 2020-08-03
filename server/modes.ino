@@ -21,29 +21,24 @@ void showSolidColor()
 
 // Patterns from FastLED example DemoReel100: https://github.com/FastLED/FastLED/blob/master/examples/DemoReel100/DemoReel100.ino
 
-void rainbow()
-{
-  // FastLED's built-in rainbow generator
-  fill_rainbow(leds, HALF_LEDS, gHue, 1000);
-  // Uncomment for mirrored strings
-  // fill_rainbow( leds, HALF_LEDS, gHue, 1000 / HALF_LEDS);
-  // reverse_fill_rainbow( leds + HALF_LEDS, HALF_LEDS, gHue, 1000 / HALF_LEDS);
-}
+// void rainbow()
+// {
+//   // FastLED's built-in rainbow generator
+//   fill_rainbow(leds, HALF_LEDS, gHue, 1000);
+//   // Uncomment for mirrored strings
+//   // fill_rainbow(leds, HALF_LEDS, gHue, 1000 / HALF_LEDS);
+//   // reverse_fill_rainbow(leds + HALF_LEDS, HALF_LEDS, gHue, 1000 / HALF_LEDS);
+// }
 
-void rainbowWithGlitter()
-{
-  // built-in FastLED rainbow, plus some random sparkly glitter
-  rainbow();
-  addGlitter(80);
-}
+// void rainbowWithGlitter()
+// {
+//   // built-in FastLED rainbow, plus some random sparkly glitter
+//   rainbow();
+//   addGlitter(80);
+// }
 
 void cycle()
 {
-  // int start_index;
-  // start_index = -1 * millis() / colorSpeed;
-  // fill_solid(leds, NUM_LEDS, CHSV(start_index, 255, 255));
-  // start_index += colorDensity;
-
   int start_index;
   start_index = -1 * millis() / colorSpeed;
   for (int i = 0; i < NUM_LEDS; i++)
@@ -52,38 +47,20 @@ void cycle()
     leds[i] = ColorFromPalette(palettes[currentPaletteIndex], start_index, 255, blendMode == 0 ? NOBLEND : LINEARBLEND);
     start_index += colorDensity;
   };
-  // fill_solid(leds, NUM_LEDS, CHSV(start_index, 255, beatsin16(speed, 50, 255))); // Set all to Off.
-
-  // FastLED.show();
 }
 
-// void strobe_mode()
-// {
-//   int start_index;
-//   start_index = -1 * millis() / colorSpeed;
-//   for (int i = 0; i < NUM_LEDS; i++)
-//   {
-//     // leds[i] = CHSV(start_hue, 255, 255);
-//     leds[i] = ColorFromPalette(palettes[currentPaletteIndex], start_index, 255, blendMode == 0 ? NOBLEND : LINEARBLEND);
-//     start_index += colorDensity;
-//   };
-
-//   // FastLED.show();
-//   // hold(strobe);
-//   // fill_solid(leds, NUM_LEDS, CHSV(0, 0, 0));
-
-//   // FastLED.show();
-//   // hold(blank);
-// }
-
-void confetti()
+void sparkle()
 {
   // random colored speckles that blink in and fade smoothly
-  fadeToBlackBy(leds, NUM_LEDS, 10);
-  int pos = random16(HALF_LEDS);
+  fadeToBlackBy(leds, NUM_LEDS, colorFade);
+  int pos = random(0, NUM_LEDS);
+  int start_index;
+  start_index = -1 * millis() / colorSpeed;
   // leds[pos] += CHSV( gHue + random8(64), 200, 255);
-  leds[pos] += ColorFromPalette(palettes[currentPaletteIndex], gHue + random8(64));
-  leds[NUM_LEDS - 1 - pos] += ColorFromPalette(palettes[currentPaletteIndex], gHue + random8(64));
+  leds[pos] += ColorFromPalette(palettes[currentPaletteIndex], start_index, 255, blendMode == 0 ? NOBLEND : LINEARBLEND);
+  // leds[NUM_LEDS - 1 - pos] += ColorFromPalette(palettes[currentPaletteIndex], start_index, 255, blendMode == 0 ? NOBLEND : LINEARBLEND);
+  start_index += colorDensity;
+  hold(10);
 }
 
 void sinelon()

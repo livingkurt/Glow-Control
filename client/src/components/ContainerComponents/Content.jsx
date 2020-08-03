@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ColorPicker, SettingSlider, RGBSlider, DropdownSelector } from '../ColorComponents';
 import { Route, BrowserRouter as Router, Switch, Link, useHistory } from 'react-router-dom';
 import API from '../../util/API';
@@ -9,6 +9,9 @@ const Content = (props) => {
 	const query_url = '192.168.0.152';
 	// const leds = '192.168.0.219';
 	// const leds = '192.168.0.60';
+
+	const autoplay_ref = useRef();
+	console.log(autoplay_ref);
 
 	const devices = {
 		living_room: { name: 'Living Room', query_url: '192.168.0.219' },
@@ -50,8 +53,10 @@ const Content = (props) => {
 			} else if (field_name === 'autoplay') {
 				if (show_hide === 1) {
 					set_show_hide(0);
+					fade_in();
 				} else if (show_hide === 0) {
 					set_show_hide(1);
+					fade_out();
 				}
 			}
 		} catch (err) {
@@ -115,6 +120,38 @@ const Content = (props) => {
 		set_loading(true);
 	};
 
+	const [ opacity, set_opacity ] = useState(1);
+	const fade_in = () => {
+		let element = document.getElementById('autoplay_duration');
+		console.log(element);
+		var op = 1; // initial opacity
+		var timer = setInterval(function() {
+			if (op <= 0.1) {
+				clearInterval(timer);
+				element.style.display = 'none';
+			}
+			element.style.opacity = op;
+			element.style.filter = 'alpha(opacity=' + op * 100 + ')';
+			op -= op * 0.2;
+		}, 50);
+		set_show_hide(0);
+	};
+	const fade_out = () => {
+		var op = 0.1; // initial opacity
+		let element = document.getElementById('autoplay_duration');
+		console.log(element);
+		element.style.display = 'block';
+		var timer = setInterval(function() {
+			if (op >= 1) {
+				clearInterval(timer);
+			}
+			element.style.opacity = op;
+			element.style.filter = 'alpha(opacity=' + op * 100 + ')';
+			op += op * 0.1;
+		}, 10);
+		set_show_hide(1);
+	};
+
 	return (
 		<Router>
 			<div className="content w-100">
@@ -169,7 +206,7 @@ const Content = (props) => {
 										settings={settings}
 									/>
 									{console.log(show_hide)}
-									<div className="w-100" style={{ display: show_hide === 1 ? 'flex' : 'none' }}>
+									<div id="autoplay_duration">
 										<SettingSlider
 											update_function={update_leds}
 											set_settings={set_settings}
@@ -179,7 +216,7 @@ const Content = (props) => {
 									</div>
 								</div>
 							)}
-							{[ 'strobe', 'confetti', 'sinelon', 'cycle' ].includes(mode_specific_settings) && (
+							{[ 'strobe', 'sparkle', 'sinelon', 'cycle' ].includes(mode_specific_settings) && (
 								<div>
 									<h2 className="t-a-c">Palettes</h2>
 									<DropdownSelector
@@ -196,7 +233,7 @@ const Content = (props) => {
 									/>
 								</div>
 							)}
-							{[ 'strobe', 'pulse', 'cycle' ].includes(mode_specific_settings) && (
+							{[ 'strobe', 'pulse', 'cycle', 'sparkle' ].includes(mode_specific_settings) && (
 								<div>
 									<h2 className="t-a-c">Color Options</h2>
 									<SettingSlider
@@ -212,9 +249,17 @@ const Content = (props) => {
 										settings={settings}
 										direction="rtl"
 									/>
+									{[ 'sparkle' ].includes(mode_specific_settings) && (
+										<SettingSlider
+											update_function={update_leds}
+											set_settings={set_settings}
+											setting={settings.colorFade}
+											settings={settings}
+											direction="rtl"
+										/>
+									)}
 								</div>
 							)}
-							{console.log(mode_specific_settings)}
 							{[ 'rainbowTwinkles', 'snowTwinkles', 'cloudTwinkles', 'incandescentTwinkles' ].includes(
 								mode_specific_settings
 							) && (

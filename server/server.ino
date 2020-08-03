@@ -88,6 +88,7 @@ uint8_t blank = 30;
 
 uint8_t colorDensity = 10;
 uint8_t colorSpeed = 10;
+uint8_t colorFade = 10;
 // uint8_t start_index = -1 * millis() / rate;
 
 ///////////////////////////////////////////////////////////////////////
@@ -147,7 +148,6 @@ PatternAndNameList patterns = {
     {pulse, "Pulse"},
     {cycle, "Cycle"},
     {pride, "Pride"},
-    {rainbowWithGlitter, "Rainbow With Glitter"},
     {cycle_rainbow_desaturated, "Cycle Rainbow Desaturated"},
     {colorWaves, "Color Waves"},
     // twinkle patterns
@@ -155,13 +155,12 @@ PatternAndNameList patterns = {
     {snowTwinkles, "Snow Twinkles"},
     {cloudTwinkles, "Cloud Twinkles"},
     {incandescentTwinkles, "Incandescent Twinkles"},
-    {confetti, "Confetti"},
+    {sparkle, "Sparkle"},
     {sinelon, "Sinelon"},
     {bpm, "Beat"},
     {juggle, "Juggle"},
     {fire, "Fire"},
     {water, "Water"},
-
     {showSolidColor, "Solid Color"},
 };
 

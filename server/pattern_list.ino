@@ -44,7 +44,7 @@
 //     //  { rainbow,                "Rainbow" },
 //     //  { rainbowWithGlitter,     "Rainbow With Glitter" },
 //     {rainbowSolid, "Solid Rainbow"},
-//     {confetti, "Confetti"},
+//     {sparkle, "Sparkle"},
 //     {sinelon, "Sinelon"},
 //     {bpm, "Beat"},
 //     {juggle, "Juggle"},
