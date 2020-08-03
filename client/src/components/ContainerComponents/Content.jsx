@@ -142,7 +142,18 @@ const Content = (props) => {
 								settings={settings}
 							/>
 
-							{mode_specific_settings === 'strobe' && (
+							{/* {mode_specific_settings === 'strobe' ||
+								(mode_specific_settings === 'confetti' && (
+									<div>
+										<DropdownSelector
+											update_function={update_leds}
+											data={palettes}
+											setting={settings.palette}
+											settings={settings}
+										/>
+									</div>
+								))} */}
+							{[ 'strobe', 'confetti' ].includes(mode_specific_settings) && (
 								<div>
 									<DropdownSelector
 										update_function={update_leds}
@@ -150,9 +161,15 @@ const Content = (props) => {
 										setting={settings.palette}
 										settings={settings}
 									/>
+									<ToggleSwitch
+										update_function={update_leds}
+										set_settings={set_settings}
+										setting={settings.blend}
+										settings={settings}
+									/>
 								</div>
 							)}
-							{mode_specific_settings === 'pulse' && (
+							{[ 'strobe', 'pulse' ].includes(mode_specific_settings) && (
 								<div>
 									<SettingSlider
 										update_function={update_leds}
@@ -170,26 +187,23 @@ const Content = (props) => {
 								</div>
 							)}
 
-							<Route
-								path="/sparkle"
-								component={() => (
-									<SparklePage>
-										<h1 className="t-a-c">Sparkle</h1>
-										<SettingSlider
-											display_name="Sparkle Speed"
-											setting_name="sparkleSpeed"
-											update_function={update_leds}
-											setting={settings}
-										/>
-										<SettingSlider
-											display_name="Sparkle Density"
-											setting_name="sparkleDensity"
-											update_function={update_leds}
-											setting={settings}
-										/>
-									</SparklePage>
-								)}
-							/>
+							{[ 'rainbowTwinkles', 'snowTwinkles', 'cloudTwinkles', 'incandescentTwinkles' ].includes(
+								mode_specific_settings
+							) && (
+								<div>
+									<h1 className="t-a-c">Sparkle</h1>
+									<SettingSlider
+										update_function={update_leds}
+										setting={settings.twinkleSpeed}
+										settings={settings}
+									/>
+									<SettingSlider
+										update_function={update_leds}
+										setting={settings.twinkleDensity}
+										settings={settings}
+									/>
+								</div>
+							)}
 							<Route
 								path="/pattern"
 								component={() => (
@@ -216,14 +230,6 @@ const Content = (props) => {
 									</ShootingStarPage>
 								)}
 							/>
-							<h1 className="t-a-c">Macro Controls</h1>
-							<SettingSlider
-								update_function={update_leds}
-								set_settings={set_settings}
-								setting={settings.brightness}
-								settings={settings}
-							/>
-
 							{mode_specific_settings === 'sinelon' && (
 								<div>
 									{/* <h1 className="t-a-c">Palettes</h1> */}
@@ -235,19 +241,39 @@ const Content = (props) => {
 									/>
 								</div>
 							)}
-							{/* <SettingSlider update_function={update_leds} set_settings={set_settings} setting={settings.colorDensity} /> */}
-							<ToggleSwitch
+							<h1 className="t-a-c">Macro Controls</h1>
+							{settings.pattern.options
+								.map((pattern) => {
+									return camelize(pattern);
+								})
+								.includes(mode_specific_settings) && (
+								<div>
+									<SettingSlider
+										update_function={update_leds}
+										set_settings={set_settings}
+										setting={settings.brightness}
+										settings={settings}
+									/>
+									<ToggleSwitch
+										update_function={update_leds}
+										set_settings={set_settings}
+										setting={settings.autoplay}
+										settings={settings}
+									/>
+									<SettingSlider
+										update_function={update_leds}
+										set_settings={set_settings}
+										setting={settings.autoplayDuration}
+										settings={settings}
+									/>
+								</div>
+							)}
+							{/* <SettingSlider
 								update_function={update_leds}
 								set_settings={set_settings}
-								setting={settings.autoplay}
+								setting={settings.brightness}
 								settings={settings}
-							/>
-							<SettingSlider
-								update_function={update_leds}
-								set_settings={set_settings}
-								setting={settings.autoplayDuration}
-								settings={settings}
-							/>
+							/> */}
 
 							{mode_specific_settings === 'strobe' && (
 								<div>
