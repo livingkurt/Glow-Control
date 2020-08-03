@@ -141,25 +141,34 @@ const Content = (props) => {
 								setting={settings.pattern}
 								settings={settings}
 							/>
-							<DropdownSelector
-								update_function={update_leds}
-								data={palettes}
-								setting={settings.palette}
-								settings={settings}
-							/>
-							<SettingSlider
-								update_function={update_leds}
-								set_settings={set_settings}
-								setting={settings.colorDensity}
-								settings={settings}
-							/>
-							<SettingSlider
-								update_function={update_leds}
-								set_settings={set_settings}
-								setting={settings.colorSpeed}
-								settings={settings}
-								direction="rtl"
-							/>
+
+							{mode_specific_settings === 'strobe' && (
+								<div>
+									<DropdownSelector
+										update_function={update_leds}
+										data={palettes}
+										setting={settings.palette}
+										settings={settings}
+									/>
+								</div>
+							)}
+							{mode_specific_settings === 'pulse' && (
+								<div>
+									<SettingSlider
+										update_function={update_leds}
+										set_settings={set_settings}
+										setting={settings.colorDensity}
+										settings={settings}
+									/>
+									<SettingSlider
+										update_function={update_leds}
+										set_settings={set_settings}
+										setting={settings.colorSpeed}
+										settings={settings}
+										direction="rtl"
+									/>
+								</div>
+							)}
 
 							<Route
 								path="/sparkle"
@@ -214,12 +223,18 @@ const Content = (props) => {
 								setting={settings.brightness}
 								settings={settings}
 							/>
-							<SettingSlider
-								update_function={update_leds}
-								set_settings={set_settings}
-								setting={settings.speed}
-								settings={settings}
-							/>
+
+							{mode_specific_settings === 'sinelon' && (
+								<div>
+									{/* <h1 className="t-a-c">Palettes</h1> */}
+									<SettingSlider
+										update_function={update_leds}
+										set_settings={set_settings}
+										setting={settings.speed}
+										settings={settings}
+									/>
+								</div>
+							)}
 							{/* <SettingSlider update_function={update_leds} set_settings={set_settings} setting={settings.colorDensity} /> */}
 							<ToggleSwitch
 								update_function={update_leds}
@@ -233,7 +248,8 @@ const Content = (props) => {
 								setting={settings.autoplayDuration}
 								settings={settings}
 							/>
-							{mode_specific_settings === settings.strobe.name && (
+
+							{mode_specific_settings === 'strobe' && (
 								<div>
 									<h1 className="t-a-c">Strobe</h1>
 									<SettingSlider
@@ -256,7 +272,7 @@ const Content = (props) => {
 									/>
 								</div>
 							)}
-							{mode_specific_settings === settings.solidColor.name && (
+							{mode_specific_settings === 'solidColor' && (
 								<div>
 									<h1 className="t-a-c">Solid Color</h1>
 									<ColorPicker />

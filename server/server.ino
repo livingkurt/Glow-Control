@@ -20,6 +20,7 @@ extern "C"
 //#include <IRremoteESP8266.h>
 #include "GradientPalettes.h"
 // #include "modes/modes.h"
+#include <math.h>
 
 #define ARRAY_SIZE(A) (sizeof(A) / sizeof((A)[0]))
 
@@ -147,6 +148,7 @@ PatternAndNameList patterns = {
     {cycle_rainbow_desaturated, "Cycle Rainbow Desaturated"},
     {colorWaves, "Color Waves"},
     {strobe_mode, "Strobe"},
+    {pulse, "Pulse"},
 
     // twinkle patterns
     {rainbowTwinkles, "Rainbow Twinkles"},
@@ -326,6 +328,19 @@ void hold(int period)
   {
   }
 }
+// void back_n_forth(int period)
+// {
+
+//   for (int x = 0; x < 10000; x++)
+//   {
+//     //code here to do what you want
+//   }
+
+//   for (int x = 9999; x >= 0; x--)
+//   {
+//     //code here to do what you want
+//   }
+// }
 
 void loop()
 {

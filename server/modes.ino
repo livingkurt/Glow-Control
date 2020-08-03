@@ -436,7 +436,6 @@ void cycle_rainbow_desaturated()
   int rate = 20;
   int start_hue;
   int delta_hue = 3;
-  int count = 255;
   start_hue = -1 * millis() / rate;
   for (int i = 0; i < NUM_LEDS; i++)
 
@@ -465,6 +464,25 @@ void strobe_mode()
 
   FastLED.show();
   hold(blank);
+}
+
+void pulse()
+{
+  int start_index;
+  start_index = -1 * millis() / colorSpeed;
+  // fill_solid(leds, NUM_LEDS, CHSV(0, 0, beat8(speed))); // Set all to Off.
+  // // fill_solid(leds, NUM_LEDS, ColorFromPalette(palettes[currentPaletteIndex], start_index, beatsin8(speed, 10, 255), NOBLEND)); // Set all to Off.
+  // // leds[i] = ColorFromPalette(palettes[currentPaletteIndex], start_index, beatsin16(10, 50, 150), LINEARBLEND);
+
+  // // hold(speed);
+  // // FastLED.show();
+  // int strobe = 10;
+  // fill_solid(leds, NUM_LEDS, CHSV(0, 0, beatsin16(speed, 50, 255))); // Set all to Off.
+  fill_solid(leds, NUM_LEDS, CHSV(start_index, 255, beatsin16(speed, 50, 255))); // Set all to Off.
+  start_index += colorDensity;
+  // fill_solid(leds, NUM_LEDS, CHSV(0, 0, triwave8(speed))); // Set all to Off.
+  // hold(speed);
+  FastLED.show();
 }
 
 // void split_color_palette_2()
