@@ -153,6 +153,13 @@ const Content = (props) => {
 								setting={settings.colorDensity}
 								settings={settings}
 							/>
+							<SettingSlider
+								update_function={update_leds}
+								set_settings={set_settings}
+								setting={settings.colorSpeed}
+								settings={settings}
+								direction="rtl"
+							/>
 
 							<Route
 								path="/sparkle"

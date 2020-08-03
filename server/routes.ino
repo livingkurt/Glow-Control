@@ -105,6 +105,13 @@ void run_server()
     broadcastInt("colorDensity", colorDensity);
     sendInt(colorDensity);
   });
+  webServer.on("/colorSpeed", HTTP_POST, []() {
+    cors_set_access_control_headers();
+    String value = webServer.arg("value");
+    colorSpeed = value.toInt();
+    broadcastInt("colorSpeed", colorSpeed);
+    sendInt(colorSpeed);
+  });
 
   webServer.on("/twinkleSpeed", HTTP_POST, []() {
     cors_set_access_control_headers();

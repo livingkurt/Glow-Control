@@ -85,8 +85,8 @@ uint8_t strobe = 30;
 uint8_t gap = 30;
 uint8_t blank = 30;
 
-uint8_t rate = 10;
 uint8_t colorDensity = 10;
+uint8_t colorSpeed = 10;
 // uint8_t start_index = -1 * millis() / rate;
 
 ///////////////////////////////////////////////////////////////////////
@@ -111,7 +111,9 @@ unsigned long autoPlayTimeout = 0;
 
 uint8_t currentPaletteIndex = 0;
 
+uint8_t rate = 10;
 uint8_t gHue = 0; // rotating "base color" used by many of the patterns
+// gHue = -1 * millis() / rate;
 
 CRGB solidColor = CRGB::Blue;
 
@@ -194,7 +196,7 @@ typedef PaletteAndName PaletteAndNameList[];
 
 const CRGBPalette16 palettes[] = {
     RainbowColors_p,
-    RainbowStripeColors_p,
+    // RainbowStripeColors_p,
     CloudColors_p,
     LavaColors_p,
     OceanColors_p,
@@ -207,7 +209,7 @@ const uint8_t paletteCount = ARRAY_SIZE(palettes);
 
 const String paletteNames[paletteCount] = {
     "Rainbow",
-    "Rainbow Stripe",
+    // "Rainbow Stripe",
     "Cloud",
     "Lava",
     "Ocean",
@@ -376,7 +378,7 @@ void loop()
   {
     // slowly blend the current palette to the next
     nblendPaletteTowardPalette(gCurrentPalette, gTargetPalette, 8);
-    gHue++; // slowly cycle the "base color" through the rainbow
+    gHue; // slowly cycle the "base color" through the rainbow
   }
 
   if (autoplay && (millis() > autoPlayTimeout))

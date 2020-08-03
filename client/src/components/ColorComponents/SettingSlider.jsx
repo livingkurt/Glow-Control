@@ -28,6 +28,7 @@ const SettingSlider = (props) => {
 					max={props.setting.max}
 					step={props.setting.step}
 					defaultValue={props.setting.value}
+					dir={props.direction}
 					className="w-90"
 					name={props.setting.name}
 					onMouseUp={(e) => props.update_function(e.target.name, e.target.value)}

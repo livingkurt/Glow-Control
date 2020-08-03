@@ -450,12 +450,8 @@ void cycle_rainbow_desaturated()
 
 void strobe_mode()
 {
-  // int rate = 10;
-
   int start_index;
-  // int colorDensity = 5;
-
-  start_index = -1 * millis() / rate;
+  start_index = -1 * millis() / colorSpeed;
   for (int i = 0; i < NUM_LEDS; i++)
   {
     // leds[i] = CHSV(start_hue, 255, 255);
