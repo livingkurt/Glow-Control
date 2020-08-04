@@ -95,9 +95,9 @@ String getAutoplayDuration()
   return String(autoplayDuration);
 }
 
-String getSolidColor()
+String getRGB()
 {
-  return String(solidColor.r) + "," + String(solidColor.g) + "," + String(solidColor.b);
+  return String(rgb.r) + "," + String(rgb.g) + "," + String(rgb.b);
 }
 
 String getCooling()
@@ -165,8 +165,8 @@ FieldList fields = {
     {"autoplay", "Autoplay", BooleanFieldType, 0, 1, 1, getAutoplay},
     {"blendMode", "Blend", BooleanFieldType, 0, 1, 1, getBlendMode},
     {"autoplayDuration", "Autoplay Duration", NumberFieldType, 0, 255, 1, getAutoplayDuration},
-    {"solidColor", "Solid Color", SectionFieldType},
-    {"solidColor", "Color", ColorFieldType, 0, 255, 1, getSolidColor},
+    {"rgb", "RGB", SectionFieldType},
+    {"rgb", "Color", ColorFieldType, 0, 255, 1, getRGB},
     {"fire", "Fire & Water", SectionFieldType},
     {"cooling", "Cooling", NumberFieldType, 0, 255, 1, getCooling},
     {"sparking", "Sparking", NumberFieldType, 0, 255, 1, getSparking},

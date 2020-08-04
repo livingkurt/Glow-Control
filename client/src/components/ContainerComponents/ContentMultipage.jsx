@@ -3,7 +3,7 @@ import { ColorPicker, SettingSlider, RGBSlider, DropdownSelector } from '../Colo
 import { Route, BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import API from '../../util/API';
 import { ToggleSwitch } from '../UtilityComponents';
-import { StrobePage, SparklePage, PatternPage, ShootingStarPage, SolidColorPage } from '../pages';
+import { StrobePage, SparklePage, PatternPage, ShootingStarPage, RGBPage } from '../pages';
 
 const Content = (props) => {
 	const query_url = '192.168.0.152';
@@ -18,7 +18,7 @@ const Content = (props) => {
 	const [ settings, set_settings ] = useState({});
 	const [ patterns, set_patterns ] = useState([]);
 	const [ palettes, set_palettes ] = useState([]);
-	const [ solid_color, set_solid_color ] = useState({});
+	const [ rgb, set_rgb ] = useState({});
 	const [ loading, set_loading ] = useState(true);
 
 	const update_leds = async (field_name, value) => {
@@ -53,8 +53,8 @@ const Content = (props) => {
 			set_settings(saved_settings);
 			// set_patterns(settings[2].options);
 			// set_palettes(settings[3].options);
-			// let color = saved_settings.solidColor.split(',');
-			// set_solid_color({ red: parseInt(color[0]), blue: parseInt(color[1]), green: parseInt(color[2]) });
+			// let color = saved_settings.rgb.split(',');
+			// set_rgb({ red: parseInt(color[0]), blue: parseInt(color[1]), green: parseInt(color[2]) });
 			// console.log({ saved_settings });
 			set_loading(false);
 		} catch (err) {
@@ -62,9 +62,9 @@ const Content = (props) => {
 		}
 	};
 
-	const update_solid_color = async (red_value, green_value, blue_value) => {
+	const update_rgb = async (red_value, green_value, blue_value) => {
 		try {
-			const res = await API.update_solid_color(query_url, solid_color.red, solid_color.green, solid_color.blue);
+			const res = await API.update_rgb(query_url, rgb.red, rgb.green, rgb.blue);
 		} catch (err) {
 			console.log(err);
 		}
@@ -94,8 +94,8 @@ const Content = (props) => {
 								<Link to="/strobe">
 									<button className="btn btn-nav">Strobe</button>
 								</Link>
-								<Link to="/solid">
-									<button className="btn btn-nav">Solid Color</button>
+								<Link to="/rgb">
+									<button className="btn btn-nav">RGB</button>
 								</Link>
 								<Link to="/shootingstar">
 									<button className="btn btn-nav">Shooting Star</button>
@@ -132,30 +132,30 @@ const Content = (props) => {
 								)}
 							/>
 							<Route
-								path="/solid"
+								path="/rgb"
 								component={() => (
-									<SolidColorPage>
-										<h1 className="t-a-c">Solid Color</h1>
+									<RGBPage>
+										<h1 className="t-a-c">RGB</h1>
 										<ColorPicker />
 										<RGBSlider
 											display_name="Red"
 											setting_name="red"
 											update_function={update_rgb}
-											solid_color={solid_color.red}
+											rgb={rgb.red}
 										/>
 										<RGBSlider
 											display_name="Green"
 											setting_name="green"
 											update_function={update_rgb}
-											solid_color={solid_color.green}
+											rgb={rgb.green}
 										/>
 										<RGBSlider
 											display_name="Blue"
 											setting_name="blue"
 											update_function={update_rgb}
-											solid_color={solid_color.blue}
+											rgb={rgb.blue}
 										/>
-									</SolidColorPage>
+									</RGBPage>
 								)}
 							/>
 							<Route

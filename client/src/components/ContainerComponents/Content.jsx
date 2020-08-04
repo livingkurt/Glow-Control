@@ -1,14 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-	ColorPicker,
-	SettingSlider,
-	RGBSlider,
-	DropdownSelector,
-	ColorBox,
-	RedSlider,
-	GreenSlider,
-	BlueSlider
-} from '../ColorComponents';
+import { SettingSlider, RGBSlider, DropdownSelector, ColorBox } from '../ColorComponents';
 import { Route, BrowserRouter as Router, Switch, Link, useHistory } from 'react-router-dom';
 import API from '../../util/API';
 import { ToggleSwitch } from '../UtilityComponents';
@@ -32,7 +23,7 @@ const Content = (props) => {
 	const [ current_device, set_current_device ] = useState(leds.test_2);
 	const [ patterns, set_patterns ] = useState([]);
 	const [ palettes, set_palettes ] = useState([]);
-	const [ solid_color, set_solid_color ] = useState({});
+	const [ rgb, set_rgb ] = useState({});
 	const [ loading, set_loading ] = useState(true);
 	const [ show_hide, set_show_hide ] = useState();
 	const [ mode_specific_settings, set_mode_specific_settings ] = useState('');
@@ -73,19 +64,19 @@ const Content = (props) => {
 		}
 	};
 
-	const update_solid_color = async (field_name, value, red, green, blue) => {
+	const update_rgb = async (field_name, value, red, green, blue) => {
 		try {
-			if (field_name !== 'solidColor') {
-				red = field_name === 'red' ? value : solid_color.red;
-				green = field_name === 'green' ? value : solid_color.green;
-				blue = field_name === 'blue' ? value : solid_color.blue;
+			if (field_name !== 'rgb') {
+				red = field_name === 'red' ? value : rgb.red;
+				green = field_name === 'green' ? value : rgb.green;
+				blue = field_name === 'blue' ? value : rgb.blue;
 			}
 			console.log(field_name, value);
 			console.log(red);
 			console.log(green);
 			console.log(blue);
-			set_solid_color({ red, green, blue });
-			const res = await API.update_solid_color(current_device.query_url, red, green, blue);
+			set_rgb({ red, green, blue });
+			const res = await API.update_rgb(current_device.query_url, red, green, blue);
 		} catch (err) {
 			console.log(err);
 		}
@@ -104,10 +95,10 @@ const Content = (props) => {
 			set_settings(saved_settings);
 			set_patterns(settings[2].options);
 			set_palettes(settings[3].options);
-			set_solid_color({
-				red: saved_settings.solidColor.value.split(',')[0],
-				green: saved_settings.solidColor.value.split(',')[1],
-				blue: saved_settings.solidColor.value.split(',')[2]
+			set_rgb({
+				red: saved_settings.rgb.value.split(',')[0],
+				green: saved_settings.rgb.value.split(',')[1],
+				blue: saved_settings.rgb.value.split(',')[2]
 			});
 			set_mode_specific_settings(camelize(saved_settings.pattern.options[saved_settings.pattern.value]));
 			set_show_hide(saved_settings.autoplay.value);
@@ -117,13 +108,13 @@ const Content = (props) => {
 		}
 	};
 
-	// const update_solid_color = async (red_value, green_value, blue_value) => {
+	// const update_rgb = async (red_value, green_value, blue_value) => {
 	// 	try {
-	// 		const res = await API.update_solid_color(
+	// 		const res = await API.update_rgb(
 	// 			current_device.query_url,
-	// 			solid_color.red,
-	// 			solid_color.green,
-	// 			solid_color.blue
+	// 			rgb.red,
+	// 			rgb.green,
+	// 			rgb.blue
 	// 		);
 	// 	} catch (err) {
 	// 		console.log(err);
@@ -218,7 +209,7 @@ const Content = (props) => {
 		<Router>
 			<div className="content w-100">
 				<div className="jc-b">
-					<div className="jc-b w-20rem">
+					<div className="jc-b w-50">
 						<button onClick={() => change_device(leds.living_room)} className="btn btn-nav">
 							Living Room
 						</button>
@@ -383,47 +374,48 @@ const Content = (props) => {
 									/>
 								</div>
 							)}
-							{mode_specific_settings === 'solidColor' && (
+							{console.log(mode_specific_settings)}
+							{mode_specific_settings === 'rGB' && (
 								<div>
-									<h2 className="t-a-c">Solid Color</h2>
+									<h2 className="t-a-c">RGB</h2>
 									<div className="">
 										{/* <input type="color" /> */}
 										<div className="row jc-b">
-											<ColorBox update_function={update_solid_color} color="255,0,0" />
-											<ColorBox update_function={update_solid_color} color="255,128,0" />
-											<ColorBox update_function={update_solid_color} color="255,255,0" />
-											<ColorBox update_function={update_solid_color} color="0,255,0" />
-											<ColorBox update_function={update_solid_color} color="0,255,173" />
-											<ColorBox update_function={update_solid_color} color="0,255,255" />
-											<ColorBox update_function={update_solid_color} color="0,128,255" />
-											<ColorBox update_function={update_solid_color} color="0,0,255" />
-											<ColorBox update_function={update_solid_color} color="128,0,255" />
-											<ColorBox update_function={update_solid_color} color="255,0,255" />
-											<ColorBox update_function={update_solid_color} color="255,0,128" />
-											<ColorBox update_function={update_solid_color} color="255,255,255" />
+											<ColorBox update_function={update_rgb} color="255,0,0" />
+											<ColorBox update_function={update_rgb} color="255,128,0" />
+											<ColorBox update_function={update_rgb} color="255,255,0" />
+											<ColorBox update_function={update_rgb} color="0,255,0" />
+											<ColorBox update_function={update_rgb} color="0,255,173" />
+											<ColorBox update_function={update_rgb} color="0,255,255" />
+											<ColorBox update_function={update_rgb} color="0,128,255" />
+											<ColorBox update_function={update_rgb} color="0,0,255" />
+											<ColorBox update_function={update_rgb} color="128,0,255" />
+											<ColorBox update_function={update_rgb} color="255,0,255" />
+											<ColorBox update_function={update_rgb} color="255,0,128" />
+											<ColorBox update_function={update_rgb} color="255,255,255" />
 										</div>
 										<RGBSlider
-											update_function={update_solid_color}
+											update_function={update_rgb}
 											color="red"
-											solid_color={solid_color}
-											set_solid_color={set_solid_color}
-											setting={settings.solidColor}
+											rgb={rgb}
+											set_rgb={set_rgb}
+											setting={settings.rgb}
 											settings={settings}
 										/>
 										<RGBSlider
-											update_function={update_solid_color}
+											update_function={update_rgb}
 											color="green"
-											solid_color={solid_color}
-											set_solid_color={set_solid_color}
-											setting={settings.solidColor}
+											rgb={rgb}
+											set_rgb={set_rgb}
+											setting={settings.rgb}
 											settings={settings}
 										/>
 										<RGBSlider
-											update_function={update_solid_color}
+											update_function={update_rgb}
 											color="blue"
-											solid_color={solid_color}
-											set_solid_color={set_solid_color}
-											setting={settings.solidColor}
+											rgb={rgb}
+											set_rgb={set_rgb}
+											setting={settings.rgb}
 											settings={settings}
 										/>
 									</div>
@@ -432,19 +424,19 @@ const Content = (props) => {
 										display_name="Red"
 										setting_name="red"
 										update_function={update_rgb}
-										solid_color={solid_color.red}
+										rgb={rgb.red}
 									/>
 									<RGBSlider
 										display_name="Green"
 										setting_name="green"
 										update_function={update_rgb}
-										solid_color={solid_color.green}
+										rgb={rgb.green}
 									/>
 									<RGBSlider
 										display_name="Blue"
 										setting_name="blue"
 										update_function={update_rgb}
-										solid_color={solid_color.blue}
+										rgb={rgb.blue}
 									/> */}
 								</div>
 							)}

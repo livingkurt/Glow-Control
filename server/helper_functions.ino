@@ -11,7 +11,7 @@ void strandTest()
 
   fill_solid(leds, NUM_LEDS, CRGB::Black);
 
-  leds[i] = solidColor;
+  leds[i] = rgb;
 }
 
 uint32_t FloatToUint(float n)

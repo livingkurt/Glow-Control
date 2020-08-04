@@ -1,7 +1,7 @@
-void showSolidColor()
+void showRGB()
 {
-  // Serial.println(solidColor);
-  fill_solid(leds, NUM_LEDS, solidColor);
+  // Serial.println(rgb);
+  fill_solid(leds, NUM_LEDS, rgb);
   FastLED.show();
 }
 

@@ -144,7 +144,7 @@ void run_server()
     sendInt(twinkleDensity);
   });
 
-  webServer.on("/solidColor", HTTP_POST, []() {
+  webServer.on("/rgb", HTTP_POST, []() {
     cors_set_access_control_headers();
     String r = webServer.arg("r");
     String g = webServer.arg("g");
@@ -153,8 +153,8 @@ void run_server()
     Serial.println(g);
     Serial.println(b);
     // Serial.println("cors_set_access_control_headers");
-    setSolidColor(r.toInt(), g.toInt(), b.toInt());
-    sendString(String(solidColor.r) + "," + String(solidColor.g) + "," + String(solidColor.b));
+    setRGB(r.toInt(), g.toInt(), b.toInt());
+    sendString(String(rgb.r) + "," + String(rgb.g) + "," + String(rgb.b));
   });
 
   webServer.on("/pattern", HTTP_POST, []() {

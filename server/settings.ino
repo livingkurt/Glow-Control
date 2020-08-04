@@ -19,7 +19,7 @@ void loadSettings()
   }
   else
   {
-    solidColor = CRGB(r, g, b);
+    rgb = CRGB(r, g, b);
   }
 
   power = EEPROM.read(5);
@@ -85,14 +85,14 @@ void setAutoplayDuration(uint8_t value)
   broadcastInt("autoplayDuration", autoplayDuration);
 }
 
-void setSolidColor(CRGB color)
+void setRGB(CRGB color)
 {
-  setSolidColor(color.r, color.g, color.b);
+  setRGB(color.r, color.g, color.b);
 }
 
-void setSolidColor(uint8_t r, uint8_t g, uint8_t b)
+void setRGB(uint8_t r, uint8_t g, uint8_t b)
 {
-  solidColor = CRGB(r, g, b);
+  rgb = CRGB(r, g, b);
 
   EEPROM.write(2, r);
   EEPROM.write(3, g);
@@ -101,7 +101,7 @@ void setSolidColor(uint8_t r, uint8_t g, uint8_t b)
 
   setPattern(patternCount - 1);
 
-  broadcastString("color", String(solidColor.r) + "," + String(solidColor.g) + "," + String(solidColor.b));
+  broadcastString("color", String(rgb.r) + "," + String(rgb.g) + "," + String(rgb.b));
 }
 
 // increase or decrease the current pattern number, and wrap around at the ends

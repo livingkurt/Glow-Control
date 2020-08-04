@@ -51,7 +51,7 @@
 //     {fire, "Fire"},
 //     {water, "Water"},
 
-//     {showSolidColor, "Solid Color"}};
+//     {showRGB, "RGB"}};
 
 // const uint8_t patternCount = ARRAY_SIZE(patterns);
 

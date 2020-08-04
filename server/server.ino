@@ -117,7 +117,7 @@ uint8_t rate = 10;
 uint8_t gHue = 0; // rotating "base color" used by many of the patterns
 // gHue = -1 * millis() / rate;
 
-CRGB solidColor = CRGB::Blue;
+CRGB rgb = CRGB::Blue;
 
 // scale the brightness of all pixels down
 void dimAll(byte value)
@@ -161,7 +161,7 @@ PatternAndNameList patterns = {
     {snowTwinkles, "Snow Twinkles"},
     {cloudTwinkles, "Cloud Twinkles"},
     {incandescentTwinkles, "Incandescent Twinkles"},
-    {showSolidColor, "Solid Color"},
+    {showRGB, "RGB"},
 };
 
 const uint8_t patternCount = ARRAY_SIZE(patterns);

@@ -124,119 +124,119 @@
 //    // custom color adjustment buttons
 //
 //    case InputCommand::RedUp: {
-//        solidColor.red += 8;
-//        setSolidColor(solidColor);
+//        rgb.red += 8;
+//        setRGB(rgb);
 //        break;
 //      }
 //    case InputCommand::RedDown: {
-//        solidColor.red -= 8;
-//        setSolidColor(solidColor);
+//        rgb.red -= 8;
+//        setRGB(rgb);
 //        break;
 //      }
 //    case InputCommand::GreenUp: {
-//        solidColor.green += 8;
-//        setSolidColor(solidColor);
+//        rgb.green += 8;
+//        setRGB(rgb);
 //        break;
 //      }
 //    case InputCommand::GreenDown: {
-//        solidColor.green -= 8;
-//        setSolidColor(solidColor);
+//        rgb.green -= 8;
+//        setRGB(rgb);
 //        break;
 //      }
 //    case InputCommand::BlueUp: {
-//        solidColor.blue += 8;
-//        setSolidColor(solidColor);
+//        rgb.blue += 8;
+//        setRGB(rgb);
 //        break;
 //      }
 //    case InputCommand::BlueDown: {
-//        solidColor.blue -= 8;
-//        setSolidColor(solidColor);
+//        rgb.blue -= 8;
+//        setRGB(rgb);
 //        break;
 //      }
 //
 //    // color buttons
 //
 //    case InputCommand::Red: {
-//        setSolidColor(CRGB::Red);
+//        setRGB(CRGB::Red);
 //        break;
 //      }
 //    case InputCommand::RedOrange: {
-//        setSolidColor(CRGB::OrangeRed);
+//        setRGB(CRGB::OrangeRed);
 //        break;
 //      }
 //    case InputCommand::Orange: {
-//        setSolidColor(CRGB::Orange);
+//        setRGB(CRGB::Orange);
 //        break;
 //      }
 //    case InputCommand::YellowOrange: {
-//        setSolidColor(CRGB::Goldenrod);
+//        setRGB(CRGB::Goldenrod);
 //        break;
 //      }
 //    case InputCommand::Yellow: {
-//        setSolidColor(CRGB::Yellow);
+//        setRGB(CRGB::Yellow);
 //        break;
 //      }
 //
 //    case InputCommand::Green: {
-//        setSolidColor(CRGB::Green);
+//        setRGB(CRGB::Green);
 //        break;
 //      }
 //    case InputCommand::Lime: {
-//        setSolidColor(CRGB::Lime);
+//        setRGB(CRGB::Lime);
 //        break;
 //      }
 //    case InputCommand::Aqua: {
-//        setSolidColor(CRGB::Aqua);
+//        setRGB(CRGB::Aqua);
 //        break;
 //      }
 //    case InputCommand::Teal: {
-//        setSolidColor(CRGB::Teal);
+//        setRGB(CRGB::Teal);
 //        break;
 //      }
 //    case InputCommand::Navy: {
-//        setSolidColor(CRGB::Navy);
+//        setRGB(CRGB::Navy);
 //        break;
 //      }
 //
 //    case InputCommand::Blue: {
-//        setSolidColor(CRGB::Blue);
+//        setRGB(CRGB::Blue);
 //        break;
 //      }
 //    case InputCommand::RoyalBlue: {
-//        setSolidColor(CRGB::RoyalBlue);
+//        setRGB(CRGB::RoyalBlue);
 //        break;
 //      }
 //    case InputCommand::Purple: {
-//        setSolidColor(CRGB::Purple);
+//        setRGB(CRGB::Purple);
 //        break;
 //      }
 //    case InputCommand::Indigo: {
-//        setSolidColor(CRGB::Indigo);
+//        setRGB(CRGB::Indigo);
 //        break;
 //      }
 //    case InputCommand::Magenta: {
-//        setSolidColor(CRGB::Magenta);
+//        setRGB(CRGB::Magenta);
 //        break;
 //      }
 //
 //    case InputCommand::White: {
-//        setSolidColor(CRGB::White);
+//        setRGB(CRGB::White);
 //        break;
 //      }
 //    case InputCommand::Pink: {
-//        setSolidColor(CRGB::Pink);
+//        setRGB(CRGB::Pink);
 //        break;
 //      }
 //    case InputCommand::LightPink: {
-//        setSolidColor(CRGB::LightPink);
+//        setRGB(CRGB::LightPink);
 //        break;
 //      }
 //    case InputCommand::BabyBlue: {
-//        setSolidColor(CRGB::CornflowerBlue);
+//        setRGB(CRGB::CornflowerBlue);
 //        break;
 //      }
 //    case InputCommand::LightBlue: {
-//        setSolidColor(CRGB::LightBlue);
+//        setRGB(CRGB::LightBlue);
 //        break;
 //      }
 //  }

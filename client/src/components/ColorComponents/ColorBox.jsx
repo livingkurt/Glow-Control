@@ -8,14 +8,14 @@ const ColorBox = (props) => {
 		<div>
 			<button
 				className="button zoom"
-				name="solidColor"
+				name="rgb"
 				style={{
 					backgroundColor: `rgb(${props.color})`,
 					height: '40px',
 					width: '60px',
 					border: 0,
-					borderRadius: '10px',
-					marginRight: '10px'
+					borderRadius: '10px'
+					// marginRight: '10px'
 				}}
 				onClick={(e) => props.update_function(e.target.name, e.target.value, red, green, blue)}
 			/>
