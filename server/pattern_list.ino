@@ -45,7 +45,7 @@
 //     //  { rainbowWithGlitter,     "Rainbow With Glitter" },
 //     {rainbowSolid, "Solid Rainbow"},
 //     {sparkle, "Sparkle"},
-//     {sinelon, "Sinelon"},
+//     {shootingStar, "Shooting Star"},
 //     {bpm, "Beat"},
 //     {juggle, "Juggle"},
 //     {fire, "Fire"},

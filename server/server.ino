@@ -147,21 +147,21 @@ PatternAndNameList patterns = {
     {strobe_mode, "Strobe"},
     {pulse, "Pulse"},
     {cycle, "Cycle"},
-    {pride, "Pride"},
     {cycle_rainbow_desaturated, "Cycle Rainbow Desaturated"},
-    {colorWaves, "Color Waves"},
-    // twinkle patterns
-    {rainbowTwinkles, "Rainbow Twinkles"},
-    {snowTwinkles, "Snow Twinkles"},
-    {cloudTwinkles, "Cloud Twinkles"},
-    {incandescentTwinkles, "Incandescent Twinkles"},
     {sparkle, "Sparkle"},
-    {sinelon, "Sinelon"},
+    {shootingStar, "Shooting Star"},
+    {colorWaves, "Color Waves"},
+    {pride, "Pride"},
     {bpm, "Beat"},
     {juggle, "Juggle"},
     {fire, "Fire"},
     {water, "Water"},
     {showSolidColor, "Solid Color"},
+    // twinkle patterns
+    {rainbowTwinkles, "Rainbow Twinkles"},
+    {snowTwinkles, "Snow Twinkles"},
+    {cloudTwinkles, "Cloud Twinkles"},
+    {incandescentTwinkles, "Incandescent Twinkles"},
 };
 
 const uint8_t patternCount = ARRAY_SIZE(patterns);
@@ -175,7 +175,6 @@ typedef PaletteAndName PaletteAndNameList[];
 
 const CRGBPalette16 palettes[] = {
     RainbowColors_p,
-    // RainbowStripeColors_p,
     CloudColors_p,
     LavaColors_p,
     OceanColors_p,

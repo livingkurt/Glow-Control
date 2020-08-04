@@ -53,10 +53,10 @@ const Content = (props) => {
 			} else if (field_name === 'autoplay') {
 				if (show_hide === 1) {
 					set_show_hide(0);
-					fade_in();
+					// fade_in();
 				} else if (show_hide === 0) {
 					set_show_hide(1);
-					fade_out();
+					// fade_out();
 				}
 			}
 		} catch (err) {
@@ -120,37 +120,37 @@ const Content = (props) => {
 		set_loading(true);
 	};
 
-	const [ opacity, set_opacity ] = useState(1);
-	const fade_in = () => {
-		let element = document.getElementById('autoplay_duration');
-		console.log(element);
-		var op = 1; // initial opacity
-		var timer = setInterval(function() {
-			if (op <= 0.1) {
-				clearInterval(timer);
-				element.style.display = 'none';
-			}
-			element.style.opacity = op;
-			element.style.filter = 'alpha(opacity=' + op * 100 + ')';
-			op -= op * 0.2;
-		}, 50);
-		set_show_hide(0);
-	};
-	const fade_out = () => {
-		var op = 0.1; // initial opacity
-		let element = document.getElementById('autoplay_duration');
-		console.log(element);
-		element.style.display = 'block';
-		var timer = setInterval(function() {
-			if (op >= 1) {
-				clearInterval(timer);
-			}
-			element.style.opacity = op;
-			element.style.filter = 'alpha(opacity=' + op * 100 + ')';
-			op += op * 0.1;
-		}, 10);
-		set_show_hide(1);
-	};
+	// const [ opacity, set_opacity ] = useState(1);
+	// const fade_in = () => {
+	// 	let element = document.getElementById('autoplay_duration');
+	// 	console.log(element);
+	// 	var op = 1; // initial opacity
+	// 	var timer = setInterval(function() {
+	// 		if (op <= 0.1) {
+	// 			clearInterval(timer);
+	// 			element.style.display = 'none';
+	// 		}
+	// 		element.style.opacity = op;
+	// 		element.style.filter = 'alpha(opacity=' + op * 100 + ')';
+	// 		op -= op * 0.2;
+	// 	}, 50);
+	// 	set_show_hide(0);
+	// };
+	// const fade_out = () => {
+	// 	var op = 0.1; // initial opacity
+	// 	let element = document.getElementById('autoplay_duration');
+	// 	console.log(element);
+	// 	element.style.display = 'block';
+	// 	var timer = setInterval(function() {
+	// 		if (op >= 1) {
+	// 			clearInterval(timer);
+	// 		}
+	// 		element.style.opacity = op;
+	// 		element.style.filter = 'alpha(opacity=' + op * 100 + ')';
+	// 		op += op * 0.1;
+	// 	}, 10);
+	// 	set_show_hide(1);
+	// };
 
 	return (
 		<Router>
@@ -199,6 +199,17 @@ const Content = (props) => {
 										setting={settings.brightness}
 										settings={settings}
 									/>
+									{[ 'shootingStar', 'beat' ].includes(mode_specific_settings) && (
+										<div>
+											{/* <h1 className="t-a-c">Palettes</h1> */}
+											<SettingSlider
+												update_function={update_leds}
+												set_settings={set_settings}
+												setting={settings.speed}
+												settings={settings}
+											/>
+										</div>
+									)}
 									<ToggleSwitch
 										update_function={update_leds}
 										set_settings={set_settings}
@@ -206,7 +217,7 @@ const Content = (props) => {
 										settings={settings}
 									/>
 									{console.log(show_hide)}
-									<div id="autoplay_duration">
+									<div style={{ display: show_hide === 1 ? 'flex' : 'none' }}>
 										<SettingSlider
 											update_function={update_leds}
 											set_settings={set_settings}
@@ -216,7 +227,9 @@ const Content = (props) => {
 									</div>
 								</div>
 							)}
-							{[ 'strobe', 'sparkle', 'sinelon', 'cycle' ].includes(mode_specific_settings) && (
+							{[ 'strobe', 'sparkle', 'shootingStar', 'cycle', 'beat' ].includes(
+								mode_specific_settings
+							) && (
 								<div>
 									<h2 className="t-a-c">Palettes</h2>
 									<DropdownSelector
@@ -233,7 +246,9 @@ const Content = (props) => {
 									/>
 								</div>
 							)}
-							{[ 'strobe', 'pulse', 'cycle', 'sparkle' ].includes(mode_specific_settings) && (
+							{[ 'strobe', 'pulse', 'cycle', 'sparkle', 'shootingStar', 'beat' ].includes(
+								mode_specific_settings
+							) && (
 								<div>
 									<h2 className="t-a-c">Color Options</h2>
 									<SettingSlider
@@ -249,7 +264,7 @@ const Content = (props) => {
 										settings={settings}
 										direction="rtl"
 									/>
-									{[ 'sparkle' ].includes(mode_specific_settings) && (
+									{[ 'sparkle', 'shootingStar', 'beat' ].includes(mode_specific_settings) && (
 										<SettingSlider
 											update_function={update_leds}
 											set_settings={set_settings}
@@ -277,17 +292,7 @@ const Content = (props) => {
 									/>
 								</div>
 							)}
-							{mode_specific_settings === 'sinelon' && (
-								<div>
-									{/* <h1 className="t-a-c">Palettes</h1> */}
-									<SettingSlider
-										update_function={update_leds}
-										set_settings={set_settings}
-										setting={settings.speed}
-										settings={settings}
-									/>
-								</div>
-							)}
+
 							{mode_specific_settings === 'strobe' && (
 								<div>
 									<h2 className="t-a-c">Strobe</h2>
