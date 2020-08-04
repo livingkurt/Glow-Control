@@ -246,3 +246,24 @@ void juggle()
     start_hue += colorDensity;
   }
 }
+
+void twinkles()
+{
+  EVERY_N_MILLIS(30)
+  {
+    // Make each pixel brighter or darker, depending on
+    // its 'direction' flag.
+    brightenOrDarkenEachPixel(FADE_IN_SPEED, FADE_OUT_SPEED);
+
+    // Now consider adding a new random twinkle
+    if (random8() < DENSITY)
+    {
+      int pos = random16(NUM_LEDS);
+      if (!leds[pos])
+      {
+        leds[pos] = ColorFromPalette(palettes[currentPaletteIndex], random8(), STARTING_BRIGHTNESS, blendMode == 0 ? NOBLEND : LINEARBLEND);
+        setPixelDirection(pos, GETTING_BRIGHTER);
+      }
+    }
+  }
+}

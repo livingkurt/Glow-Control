@@ -157,14 +157,9 @@ PatternAndNameList patterns = {
     {juggle, "Juggle"},
     {fire, "Fire"},
     {water, "Water"},
-
-    // twinkle patterns
-    {rainbowTwinkles, "Rainbow Twinkles"},
-    {snowTwinkles, "Snow Twinkles"},
-    {cloudTwinkles, "Cloud Twinkles"},
-    {incandescentTwinkles, "Incandescent Twinkles"},
     // {showRGB, "RGB"},
     {showHSV, "HSV"},
+    {twinkles, "Twinkles"},
 };
 
 const uint8_t patternCount = ARRAY_SIZE(patterns);

@@ -259,7 +259,7 @@ const Content = (props) => {
 									</div>
 								</div>
 							)}
-							{[ 'strobe', 'sparkle', 'shootingStar', 'cycle', 'beat', 'colorWaves' ].includes(
+							{[ 'strobe', 'sparkle', 'shootingStar', 'cycle', 'beat', 'colorWaves', 'twinkles' ].includes(
 								mode_specific_settings
 							) && (
 								<div>
@@ -309,11 +309,11 @@ const Content = (props) => {
 									)}
 								</div>
 							)}
-							{[ 'rainbowTwinkles', 'snowTwinkles', 'cloudTwinkles', 'incandescentTwinkles' ].includes(
+							{[ 'rainbowTwinkles', 'snowTwinkles', 'cloudTwinkles', 'incandescentTwinkles', 'twinkles' ].includes(
 								mode_specific_settings
 							) && (
 								<div>
-									<h2 className="t-a-c">Sparkle</h2>
+									<h2 className="t-a-c">Twinkles</h2>
 									<SettingSlider
 										update_function={update_leds}
 										setting={settings.twinkleSpeed}
@@ -434,15 +434,16 @@ const Content = (props) => {
 												hsv="64,255,255"
 											/>
 											<ColorBoxHSV update_function={update_hsv} rgb="0,255,0" hsv="92,255,255" />
-											<ColorBoxHSV
-												update_function={update_hsv}
-												rgb="0,255,173"
-												hsv="138,255,255"
-											/>
+
 											<ColorBoxHSV
 												update_function={update_hsv}
 												rgb="0,255,255"
 												hsv="127,255,255"
+											/>
+											<ColorBoxHSV
+												update_function={update_hsv}
+												rgb="93, 200, 252"
+												hsv="138,255,255"
 											/>
 											<ColorBoxHSV
 												update_function={update_hsv}
@@ -487,7 +488,7 @@ const Content = (props) => {
 										>
 											<img
 												style={{
-													webkitTransform: 'rotate(180deg)',
+													// webkitTransform: 'rotate(180deg)',
 													height: '36px',
 													left: '230px',
 													width: '77%',
@@ -517,30 +518,6 @@ const Content = (props) => {
 												/>
 											</div>
 										</div>
-										{/* <div>
-											<div style={{ position: 'relative' }}>
-												<img
-													style={{
-														position: 'absolute',
-														height: '41px',
-														zIndex: '0',
-														width: '79%',
-														right: '0px'
-													}}
-													src="./images/hsv_picture.jpg"
-													alt="hsv"
-													className="w-100"
-												/>
-												<HSVSlider
-													update_function={update_hsv}
-													color="hue"
-													hsv={hsv}
-													set_hsv={set_hsv}
-													setting={settings.hsv}
-													settings={settings}
-												/>
-											</div>
-										</div> */}
 										<HSVSlider
 											update_function={update_hsv}
 											color="saturation"
