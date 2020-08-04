@@ -175,7 +175,7 @@ typedef PaletteAndName PaletteAndNameList[];
 
 const CRGBPalette16 palettes[] = {
     RainbowColors_p,
-    RainbowStripeColors_p,
+    // RainbowStripeColors_p,
     CloudColors_p,
     LavaColors_p,
     OceanColors_p,
