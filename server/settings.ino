@@ -35,8 +35,8 @@ void loadSettings()
 
   power = EEPROM.read(5);
 
-  autoplay = EEPROM.read(6);
-  autoplayDuration = EEPROM.read(7);
+  autoplayPattern = EEPROM.read(6);
+  autoplayPatternDuration = EEPROM.read(7);
 
   currentPaletteIndex = EEPROM.read(8);
   if (currentPaletteIndex < 0)
@@ -44,15 +44,6 @@ void loadSettings()
   else if (currentPaletteIndex >= paletteCount)
     currentPaletteIndex = paletteCount - 1;
 }
-
-// // scale the brightness of all pixels down
-// void dimAll(byte value)
-// {
-//   for (int i = 0; i < NUM_LEDS; i++)
-//   {
-//     leds[i].nscale8(value);
-//   }
-// }
 
 void setPower(uint8_t value)
 {
@@ -64,14 +55,46 @@ void setPower(uint8_t value)
   broadcastInt("power", power);
 }
 
-void setAutoplay(uint8_t value)
+void setAutoplayPattern(uint8_t value)
 {
-  autoplay = value == 0 ? 0 : 1;
+  autoplayPattern = value == 0 ? 0 : 1;
 
-  EEPROM.write(6, autoplay);
+  EEPROM.write(6, autoplayPattern);
   EEPROM.commit();
 
-  broadcastInt("autoplay", autoplay);
+  broadcastInt("autoplayPattern", autoplayPattern);
+}
+void setAutoplayPatternDuration(uint8_t value)
+{
+  autoplayPatternDuration = value;
+
+  EEPROM.write(7, autoplayPatternDuration);
+  EEPROM.commit();
+
+  autoplayPatternTimeout = millis() + (autoplayPatternDuration * 1000);
+
+  broadcastInt("autoplayPatternDuration", autoplayPatternDuration);
+}
+
+void setAutoplayPalette(uint8_t value)
+{
+  autoplayPalette = value == 0 ? 0 : 1;
+
+  EEPROM.write(14, autoplayPalette);
+  EEPROM.commit();
+
+  broadcastInt("autoplayPalette", autoplayPalette);
+}
+void setAutoplayPaletteDuration(uint8_t value)
+{
+  autoplayPaletteDuration = value;
+
+  EEPROM.write(15, autoplayPaletteDuration);
+  EEPROM.commit();
+
+  autoplayPaletteTimeout = millis() + (autoplayPaletteDuration * 1000);
+
+  broadcastInt("autoplayPaletteDuration", autoplayPaletteDuration);
 }
 
 void setBlendMode(uint8_t value)
@@ -83,26 +106,23 @@ void setBlendMode(uint8_t value)
 
   broadcastInt("blendMode", blendMode);
 }
-void setRandomMode(uint8_t value)
+void setRandomPatternMode(uint8_t value)
 {
-  randomMode = value == 0 ? 0 : 1;
+  randomPatternMode = value == 0 ? 0 : 1;
 
-  EEPROM.write(13, randomMode);
+  EEPROM.write(13, randomPatternMode);
   EEPROM.commit();
 
-  broadcastInt("randomMode", randomMode);
+  broadcastInt("randomPatternMode", randomPatternMode);
 }
-
-void setAutoplayDuration(uint8_t value)
+void setRandomPaletteMode(uint8_t value)
 {
-  autoplayDuration = value;
+  randomPaletteMode = value == 0 ? 0 : 1;
 
-  EEPROM.write(7, autoplayDuration);
+  EEPROM.write(17, randomPaletteMode);
   EEPROM.commit();
 
-  autoPlayTimeout = millis() + (autoplayDuration * 1000);
-
-  broadcastInt("autoplayDuration", autoplayDuration);
+  broadcastInt("randomPaletteMode", randomPaletteMode);
 }
 
 void setRGB(CRGB color)
@@ -157,7 +177,7 @@ void adjustPattern(bool up)
   if (currentPatternIndex >= patternCount)
     currentPatternIndex = 0;
 
-  if (autoplay == 0)
+  if (autoplayPattern == 0)
   {
     EEPROM.write(1, currentPatternIndex);
     EEPROM.commit();
@@ -171,24 +191,49 @@ void randomPattern(bool rand)
   {
     currentPatternIndex = random(0, patternCount);
   }
-  // if (up)
-  //   currentPatternIndex++;
-  // else
-  //   currentPatternIndex--;
-
-  // // wrap around at the ends
-  // if (currentPatternIndex < 0)
-  //   currentPatternIndex = patternCount - 1;
-  // if (currentPatternIndex >= patternCount)
-  //   currentPatternIndex = 0;
-
-  if (autoplay == 0)
+  if (autoplayPattern == 0)
   {
-    EEPROM.write(1, currentPatternIndex);
+    EEPROM.write(16, currentPatternIndex);
     EEPROM.commit();
   }
 
   broadcastInt("pattern", currentPatternIndex);
+}
+
+void adjustPalette(bool up)
+{
+  if (up)
+    currentPaletteIndex++;
+  else
+    currentPaletteIndex--;
+
+  // wrap around at the ends
+  if (currentPaletteIndex < 0)
+    currentPaletteIndex = paletteCount - 1;
+  if (currentPaletteIndex >= paletteCount)
+    currentPaletteIndex = 0;
+
+  if (autoplayPalette == 0)
+  {
+    EEPROM.write(14, currentPaletteIndex);
+    EEPROM.commit();
+  }
+
+  broadcastInt("palette", currentPaletteIndex);
+}
+void randomPalette(bool rand)
+{
+  if (rand)
+  {
+    currentPaletteIndex = random(0, paletteCount);
+  }
+  if (autoplayPalette == 0)
+  {
+    EEPROM.write(15, currentPaletteIndex);
+    EEPROM.commit();
+  }
+
+  broadcastInt("palette", currentPaletteIndex);
 }
 
 void setPattern(uint8_t value)
@@ -198,7 +243,7 @@ void setPattern(uint8_t value)
 
   currentPatternIndex = value;
 
-  if (autoplay == 0)
+  if (autoplayPattern == 0)
   {
     EEPROM.write(1, currentPatternIndex);
     EEPROM.commit();

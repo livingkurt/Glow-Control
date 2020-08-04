@@ -105,12 +105,17 @@ CRGBPalette16 gTargetPalette(gGradientPalettes[0]);
 CRGBPalette16 IceColors_p = CRGBPalette16(CRGB::Black, CRGB::Blue, CRGB::Aqua, CRGB::White);
 
 uint8_t currentPatternIndex = 0; // Index number of which pattern is current
-uint8_t autoplay = 0;
+// uint8_t currentPaletteIndex = 0; // Index number of which pattern is current
+uint8_t autoplayPattern = 0;
+uint8_t autoplayPalette = 0;
 uint8_t blendMode = 1;
-uint8_t randomMode = 0;
+uint8_t randomPatternMode = 0;
+uint8_t randomPaletteMode = 0;
 
-uint8_t autoplayDuration = 10;
-unsigned long autoPlayTimeout = 0;
+uint8_t autoplayPatternDuration = 10;
+uint8_t autoplayPaletteDuration = 10;
+unsigned long autoplayPatternTimeout = 0;
+unsigned long autoplayPaletteTimeout = 0;
 
 uint8_t currentPaletteIndex = 0;
 
@@ -158,8 +163,9 @@ PatternAndNameList patterns = {
     {fire, "Fire"},
     {water, "Water"},
     // {showRGB, "RGB"},
-    {showHSV, "HSV"},
     {twinkles, "Twinkles"},
+    {showHSV, "HSV"}
+
 };
 
 const uint8_t patternCount = ARRAY_SIZE(patterns);
@@ -260,7 +266,8 @@ void setup()
   //initializeWiFi();
   wifi_setup();
   run_server();
-  autoPlayTimeout = millis() + (autoplayDuration * 1000);
+  autoplayPatternTimeout = millis() + (autoplayPatternDuration * 1000);
+  autoplayPaletteTimeout = millis() + (autoplayPaletteDuration * 1000);
 }
 
 void sendInt(uint8_t value)
@@ -358,9 +365,9 @@ void loop()
     gHue++; // slowly cycle the "base color" through the rainbow
   }
 
-  if (autoplay && (millis() > autoPlayTimeout))
+  if (autoplayPattern && (millis() > autoplayPatternTimeout))
   {
-    if (randomMode)
+    if (randomPatternMode)
     {
       randomPattern(true);
     }
@@ -369,7 +376,20 @@ void loop()
       adjustPattern(true);
     }
 
-    autoPlayTimeout = millis() + (autoplayDuration * 1000);
+    autoplayPatternTimeout = millis() + (autoplayPatternDuration * 1000);
+  }
+  if (autoplayPalette && (millis() > autoplayPaletteTimeout))
+  {
+    if (randomPaletteMode)
+    {
+      randomPalette(true);
+    }
+    else
+    {
+      adjustPalette(true);
+    }
+
+    autoplayPaletteTimeout = millis() + (autoplayPaletteDuration * 1000);
   }
 
   // Call the current pattern function once, updating the 'leds' array

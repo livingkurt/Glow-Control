@@ -81,22 +81,34 @@ String getPalettes()
   return json;
 }
 
-String getAutoplay()
+String getAutoplayPattern()
 {
-  return String(autoplay);
+  return String(autoplayPattern);
+}
+String getAutoplayPalette()
+{
+  return String(autoplayPalette);
 }
 String getBlendMode()
 {
   return String(blendMode);
 }
-String getRandomMode()
+String getrandomPatternMode()
 {
-  return String(randomMode);
+  return String(randomPatternMode);
+}
+String getrandomPaletteMode()
+{
+  return String(randomPaletteMode);
 }
 
-String getAutoplayDuration()
+String getAutoplayPatternDuration()
 {
-  return String(autoplayDuration);
+  return String(autoplayPatternDuration);
+}
+String getAutoplayPaletteDuration()
+{
+  return String(autoplayPaletteDuration);
 }
 
 String getRGB()
@@ -169,11 +181,15 @@ FieldList fields = {
     {"colorDensity", "Color Density", NumberFieldType, 1, 30, 1, getColorDensity},
     {"colorSpeed", "Color Speed", NumberFieldType, 1, 110, 1, getColorSpeed},
     {"colorFade", "Color Fade", NumberFieldType, 1, 150, 1, getColorFade},
-    {"autoplay", "Autoplay", SectionFieldType},
-    {"autoplay", "Autoplay", BooleanFieldType, 0, 1, 1, getAutoplay},
+    {"autoplayPattern", "Autoplay Pattern", SectionFieldType},
+    {"autoplayPattern", "Autoplay Pattern", BooleanFieldType, 0, 1, 1, getAutoplayPattern},
+    {"autoplayPalette", "Autoplay Palette", SectionFieldType},
+    {"autoplayPalette", "Autoplay Palette", BooleanFieldType, 0, 1, 1, getAutoplayPalette},
     {"blendMode", "Blend", BooleanFieldType, 0, 1, 1, getBlendMode},
-    {"randomMode", "Random", BooleanFieldType, 0, 1, 1, getRandomMode},
-    {"autoplayDuration", "Autoplay Duration", NumberFieldType, 0, 255, 1, getAutoplayDuration},
+    {"randomPatternMode", "Randomize Patterns", BooleanFieldType, 0, 1, 1, getrandomPatternMode},
+    {"randomPaletteMode", "Randomize Palettes", BooleanFieldType, 0, 1, 1, getrandomPaletteMode},
+    {"autoplayPatternDuration", "Autoplay Pattern Duration", NumberFieldType, 0, 255, 1, getAutoplayPatternDuration},
+    {"autoplayPaletteDuration", "Autoplay Palette Duration", NumberFieldType, 0, 255, 1, getAutoplayPaletteDuration},
     {"rgb", "RGB", SectionFieldType},
     {"rgb", "Color", ColorFieldType, 0, 255, 1, getHSV},
     {"hsv", "HSV", SectionFieldType},

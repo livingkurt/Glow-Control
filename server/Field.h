@@ -135,8 +135,8 @@ String getFieldsJson(FieldList fields, uint8_t count)
   }
   json += "]},";
 
-  json += "{\"name\":\"autoplay\",\"label\":\"Autoplay\",\"type\":\"Boolean\",\"value\":" + String(autoplay) + "},";
-  json += "{\"name\":\"autoplayDuration\",\"label\":\"Autoplay Duration\",\"type\":\"Number\",\"value\":" + String(autoplayDuration) + "},";
+  json += "{\"name\":\"autoplayPattern\",\"label\":\"AutoplayPattern\",\"type\":\"Boolean\",\"value\":" + String(autoplayPattern) + "},";
+  json += "{\"name\":\"autoplayPatternDuration\",\"label\":\"AutoplayPattern Duration\",\"type\":\"Number\",\"value\":" + String(autoplayPatternDuration) + "},";
 
   json += "{\"name\":\"rgb\",\"label\":\"Color\",\"type\":\"Color\",\"value\":\"" + String(rgb.r) + "," + String(rgb.g) + "," + String(rgb.b) +"\"},";
 

@@ -49,7 +49,7 @@ const Content = (props) => {
 			settings.map((setting) => {
 				return (saved_settings[setting.name] = setting);
 			});
-			console.log(saved_settings.autoplay.value);
+			console.log(saved_settings.autoplayPattern.value);
 			set_settings(saved_settings);
 			// set_patterns(settings[2].options);
 			// set_palettes(settings[3].options);
@@ -224,8 +224,8 @@ const Content = (props) => {
 							<SettingSlider update_function={update_leds} setting={settings.brightness} />
 							<SettingSlider update_function={update_leds} setting={settings.speed} />
 							{/* <SettingSlider update_function={update_leds} setting={settings.colorDensity} /> */}
-							<ToggleSwitch update_function={update_leds} setting={settings.autoplay} />
-							<SettingSlider update_function={update_leds} setting={settings.autoplayDuration} />
+							<ToggleSwitch update_function={update_leds} setting={settings.autoplayPattern} />
+							<SettingSlider update_function={update_leds} setting={settings.autoplayPatternDuration} />
 							<button className="button primary" onClick={() => reset_device()}>
 								Reset
 							</button>

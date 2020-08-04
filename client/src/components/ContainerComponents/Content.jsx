@@ -5,28 +5,22 @@ import API from '../../util/API';
 import { ToggleSwitch } from '../UtilityComponents';
 
 const Content = (props) => {
-	const query_url = '192.168.0.152';
-	// const leds = '192.168.0.219';
-	// const leds = '192.168.0.60';
-
-	// const autoplay_ref = useRef();
-	// console.log(autoplay_ref);
-
 	const devices = {
 		living_room: { name: 'Living Room', query_url: '192.168.0.219' },
-		test: { name: 'Test', query_url: '192.168.0.152' },
-		test_2: { name: 'Test 2', query_url: '192.168.0.60' }
+		test_2: { name: 'Test', query_url: '192.168.0.152' },
+		test: { name: 'Test 2', query_url: '192.168.0.60' }
 	};
 
 	const [ settings, set_settings ] = useState({});
 	const [ leds, set_leds ] = useState(devices);
-	const [ current_device, set_current_device ] = useState(leds.test_2);
+	const [ current_device, set_current_device ] = useState(leds.test);
 	const [ patterns, set_patterns ] = useState([]);
 	const [ palettes, set_palettes ] = useState([]);
 	const [ rgb, set_rgb ] = useState({});
 	const [ hsv, set_hsv ] = useState({});
 	const [ loading, set_loading ] = useState(true);
-	const [ show_hide, set_show_hide ] = useState();
+	const [ show_hide_pattern, set_show_hide_pattern ] = useState();
+	const [ show_hide_palette, set_show_hide_palette ] = useState();
 	const [ mode_specific_settings, set_mode_specific_settings ] = useState('');
 
 	useEffect(() => {
@@ -51,12 +45,20 @@ const Content = (props) => {
 				let pattern = camelize(patterns[value]);
 				console.log(pattern);
 				set_mode_specific_settings(pattern);
-			} else if (field_name === 'autoplay') {
-				if (show_hide === 1) {
-					set_show_hide(0);
+			} else if (field_name === 'autoplayPattern') {
+				if (show_hide_pattern === 1) {
+					set_show_hide_pattern(0);
 					// fade_in();
-				} else if (show_hide === 0) {
-					set_show_hide(1);
+				} else if (show_hide_pattern === 0) {
+					set_show_hide_pattern(1);
+					// fade_out();
+				}
+			} else if (field_name === 'autoplayPalette') {
+				if (show_hide_palette === 1) {
+					set_show_hide_palette(0);
+					// fade_in();
+				} else if (show_hide_palette === 0) {
+					set_show_hide_palette(1);
 					// fade_out();
 				}
 			}
@@ -119,7 +121,8 @@ const Content = (props) => {
 				value: saved_settings.hsv.value.split(',')[2]
 			});
 			set_mode_specific_settings(camelize(saved_settings.pattern.options[saved_settings.pattern.value]));
-			set_show_hide(saved_settings.autoplay.value);
+			set_show_hide_pattern(saved_settings.autoplayPattern.value);
+			set_show_hide_palette(saved_settings.autoplayPalette.value);
 			set_loading(false);
 		} catch (err) {
 			console.log(err);
@@ -143,7 +146,7 @@ const Content = (props) => {
 
 	// const [ opacity, set_opacity ] = useState(1);
 	// const fade_in = () => {
-	// 	let element = document.getElementById('autoplay_duration');
+	// 	let element = document.getElementById('autoplayPattern_duration');
 	// 	console.log(element);
 	// 	var op = 1; // initial opacity
 	// 	var timer = setInterval(function() {
@@ -159,7 +162,7 @@ const Content = (props) => {
 	// };
 	// const fade_out = () => {
 	// 	var op = 0.1; // initial opacity
-	// 	let element = document.getElementById('autoplay_duration');
+	// 	let element = document.getElementById('autoplayPattern_duration');
 	// 	console.log(element);
 	// 	element.style.display = 'block';
 	// 	var timer = setInterval(function() {
@@ -237,31 +240,36 @@ const Content = (props) => {
 									<ToggleSwitch
 										update_function={update_leds}
 										set_settings={set_settings}
-										setting={settings.autoplay}
+										setting={settings.autoplayPattern}
 										settings={settings}
 									/>
-									{/* {console.log(show_hide)} */}
-									<div style={{ display: show_hide === 1 ? 'flex' : 'none' }}>
+									<div style={{ display: show_hide_pattern === 1 ? 'flex' : 'none' }}>
 										<SettingSlider
 											update_function={update_leds}
 											set_settings={set_settings}
-											setting={settings.autoplayDuration}
+											setting={settings.autoplayPatternDuration}
 											settings={settings}
 										/>
 									</div>
-									<div style={{ display: show_hide === 1 ? 'flex' : 'none' }}>
+									<div style={{ display: show_hide_pattern === 1 ? 'flex' : 'none' }}>
 										<ToggleSwitch
 											update_function={update_leds}
 											set_settings={set_settings}
-											setting={settings.randomMode}
+											setting={settings.randomPatternMode}
 											settings={settings}
 										/>
 									</div>
 								</div>
 							)}
-							{[ 'strobe', 'sparkle', 'shootingStar', 'cycle', 'beat', 'colorWaves', 'twinkles' ].includes(
-								mode_specific_settings
-							) && (
+							{[
+								'strobe',
+								'sparkle',
+								'shootingStar',
+								'cycle',
+								'beat',
+								'colorWaves',
+								'twinkles'
+							].includes(mode_specific_settings) && (
 								<div>
 									<h2 className="t-a-c">Palettes</h2>
 									<DropdownSelector
@@ -276,6 +284,28 @@ const Content = (props) => {
 										setting={settings.blendMode}
 										settings={settings}
 									/>
+									<ToggleSwitch
+										update_function={update_leds}
+										set_settings={set_settings}
+										setting={settings.autoplayPalette}
+										settings={settings}
+									/>
+									<div style={{ display: show_hide_palette === 1 ? 'flex' : 'none' }}>
+										<SettingSlider
+											update_function={update_leds}
+											set_settings={set_settings}
+											setting={settings.autoplayPaletteDuration}
+											settings={settings}
+										/>
+									</div>
+									<div style={{ display: show_hide_palette === 1 ? 'flex' : 'none' }}>
+										<ToggleSwitch
+											update_function={update_leds}
+											set_settings={set_settings}
+											setting={settings.randomPaletteMode}
+											settings={settings}
+										/>
+									</div>
 								</div>
 							)}
 							{[ 'strobe', 'pulse', 'cycle', 'sparkle', 'shootingStar', 'beat', 'juggle' ].includes(
@@ -309,9 +339,13 @@ const Content = (props) => {
 									)}
 								</div>
 							)}
-							{[ 'rainbowTwinkles', 'snowTwinkles', 'cloudTwinkles', 'incandescentTwinkles', 'twinkles' ].includes(
-								mode_specific_settings
-							) && (
+							{[
+								'rainbowTwinkles',
+								'snowTwinkles',
+								'cloudTwinkles',
+								'incandescentTwinkles',
+								'twinkles'
+							].includes(mode_specific_settings) && (
 								<div>
 									<h2 className="t-a-c">Twinkles</h2>
 									<SettingSlider

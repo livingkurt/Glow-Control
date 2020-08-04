@@ -66,7 +66,7 @@
 //        break;
 //      }
 //    case InputCommand::PlayMode: { // toggle pause/play
-//        setAutoplay(!autoplay);
+//        setAutoplayPattern(!autoplayPattern);
 //        break;
 //      }
 //

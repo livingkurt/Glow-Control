@@ -209,25 +209,44 @@ void run_server()
     setBlendMode(value.toInt());
     sendInt(blendMode);
   });
-  webServer.on("/randomMode", HTTP_POST, []() {
+  webServer.on("/randomPatternMode", HTTP_POST, []() {
     cors_set_access_control_headers();
     String value = webServer.arg("value");
-    setRandomMode(value.toInt());
-    sendInt(randomMode);
+    setRandomPatternMode(value.toInt());
+    sendInt(randomPatternMode);
+  });
+  webServer.on("/randomPaletteMode", HTTP_POST, []() {
+    cors_set_access_control_headers();
+    String value = webServer.arg("value");
+    setRandomPaletteMode(value.toInt());
+    sendInt(randomPaletteMode);
   });
 
-  webServer.on("/autoplay", HTTP_POST, []() {
+  webServer.on("/autoplayPattern", HTTP_POST, []() {
     cors_set_access_control_headers();
     String value = webServer.arg("value");
-    setAutoplay(value.toInt());
-    sendInt(autoplay);
+    setAutoplayPattern(value.toInt());
+    sendInt(autoplayPattern);
   });
 
-  webServer.on("/autoplayDuration", HTTP_POST, []() {
+  webServer.on("/autoplayPatternDuration", HTTP_POST, []() {
     cors_set_access_control_headers();
     String value = webServer.arg("value");
-    setAutoplayDuration(value.toInt());
-    sendInt(autoplayDuration);
+    setAutoplayPatternDuration(value.toInt());
+    sendInt(autoplayPatternDuration);
+  });
+  webServer.on("/autoplayPalette", HTTP_POST, []() {
+    cors_set_access_control_headers();
+    String value = webServer.arg("value");
+    setAutoplayPalette(value.toInt());
+    sendInt(autoplayPalette);
+  });
+
+  webServer.on("/autoplayPaletteDuration", HTTP_POST, []() {
+    cors_set_access_control_headers();
+    String value = webServer.arg("value");
+    setAutoplayPaletteDuration(value.toInt());
+    sendInt(autoplayPaletteDuration);
   });
 
   //list directory
