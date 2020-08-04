@@ -149,6 +149,10 @@ void run_server()
     String r = webServer.arg("r");
     String g = webServer.arg("g");
     String b = webServer.arg("b");
+    Serial.println(r);
+    Serial.println(g);
+    Serial.println(b);
+    // Serial.println("cors_set_access_control_headers");
     setSolidColor(r.toInt(), g.toInt(), b.toInt());
     sendString(String(solidColor.r) + "," + String(solidColor.g) + "," + String(solidColor.b));
   });

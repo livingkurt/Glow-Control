@@ -20,7 +20,6 @@ extern "C"
 //#include <IRremoteESP8266.h>
 #include "GradientPalettes.h"
 // #include "modes/modes.h"
-#include <math.h>
 
 #define ARRAY_SIZE(A) (sizeof(A) / sizeof((A)[0]))
 
@@ -45,7 +44,7 @@ ESP8266HTTPUpdateServer httpUpdateServer;
 
 #define NUM_LEDS SYSTEM_MAX_LEDS //try to sync everything
 
-// #define NUM_LEDS 500
+// #define NUM_LEDS 200
 #define HALF_LEDS NUM_LEDS / 2
 
 #define HALF_SYSTEM_MAX_LEDS HALF_LEDS
@@ -147,7 +146,6 @@ PatternAndNameList patterns = {
     {strobe_mode, "Strobe"},
     {pulse, "Pulse"},
     {cycle, "Cycle"},
-    // {juggljugglee_2, "Juggle 2.0"},
     {cycle_rainbow_desaturated, "Cycle Rainbow Desaturated"},
     {sparkle, "Sparkle"},
     {shootingStar, "Shooting Star"},
@@ -157,12 +155,13 @@ PatternAndNameList patterns = {
     {juggle, "Juggle"},
     {fire, "Fire"},
     {water, "Water"},
-    {showSolidColor, "Solid Color"},
+
     // twinkle patterns
     {rainbowTwinkles, "Rainbow Twinkles"},
     {snowTwinkles, "Snow Twinkles"},
     {cloudTwinkles, "Cloud Twinkles"},
     {incandescentTwinkles, "Incandescent Twinkles"},
+    {showSolidColor, "Solid Color"},
 };
 
 const uint8_t patternCount = ARRAY_SIZE(patterns);
@@ -176,6 +175,7 @@ typedef PaletteAndName PaletteAndNameList[];
 
 const CRGBPalette16 palettes[] = {
     RainbowColors_p,
+    RainbowStripeColors_p,
     CloudColors_p,
     LavaColors_p,
     OceanColors_p,
@@ -305,19 +305,6 @@ void hold(int period)
   {
   }
 }
-// void back_n_forth(int period)
-// {
-
-//   for (int x = 0; x < 10000; x++)
-//   {
-//     //code here to do what you want
-//   }
-
-//   for (int x = 9999; x >= 0; x--)
-//   {
-//     //code here to do what you want
-//   }
-// }
 
 void loop()
 {
@@ -370,7 +357,7 @@ void loop()
   {
     // slowly blend the current palette to the next
     nblendPaletteTowardPalette(gCurrentPalette, gTargetPalette, 8);
-    gHue; // slowly cycle the "base color" through the rainbow
+    gHue++; // slowly cycle the "base color" through the rainbow
   }
 
   if (autoplay && (millis() > autoPlayTimeout))

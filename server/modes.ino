@@ -1,6 +1,8 @@
 void showSolidColor()
 {
+  // Serial.println(solidColor);
   fill_solid(leds, NUM_LEDS, solidColor);
+  FastLED.show();
 }
 
 void cycle()
@@ -179,7 +181,7 @@ void pride()
 
 void colorWaves()
 {
-  colorwaves(leds, NUM_LEDS, gCurrentPalette);
+  colorwaves(leds, NUM_LEDS, palettes[currentPaletteIndex]);
 }
 
 void cycle_rainbow_desaturated()

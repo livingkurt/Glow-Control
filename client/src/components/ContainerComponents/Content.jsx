@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ColorPicker, SettingSlider, RGBSlider, DropdownSelector } from '../ColorComponents';
+import { ColorPicker, SettingSlider, RGBSlider, DropdownSelector, ColorBox } from '../ColorComponents';
 import { Route, BrowserRouter as Router, Switch, Link, useHistory } from 'react-router-dom';
 import API from '../../util/API';
 import { ToggleSwitch } from '../UtilityComponents';
-import { StrobePage, SparklePage, PatternPage, ShootingStarPage, SolidColorPage } from '../pages';
 
 const Content = (props) => {
 	const query_url = '192.168.0.152';
@@ -15,12 +14,13 @@ const Content = (props) => {
 
 	const devices = {
 		living_room: { name: 'Living Room', query_url: '192.168.0.219' },
-		test: { name: 'Test', query_url: '192.168.0.152' }
+		test: { name: 'Test', query_url: '192.168.0.152' },
+		test_2: { name: 'Test 2', query_url: '192.168.0.60' }
 	};
 
 	const [ settings, set_settings ] = useState({});
 	const [ leds, set_leds ] = useState(devices);
-	const [ current_device, set_current_device ] = useState(leds.test);
+	const [ current_device, set_current_device ] = useState(leds.test_2);
 	const [ patterns, set_patterns ] = useState([]);
 	const [ palettes, set_palettes ] = useState([]);
 	const [ solid_color, set_solid_color ] = useState({});
@@ -44,7 +44,7 @@ const Content = (props) => {
 
 	const update_leds = async (field_name, value) => {
 		try {
-			console.log(field_name);
+			console.log({ field_name, value });
 			const res = await API.update_leds(current_device.query_url, field_name, value);
 			if (field_name === 'pattern') {
 				let pattern = camelize(patterns[value]);
@@ -64,9 +64,9 @@ const Content = (props) => {
 		}
 	};
 
-	const update_rgb = async (field_name, value) => {
+	const update_solid_color = async (red_value, green_value, blue_value) => {
 		try {
-			const res = await API.update_leds(current_device.query_url, field_name, value);
+			const res = await API.update_solid_color(current_device.query_url, red_value, green_value, blue_value);
 		} catch (err) {
 			console.log(err);
 		}
@@ -93,18 +93,18 @@ const Content = (props) => {
 		}
 	};
 
-	const update_solid_color = async (red_value, green_value, blue_value) => {
-		try {
-			const res = await API.update_solid_color(
-				current_device.query_url,
-				solid_color.red,
-				solid_color.green,
-				solid_color.blue
-			);
-		} catch (err) {
-			console.log(err);
-		}
-	};
+	// const update_solid_color = async (red_value, green_value, blue_value) => {
+	// 	try {
+	// 		const res = await API.update_solid_color(
+	// 			current_device.query_url,
+	// 			solid_color.red,
+	// 			solid_color.green,
+	// 			solid_color.blue
+	// 		);
+	// 	} catch (err) {
+	// 		console.log(err);
+	// 	}
+	// };
 
 	const reset_device = async () => {
 		try {
@@ -163,6 +163,9 @@ const Content = (props) => {
 						</button>
 						<button onClick={() => change_device(leds.test)} className="btn btn-nav">
 							Test
+						</button>
+						<button onClick={() => change_device(leds.test_2)} className="btn btn-nav">
+							Test 2
 						</button>
 					</div>
 					<button className="btn primary" onClick={() => reset_device()}>
@@ -228,7 +231,7 @@ const Content = (props) => {
 									</div>
 								</div>
 							)}
-							{[ 'strobe', 'sparkle', 'shootingStar', 'cycle', 'beat' ].includes(
+							{[ 'strobe', 'sparkle', 'shootingStar', 'cycle', 'beat', 'colorWaves' ].includes(
 								mode_specific_settings
 							) && (
 								<div>
@@ -322,7 +325,24 @@ const Content = (props) => {
 							{mode_specific_settings === 'solidColor' && (
 								<div>
 									<h2 className="t-a-c">Solid Color</h2>
-									<ColorPicker />
+									<div>
+										{/* <input type="color" /> */}
+										<div className="flex row">
+											<ColorBox update_function={update_solid_color} color="255,0,0" />
+											<ColorBox update_function={update_solid_color} color="255,128,0" />
+											<ColorBox update_function={update_solid_color} color="255,255,0" />
+											<ColorBox update_function={update_solid_color} color="0,255,0" />
+											<ColorBox update_function={update_solid_color} color="0,255,173" />
+											<ColorBox update_function={update_solid_color} color="0,255,255" />
+											<ColorBox update_function={update_solid_color} color="0,128,255" />
+											<ColorBox update_function={update_solid_color} color="0,0,255" />
+											<ColorBox update_function={update_solid_color} color="128,0,255" />
+											<ColorBox update_function={update_solid_color} color="255,0,255" />
+											<ColorBox update_function={update_solid_color} color="255,0,128" />
+											<ColorBox update_function={update_solid_color} color="255,255,255" />
+										</div>
+									</div>
+									{/* <ColorPicker />
 									<RGBSlider
 										display_name="Red"
 										setting_name="red"
@@ -340,7 +360,7 @@ const Content = (props) => {
 										setting_name="blue"
 										update_function={update_rgb}
 										solid_color={solid_color.blue}
-									/>
+									/> */}
 								</div>
 							)}
 						</div>

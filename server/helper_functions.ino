@@ -160,7 +160,7 @@ uint8_t beatsaw8(accum88 beats_per_minute, uint8_t lowest = 0, uint8_t highest =
 // ColorWavesWithPalettes by Mark Kriegsman: https://gist.github.com/kriegsman/8281905786e8b2632aeb
 // This function draws color waves with an ever-changing,
 // widely-varying set of parameters, using a color palette.
-void colorwaves(CRGB *ledarray, uint16_t numleds, CRGBPalette16 &palette)
+void colorwaves(CRGB *ledarray, uint16_t numleds, CRGBPalette16 palette)
 {
   static uint16_t sPseudotime = 0;
   static uint16_t sLastMillis = 0;
