@@ -179,27 +179,44 @@ typedef PaletteAndName PaletteAndNameList[];
 
 const CRGBPalette16 palettes[] = {
     RainbowColors_p,
-    // RainbowStripeColors_p,
-    CloudColors_p,
-    LavaColors_p,
     OceanColors_p,
     ForestColors_p,
     PartyColors_p,
     HeatColors_p,
-    jet_gp};
+    jet_gp,
+    es_rivendell_15_gp,
+    es_ocean_breeze_036_gp,
+    es_pinksplash_08_gp,
+    Coral_reef_gp,
+    es_vintage_01_gp,
+    es_landscape_33_gp,
+    rainbowsherbet_gp,
+    gr65_hult_gp,
+    GMT_drywet_gp,
+    ib_jul01_gp,
+    Colorfull_gp,
+};
 
 const uint8_t paletteCount = ARRAY_SIZE(palettes);
 
 const String paletteNames[paletteCount] = {
     "Rainbow",
-    // "Rainbow Stripe",
-    "Cloud",
-    "Lava",
     "Ocean",
     "Forest",
     "Party",
     "Heat",
     "Ocean Sunset",
+    "Vanilla Mint",
+    "Ocean Breeze",
+    "Love",
+    "Coral Reef",
+    "Fire Ball",
+    "Emerald Sunset",
+    "Flower Garden",
+    "Cotton Candy",
+    "Autumn Water",
+    "Faded Apple Tree",
+    "Spring Time",
 };
 
 #include "Fields.h"
@@ -394,6 +411,7 @@ void loop()
 
   // Call the current pattern function once, updating the 'leds' array
   patterns[currentPatternIndex].pattern();
+  // palettes[currentPaletteIndex].palette();
 
   FastLED.show();
 
