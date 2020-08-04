@@ -157,6 +157,19 @@ void run_server()
     sendString(String(rgb.r) + "," + String(rgb.g) + "," + String(rgb.b));
   });
 
+  webServer.on("/hsv", HTTP_POST, []() {
+    cors_set_access_control_headers();
+    String h = webServer.arg("h");
+    String s = webServer.arg("s");
+    String v = webServer.arg("v");
+    Serial.println(h);
+    Serial.println(s);
+    Serial.println(v);
+    // Serial.println("cors_set_access_control_headers");
+    setHSV(h.toInt(), s.toInt(), v.toInt());
+    sendString(String(hsv.h) + "," + String(hsv.s) + "," + String(hsv.v));
+  });
+
   webServer.on("/pattern", HTTP_POST, []() {
     cors_set_access_control_headers();
     String value = webServer.arg("value");

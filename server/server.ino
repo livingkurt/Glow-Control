@@ -118,6 +118,7 @@ uint8_t gHue = 0; // rotating "base color" used by many of the patterns
 // gHue = -1 * millis() / rate;
 
 CRGB rgb = CRGB::Blue;
+CHSV hsv = CHSV(255, 255, 255);
 
 // scale the brightness of all pixels down
 void dimAll(byte value)
@@ -162,6 +163,7 @@ PatternAndNameList patterns = {
     {cloudTwinkles, "Cloud Twinkles"},
     {incandescentTwinkles, "Incandescent Twinkles"},
     {showRGB, "RGB"},
+    {showHSV, "HSV"},
 };
 
 const uint8_t patternCount = ARRAY_SIZE(patterns);

@@ -99,6 +99,10 @@ String getRGB()
 {
   return String(rgb.r) + "," + String(rgb.g) + "," + String(rgb.b);
 }
+String getHSV()
+{
+  return String(hsv.h) + "," + String(hsv.s) + "," + String(hsv.v);
+}
 
 String getCooling()
 {
@@ -166,7 +170,9 @@ FieldList fields = {
     {"blendMode", "Blend", BooleanFieldType, 0, 1, 1, getBlendMode},
     {"autoplayDuration", "Autoplay Duration", NumberFieldType, 0, 255, 1, getAutoplayDuration},
     {"rgb", "RGB", SectionFieldType},
-    {"rgb", "Color", ColorFieldType, 0, 255, 1, getRGB},
+    {"rgb", "Color", ColorFieldType, 0, 255, 1, getHSV},
+    {"hsv", "HSV", SectionFieldType},
+    {"hsv", "Color", ColorFieldType, 0, 255, 1, getHSV},
     {"fire", "Fire & Water", SectionFieldType},
     {"cooling", "Cooling", NumberFieldType, 0, 255, 1, getCooling},
     {"sparking", "Sparking", NumberFieldType, 0, 255, 1, getSparking},

@@ -21,6 +21,17 @@ void loadSettings()
   {
     rgb = CRGB(r, g, b);
   }
+  byte h = EEPROM.read(10);
+  byte s = EEPROM.read(11);
+  byte v = EEPROM.read(12);
+
+  if (h == 0 && s == 0 && v == 0)
+  {
+  }
+  else
+  {
+    hsv = CHSV(h, s, v);
+  }
 
   power = EEPROM.read(5);
 
@@ -102,6 +113,25 @@ void setRGB(uint8_t r, uint8_t g, uint8_t b)
   setPattern(patternCount - 1);
 
   broadcastString("color", String(rgb.r) + "," + String(rgb.g) + "," + String(rgb.b));
+}
+
+void setHSV(CHSV color)
+{
+  setHSV(color.h, color.s, color.v);
+}
+
+void setHSV(uint8_t h, uint8_t s, uint8_t v)
+{
+  hsv = CHSV(h, s, v);
+
+  EEPROM.write(10, h);
+  EEPROM.write(11, s);
+  EEPROM.write(12, v);
+  EEPROM.commit();
+
+  setPattern(patternCount - 1);
+
+  broadcastString("color", String(hsv.h) + "," + String(hsv.s) + "," + String(hsv.v));
 }
 
 // increase or decrease the current pattern number, and wrap around at the ends

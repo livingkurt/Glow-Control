@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { SettingSlider, RGBSlider, DropdownSelector, ColorBox } from '../ColorComponents';
+import { SettingSlider, RGBSlider, DropdownSelector, HSVSlider, ColorBoxRGB, ColorBoxHSV } from '../ColorComponents';
 import { Route, BrowserRouter as Router, Switch, Link, useHistory } from 'react-router-dom';
 import API from '../../util/API';
 import { ToggleSwitch } from '../UtilityComponents';
@@ -24,6 +24,7 @@ const Content = (props) => {
 	const [ patterns, set_patterns ] = useState([]);
 	const [ palettes, set_palettes ] = useState([]);
 	const [ rgb, set_rgb ] = useState({});
+	const [ hsv, set_hsv ] = useState({});
 	const [ loading, set_loading ] = useState(true);
 	const [ show_hide, set_show_hide ] = useState();
 	const [ mode_specific_settings, set_mode_specific_settings ] = useState('');
@@ -81,6 +82,23 @@ const Content = (props) => {
 			console.log(err);
 		}
 	};
+	const update_hsv = async (field_name, field_value, hue, saturation, value) => {
+		try {
+			if (field_name !== 'hsv') {
+				hue = field_name === 'hue' ? field_value : hsv.hue;
+				saturation = field_name === 'saturation' ? field_value : hsv.saturation;
+				value = field_name === 'value' ? field_value : hsv.value;
+			}
+			console.log(field_name, field_value);
+			console.log(hue);
+			console.log(saturation);
+			console.log(value);
+			set_hsv({ hue, saturation, value });
+			const res = await API.update_hsv(current_device.query_url, hue, saturation, value);
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	const get_all_settings = async (query_url) => {
 		try {
@@ -99,6 +117,11 @@ const Content = (props) => {
 				red: saved_settings.rgb.value.split(',')[0],
 				green: saved_settings.rgb.value.split(',')[1],
 				blue: saved_settings.rgb.value.split(',')[2]
+			});
+			set_hsv({
+				hue: saved_settings.hsv.value.split(',')[0],
+				saturation: saved_settings.hsv.value.split(',')[1],
+				value: saved_settings.hsv.value.split(',')[2]
 			});
 			set_mode_specific_settings(camelize(saved_settings.pattern.options[saved_settings.pattern.value]));
 			set_show_hide(saved_settings.autoplay.value);
@@ -120,43 +143,6 @@ const Content = (props) => {
 	// 		console.log(err);
 	// 	}
 	// };
-
-	// function HSVtoRGB(h, s, v) {
-	// 	var r, g, b, i, f, p, q, t;
-	// 	if (arguments.length === 1) {
-	// 		(s = h.s), (v = h.v), (h = h.h);
-	// 	}
-	// 	i = Math.floor(h * 6);
-	// 	f = h * 6 - i;
-	// 	p = v * (1 - s);
-	// 	q = v * (1 - f * s);
-	// 	t = v * (1 - (1 - f) * s);
-	// 	switch (i % 6) {
-	// 		case 0:
-	// 			(r = v), (g = t), (b = p);
-	// 			break;
-	// 		case 1:
-	// 			(r = q), (g = v), (b = p);
-	// 			break;
-	// 		case 2:
-	// 			(r = p), (g = v), (b = t);
-	// 			break;
-	// 		case 3:
-	// 			(r = p), (g = q), (b = v);
-	// 			break;
-	// 		case 4:
-	// 			(r = t), (g = p), (b = v);
-	// 			break;
-	// 		case 5:
-	// 			(r = v), (g = p), (b = q);
-	// 			break;
-	// 	}
-	// 	return {
-	// 		r: Math.round(r * 255),
-	// 		g: Math.round(g * 255),
-	// 		b: Math.round(b * 255)
-	// 	};
-	// }
 
 	const reset_device = async () => {
 		try {
@@ -381,18 +367,18 @@ const Content = (props) => {
 									<div className="">
 										{/* <input type="color" /> */}
 										<div className="row jc-b">
-											<ColorBox update_function={update_rgb} color="255,0,0" />
-											<ColorBox update_function={update_rgb} color="255,128,0" />
-											<ColorBox update_function={update_rgb} color="255,255,0" />
-											<ColorBox update_function={update_rgb} color="0,255,0" />
-											<ColorBox update_function={update_rgb} color="0,255,173" />
-											<ColorBox update_function={update_rgb} color="0,255,255" />
-											<ColorBox update_function={update_rgb} color="0,128,255" />
-											<ColorBox update_function={update_rgb} color="0,0,255" />
-											<ColorBox update_function={update_rgb} color="128,0,255" />
-											<ColorBox update_function={update_rgb} color="255,0,255" />
-											<ColorBox update_function={update_rgb} color="255,0,128" />
-											<ColorBox update_function={update_rgb} color="255,255,255" />
+											<ColorBoxRGB update_function={update_rgb} color="255,0,0" />
+											<ColorBoxRGB update_function={update_rgb} color="255,128,0" />
+											<ColorBoxRGB update_function={update_rgb} color="255,255,0" />
+											<ColorBoxRGB update_function={update_rgb} color="0,255,0" />
+											<ColorBoxRGB update_function={update_rgb} color="0,255,173" />
+											<ColorBoxRGB update_function={update_rgb} color="0,255,255" />
+											<ColorBoxRGB update_function={update_rgb} color="0,128,255" />
+											<ColorBoxRGB update_function={update_rgb} color="0,0,255" />
+											<ColorBoxRGB update_function={update_rgb} color="128,0,255" />
+											<ColorBoxRGB update_function={update_rgb} color="255,0,255" />
+											<ColorBoxRGB update_function={update_rgb} color="255,0,128" />
+											<ColorBoxRGB update_function={update_rgb} color="255,255,255" />
 										</div>
 										<RGBSlider
 											update_function={update_rgb}
@@ -419,25 +405,88 @@ const Content = (props) => {
 											settings={settings}
 										/>
 									</div>
-									{/* <ColorPicker />
-									<RGBSlider
-										display_name="Red"
-										setting_name="red"
-										update_function={update_rgb}
-										rgb={rgb.red}
-									/>
-									<RGBSlider
-										display_name="Green"
-										setting_name="green"
-										update_function={update_rgb}
-										rgb={rgb.green}
-									/>
-									<RGBSlider
-										display_name="Blue"
-										setting_name="blue"
-										update_function={update_rgb}
-										rgb={rgb.blue}
-									/> */}
+								</div>
+							)}
+							{mode_specific_settings === 'hSV' && (
+								<div>
+									<h2 className="t-a-c">HSV</h2>
+									<div className="">
+										{/* <input type="color" /> */}
+										<div className="row jc-b m-h-auto w-100">
+											<ColorBoxHSV update_function={update_hsv} rgb="255,0,0" hsv="0,255,255" />
+											<ColorBoxHSV
+												update_function={update_hsv}
+												rgb="255,128,0"
+												hsv="21,255,255"
+											/>
+											<ColorBoxHSV
+												update_function={update_hsv}
+												rgb="255,255,0"
+												hsv="42,255,255"
+											/>
+											<ColorBoxHSV update_function={update_hsv} rgb="0,255,0" hsv="120,255,255" />
+											<ColorBoxHSV
+												update_function={update_hsv}
+												rgb="0,255,173"
+												hsv="138,255,255"
+											/>
+											<ColorBoxHSV
+												update_function={update_hsv}
+												rgb="0,255,255"
+												hsv="127,255,255"
+											/>
+											<ColorBoxHSV
+												update_function={update_hsv}
+												rgb="0,128,255"
+												hsv="148,255,255"
+											/>
+											<ColorBoxHSV update_function={update_hsv} rgb="0,0,255" hsv="170,255,255" />
+											<ColorBoxHSV
+												update_function={update_hsv}
+												rgb="128,0,255"
+												hsv="191,255,255"
+											/>
+											<ColorBoxHSV
+												update_function={update_hsv}
+												rgb="255,0,255"
+												hsv="212,255,255"
+											/>
+											<ColorBoxHSV
+												update_function={update_hsv}
+												rgb="255,0,128"
+												hsv="233,255,255"
+											/>
+											<ColorBoxHSV
+												update_function={update_hsv}
+												rgb="255,255,255"
+												hsv="255,255,255"
+											/>
+										</div>
+										<HSVSlider
+											update_function={update_hsv}
+											color="hue"
+											hsv={hsv}
+											set_hsv={set_hsv}
+											setting={settings.hsv}
+											settings={settings}
+										/>
+										<HSVSlider
+											update_function={update_hsv}
+											color="saturation"
+											hsv={hsv}
+											set_hsv={set_hsv}
+											setting={settings.hsv}
+											settings={settings}
+										/>
+										<HSVSlider
+											update_function={update_hsv}
+											color="value"
+											hsv={hsv}
+											set_hsv={set_hsv}
+											setting={settings.hsv}
+											settings={settings}
+										/>
+									</div>
 								</div>
 							)}
 						</div>

@@ -11,6 +11,10 @@ export default {
 		console.log(`http://${query_url}/rgb?r=${red_value}&g=${green_value}&b=${blue_value}`);
 		return axios.post(`http://${query_url}/rgb?r=${red_value}&g=${green_value}&b=${blue_value}`);
 	},
+	update_hsv: (query_url: string, hue: number, saturation: number, value: number) => {
+		console.log(`http://${query_url}/hsv?h=${hue}&s=${saturation}&v=${value}`);
+		return axios.post(`http://${query_url}/hsv?h=${hue}&s=${saturation}&v=${value}`);
+	},
 	get_all_settings: (query_url: string) => {
 		return axios.get(`http://${query_url}/all`);
 	},

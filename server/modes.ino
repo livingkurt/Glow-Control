@@ -4,6 +4,11 @@ void showRGB()
   fill_solid(leds, NUM_LEDS, rgb);
   FastLED.show();
 }
+void showHSV()
+{
+  fill_solid(leds, NUM_LEDS, hsv);
+  FastLED.show();
+}
 
 void cycle()
 {
