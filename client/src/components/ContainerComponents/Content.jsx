@@ -360,6 +360,23 @@ const Content = (props) => {
 									/>
 								</div>
 							)}
+							{[ 'fire', 'water' ].includes(mode_specific_settings) && (
+								<div>
+									<h2 className="t-a-c">Variablity</h2>
+									<SettingSlider
+										update_function={update_leds}
+										set_settings={set_settings}
+										setting={settings.cooling}
+										settings={settings}
+									/>
+									<SettingSlider
+										update_function={update_leds}
+										set_settings={set_settings}
+										setting={settings.sparking}
+										settings={settings}
+									/>
+								</div>
+							)}
 							{console.log(mode_specific_settings)}
 							{mode_specific_settings === 'rGB' && (
 								<div>
