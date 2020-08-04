@@ -83,6 +83,15 @@ void setBlendMode(uint8_t value)
 
   broadcastInt("blendMode", blendMode);
 }
+void setRandomMode(uint8_t value)
+{
+  randomMode = value == 0 ? 0 : 1;
+
+  EEPROM.write(13, randomMode);
+  EEPROM.commit();
+
+  broadcastInt("randomMode", randomMode);
+}
 
 void setAutoplayDuration(uint8_t value)
 {
@@ -112,7 +121,7 @@ void setRGB(uint8_t r, uint8_t g, uint8_t b)
 
   setPattern(patternCount - 1);
 
-  broadcastString("color", String(rgb.r) + "," + String(rgb.g) + "," + String(rgb.b));
+  broadcastString("rgb", String(rgb.r) + "," + String(rgb.g) + "," + String(rgb.b));
 }
 
 void setHSV(CHSV color)
@@ -131,7 +140,7 @@ void setHSV(uint8_t h, uint8_t s, uint8_t v)
 
   setPattern(patternCount - 1);
 
-  broadcastString("color", String(hsv.h) + "," + String(hsv.s) + "," + String(hsv.v));
+  broadcastString("hsv", String(hsv.h) + "," + String(hsv.s) + "," + String(hsv.v));
 }
 
 // increase or decrease the current pattern number, and wrap around at the ends
@@ -147,6 +156,31 @@ void adjustPattern(bool up)
     currentPatternIndex = patternCount - 1;
   if (currentPatternIndex >= patternCount)
     currentPatternIndex = 0;
+
+  if (autoplay == 0)
+  {
+    EEPROM.write(1, currentPatternIndex);
+    EEPROM.commit();
+  }
+
+  broadcastInt("pattern", currentPatternIndex);
+}
+void randomPattern(bool rand)
+{
+  if (rand)
+  {
+    currentPatternIndex = random(0, patternCount);
+  }
+  // if (up)
+  //   currentPatternIndex++;
+  // else
+  //   currentPatternIndex--;
+
+  // // wrap around at the ends
+  // if (currentPatternIndex < 0)
+  //   currentPatternIndex = patternCount - 1;
+  // if (currentPatternIndex >= patternCount)
+  //   currentPatternIndex = 0;
 
   if (autoplay == 0)
   {

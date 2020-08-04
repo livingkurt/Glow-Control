@@ -14,7 +14,8 @@ const ColorBoxHSV = (props) => {
 					height: '40px',
 					width: '60px',
 					border: 0,
-					borderRadius: '10px'
+					borderRadius: '10px',
+					margin: 'auto'
 				}}
 				onClick={(e) => props.update_function(e.target.name, e.target.value, hue, saturation, value)}
 			/>

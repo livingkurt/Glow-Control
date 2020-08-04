@@ -152,7 +152,6 @@ void run_server()
     Serial.println(r);
     Serial.println(g);
     Serial.println(b);
-    // Serial.println("cors_set_access_control_headers");
     setRGB(r.toInt(), g.toInt(), b.toInt());
     sendString(String(rgb.r) + "," + String(rgb.g) + "," + String(rgb.b));
   });
@@ -165,7 +164,6 @@ void run_server()
     Serial.println(h);
     Serial.println(s);
     Serial.println(v);
-    // Serial.println("cors_set_access_control_headers");
     setHSV(h.toInt(), s.toInt(), v.toInt());
     sendString(String(hsv.h) + "," + String(hsv.s) + "," + String(hsv.v));
   });
@@ -210,6 +208,12 @@ void run_server()
     String value = webServer.arg("value");
     setBlendMode(value.toInt());
     sendInt(blendMode);
+  });
+  webServer.on("/randomMode", HTTP_POST, []() {
+    cors_set_access_control_headers();
+    String value = webServer.arg("value");
+    setRandomMode(value.toInt());
+    sendInt(randomMode);
   });
 
   webServer.on("/autoplay", HTTP_POST, []() {

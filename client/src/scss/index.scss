@@ -828,24 +828,24 @@ video {
 
 /* Style the images inside the grid */
 
-.column img {
-	opacity: 0.8;
-	cursor: pointer;
-	height: unset;
-	border-radius: $br_small_containers;
-}
+// .column img {
+// 	opacity: 0.8;
+// 	cursor: pointer;
+// 	height: unset;
+// 	border-radius: $br_small_containers;
+// }
 
-.column img:hover {
-	opacity: 1;
-}
+// .column img:hover {
+// 	opacity: 1;
+// }
 
-/* Clear floats after the columns */
+// /* Clear floats after the columns */
 
-.row:after {
-	content: "";
-	display: table;
-	clear: both;
-}
+// .row:after {
+// 	content: "";
+// 	display: table;
+// 	clear: both;
+// }
 
 /* The expanding image container */
 

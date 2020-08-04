@@ -89,6 +89,10 @@ String getBlendMode()
 {
   return String(blendMode);
 }
+String getRandomMode()
+{
+  return String(randomMode);
+}
 
 String getAutoplayDuration()
 {
@@ -168,6 +172,7 @@ FieldList fields = {
     {"autoplay", "Autoplay", SectionFieldType},
     {"autoplay", "Autoplay", BooleanFieldType, 0, 1, 1, getAutoplay},
     {"blendMode", "Blend", BooleanFieldType, 0, 1, 1, getBlendMode},
+    {"randomMode", "Random", BooleanFieldType, 0, 1, 1, getRandomMode},
     {"autoplayDuration", "Autoplay Duration", NumberFieldType, 0, 255, 1, getAutoplayDuration},
     {"rgb", "RGB", SectionFieldType},
     {"rgb", "Color", ColorFieldType, 0, 255, 1, getHSV},

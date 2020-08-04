@@ -72,10 +72,7 @@ const Content = (props) => {
 				green = field_name === 'green' ? value : rgb.green;
 				blue = field_name === 'blue' ? value : rgb.blue;
 			}
-			console.log(field_name, value);
-			console.log(red);
-			console.log(green);
-			console.log(blue);
+			console.log(field_name, value, red, green, blue);
 			set_rgb({ red, green, blue });
 			const res = await API.update_rgb(current_device.query_url, red, green, blue);
 		} catch (err) {
@@ -90,9 +87,7 @@ const Content = (props) => {
 				value = field_name === 'value' ? field_value : hsv.value;
 			}
 			console.log(field_name, field_value);
-			console.log(hue);
-			console.log(saturation);
-			console.log(value);
+			console.log(field_name, field_value, hue, saturation, value);
 			set_hsv({ hue, saturation, value });
 			const res = await API.update_hsv(current_device.query_url, hue, saturation, value);
 		} catch (err) {
@@ -130,19 +125,6 @@ const Content = (props) => {
 			console.log(err);
 		}
 	};
-
-	// const update_rgb = async (red_value, green_value, blue_value) => {
-	// 	try {
-	// 		const res = await API.update_rgb(
-	// 			current_device.query_url,
-	// 			rgb.red,
-	// 			rgb.green,
-	// 			rgb.blue
-	// 		);
-	// 	} catch (err) {
-	// 		console.log(err);
-	// 	}
-	// };
 
 	const reset_device = async () => {
 		try {
@@ -267,6 +249,14 @@ const Content = (props) => {
 											settings={settings}
 										/>
 									</div>
+									<div style={{ display: show_hide === 1 ? 'flex' : 'none' }}>
+										<ToggleSwitch
+											update_function={update_leds}
+											set_settings={set_settings}
+											setting={settings.randomMode}
+											settings={settings}
+										/>
+									</div>
 								</div>
 							)}
 							{[ 'strobe', 'sparkle', 'shootingStar', 'cycle', 'beat', 'colorWaves' ].includes(
@@ -384,18 +374,20 @@ const Content = (props) => {
 									<div className="">
 										{/* <input type="color" /> */}
 										<div className="row jc-b">
-											<ColorBoxRGB update_function={update_rgb} color="255,0,0" />
-											<ColorBoxRGB update_function={update_rgb} color="255,128,0" />
-											<ColorBoxRGB update_function={update_rgb} color="255,255,0" />
-											<ColorBoxRGB update_function={update_rgb} color="0,255,0" />
-											<ColorBoxRGB update_function={update_rgb} color="0,255,173" />
-											<ColorBoxRGB update_function={update_rgb} color="0,255,255" />
-											<ColorBoxRGB update_function={update_rgb} color="0,128,255" />
-											<ColorBoxRGB update_function={update_rgb} color="0,0,255" />
-											<ColorBoxRGB update_function={update_rgb} color="128,0,255" />
-											<ColorBoxRGB update_function={update_rgb} color="255,0,255" />
-											<ColorBoxRGB update_function={update_rgb} color="255,0,128" />
-											<ColorBoxRGB update_function={update_rgb} color="255,255,255" />
+											<div className="row jc-c">
+												<ColorBoxRGB update_function={update_rgb} color="255,0,0" />
+												<ColorBoxRGB update_function={update_rgb} color="255,128,0" />
+												<ColorBoxRGB update_function={update_rgb} color="255,255,0" />
+												<ColorBoxRGB update_function={update_rgb} color="0,255,0" />
+												<ColorBoxRGB update_function={update_rgb} color="0,255,173" />
+												<ColorBoxRGB update_function={update_rgb} color="0,255,255" />
+												<ColorBoxRGB update_function={update_rgb} color="0,128,255" />
+												<ColorBoxRGB update_function={update_rgb} color="0,0,255" />
+												<ColorBoxRGB update_function={update_rgb} color="128,0,255" />
+												<ColorBoxRGB update_function={update_rgb} color="255,0,255" />
+												<ColorBoxRGB update_function={update_rgb} color="255,0,128" />
+												<ColorBoxRGB update_function={update_rgb} color="255,255,255" />
+											</div>
 										</div>
 										<RGBSlider
 											update_function={update_rgb}
@@ -434,14 +426,14 @@ const Content = (props) => {
 											<ColorBoxHSV
 												update_function={update_hsv}
 												rgb="255,128,0"
-												hsv="21,255,255"
+												hsv="32,255,255"
 											/>
 											<ColorBoxHSV
 												update_function={update_hsv}
 												rgb="255,255,0"
-												hsv="42,255,255"
+												hsv="64,255,255"
 											/>
-											<ColorBoxHSV update_function={update_hsv} rgb="0,255,0" hsv="120,255,255" />
+											<ColorBoxHSV update_function={update_hsv} rgb="0,255,0" hsv="92,255,255" />
 											<ColorBoxHSV
 												update_function={update_hsv}
 												rgb="0,255,173"
@@ -476,17 +468,79 @@ const Content = (props) => {
 											<ColorBoxHSV
 												update_function={update_hsv}
 												rgb="255,255,255"
-												hsv="255,255,255"
+												hsv="255,0,255"
 											/>
 										</div>
-										<HSVSlider
-											update_function={update_hsv}
-											color="hue"
-											hsv={hsv}
-											set_hsv={set_hsv}
-											setting={settings.hsv}
-											settings={settings}
-										/>
+										<div
+											style={{
+												position: 'relative',
+												height: '36px',
+												left: '0',
+												width: '100%',
+												top: '5px',
+												borderRadius: '10px',
+												display: 'flex',
+												marginTop: '10px',
+												marginBottom: '15px',
+												justifyContent: 'flex-end'
+											}}
+										>
+											<img
+												style={{
+													webkitTransform: 'rotate(180deg)',
+													height: '36px',
+													left: '230px',
+													width: '77%',
+													borderRadius: '10px',
+													marginRight: '10px'
+												}}
+												src="./images/hsv_picture.jpg"
+												alt="hsv"
+												className="w-100"
+											/>
+											<div
+												style={{
+													position: 'absolute',
+													zIndex: 0,
+													width: '100%',
+													/* left: 0px, */
+													top: '-10px'
+												}}
+											>
+												<HSVSlider
+													update_function={update_hsv}
+													color="hue"
+													hsv={hsv}
+													set_hsv={set_hsv}
+													setting={settings.hsv}
+													settings={settings}
+												/>
+											</div>
+										</div>
+										{/* <div>
+											<div style={{ position: 'relative' }}>
+												<img
+													style={{
+														position: 'absolute',
+														height: '41px',
+														zIndex: '0',
+														width: '79%',
+														right: '0px'
+													}}
+													src="./images/hsv_picture.jpg"
+													alt="hsv"
+													className="w-100"
+												/>
+												<HSVSlider
+													update_function={update_hsv}
+													color="hue"
+													hsv={hsv}
+													set_hsv={set_hsv}
+													setting={settings.hsv}
+													settings={settings}
+												/>
+											</div>
+										</div> */}
 										<HSVSlider
 											update_function={update_hsv}
 											color="saturation"
