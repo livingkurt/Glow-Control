@@ -147,6 +147,7 @@ PatternAndNameList patterns = {
     {strobe_mode, "Strobe"},
     {pulse, "Pulse"},
     {cycle, "Cycle"},
+    // {juggljugglee_2, "Juggle 2.0"},
     {cycle_rainbow_desaturated, "Cycle Rainbow Desaturated"},
     {sparkle, "Sparkle"},
     {shootingStar, "Shooting Star"},

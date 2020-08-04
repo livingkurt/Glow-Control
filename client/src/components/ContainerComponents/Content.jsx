@@ -81,6 +81,7 @@ const Content = (props) => {
 			settings.map((setting) => {
 				return (saved_settings[setting.name] = setting);
 			});
+			console.log(saved_settings);
 			set_settings(saved_settings);
 			set_patterns(settings[2].options);
 			set_palettes(settings[3].options);
@@ -246,7 +247,7 @@ const Content = (props) => {
 									/>
 								</div>
 							)}
-							{[ 'strobe', 'pulse', 'cycle', 'sparkle', 'shootingStar', 'beat' ].includes(
+							{[ 'strobe', 'pulse', 'cycle', 'sparkle', 'shootingStar', 'beat', 'juggle' ].includes(
 								mode_specific_settings
 							) && (
 								<div>
@@ -264,7 +265,9 @@ const Content = (props) => {
 										settings={settings}
 										direction="rtl"
 									/>
-									{[ 'sparkle', 'shootingStar', 'beat' ].includes(mode_specific_settings) && (
+									{[ 'sparkle', 'shootingStar', 'beat', 'juggle' ].includes(
+										mode_specific_settings
+									) && (
 										<SettingSlider
 											update_function={update_leds}
 											set_settings={set_settings}
