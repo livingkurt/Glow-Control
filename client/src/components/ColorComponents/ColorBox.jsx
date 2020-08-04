@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 const ColorBox = (props) => {
-	// const red = props.color.split(','];
-
 	const red = props.color.split(',')[0];
 	const green = props.color.split(',')[1];
 	const blue = props.color.split(',')[2];
-	console.log(red);
 	return (
 		<div>
 			<button
@@ -20,7 +17,7 @@ const ColorBox = (props) => {
 					borderRadius: '10px',
 					marginRight: '10px'
 				}}
-				onClick={() => props.update_function(red, green, blue)}
+				onClick={(e) => props.update_function(e.target.name, e.target.value, red, green, blue)}
 			/>
 		</div>
 	);

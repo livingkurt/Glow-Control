@@ -1,5 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ColorPicker, SettingSlider, RGBSlider, DropdownSelector, ColorBox } from '../ColorComponents';
+import {
+	ColorPicker,
+	SettingSlider,
+	RGBSlider,
+	DropdownSelector,
+	ColorBox,
+	RedSlider,
+	GreenSlider,
+	BlueSlider
+} from '../ColorComponents';
 import { Route, BrowserRouter as Router, Switch, Link, useHistory } from 'react-router-dom';
 import API from '../../util/API';
 import { ToggleSwitch } from '../UtilityComponents';
@@ -9,8 +18,8 @@ const Content = (props) => {
 	// const leds = '192.168.0.219';
 	// const leds = '192.168.0.60';
 
-	const autoplay_ref = useRef();
-	console.log(autoplay_ref);
+	// const autoplay_ref = useRef();
+	// console.log(autoplay_ref);
 
 	const devices = {
 		living_room: { name: 'Living Room', query_url: '192.168.0.219' },
@@ -64,9 +73,19 @@ const Content = (props) => {
 		}
 	};
 
-	const update_solid_color = async (red_value, green_value, blue_value) => {
+	const update_solid_color = async (field_name, value, red, green, blue) => {
 		try {
-			const res = await API.update_solid_color(current_device.query_url, red_value, green_value, blue_value);
+			if (field_name !== 'solidColor') {
+				red = field_name === 'red' ? value : solid_color.red;
+				green = field_name === 'green' ? value : solid_color.green;
+				blue = field_name === 'blue' ? value : solid_color.blue;
+			}
+			console.log(field_name, value);
+			console.log(red);
+			console.log(green);
+			console.log(blue);
+			set_solid_color({ red, green, blue });
+			const res = await API.update_solid_color(current_device.query_url, red, green, blue);
 		} catch (err) {
 			console.log(err);
 		}
@@ -85,6 +104,11 @@ const Content = (props) => {
 			set_settings(saved_settings);
 			set_patterns(settings[2].options);
 			set_palettes(settings[3].options);
+			set_solid_color({
+				red: saved_settings.solidColor.value.split(',')[0],
+				green: saved_settings.solidColor.value.split(',')[1],
+				blue: saved_settings.solidColor.value.split(',')[2]
+			});
 			set_mode_specific_settings(camelize(saved_settings.pattern.options[saved_settings.pattern.value]));
 			set_show_hide(saved_settings.autoplay.value);
 			set_loading(false);
@@ -105,6 +129,43 @@ const Content = (props) => {
 	// 		console.log(err);
 	// 	}
 	// };
+
+	// function HSVtoRGB(h, s, v) {
+	// 	var r, g, b, i, f, p, q, t;
+	// 	if (arguments.length === 1) {
+	// 		(s = h.s), (v = h.v), (h = h.h);
+	// 	}
+	// 	i = Math.floor(h * 6);
+	// 	f = h * 6 - i;
+	// 	p = v * (1 - s);
+	// 	q = v * (1 - f * s);
+	// 	t = v * (1 - (1 - f) * s);
+	// 	switch (i % 6) {
+	// 		case 0:
+	// 			(r = v), (g = t), (b = p);
+	// 			break;
+	// 		case 1:
+	// 			(r = q), (g = v), (b = p);
+	// 			break;
+	// 		case 2:
+	// 			(r = p), (g = v), (b = t);
+	// 			break;
+	// 		case 3:
+	// 			(r = p), (g = q), (b = v);
+	// 			break;
+	// 		case 4:
+	// 			(r = t), (g = p), (b = v);
+	// 			break;
+	// 		case 5:
+	// 			(r = v), (g = p), (b = q);
+	// 			break;
+	// 	}
+	// 	return {
+	// 		r: Math.round(r * 255),
+	// 		g: Math.round(g * 255),
+	// 		b: Math.round(b * 255)
+	// 	};
+	// }
 
 	const reset_device = async () => {
 		try {
@@ -220,7 +281,7 @@ const Content = (props) => {
 										setting={settings.autoplay}
 										settings={settings}
 									/>
-									{console.log(show_hide)}
+									{/* {console.log(show_hide)} */}
 									<div style={{ display: show_hide === 1 ? 'flex' : 'none' }}>
 										<SettingSlider
 											update_function={update_leds}
@@ -325,9 +386,9 @@ const Content = (props) => {
 							{mode_specific_settings === 'solidColor' && (
 								<div>
 									<h2 className="t-a-c">Solid Color</h2>
-									<div>
+									<div className="">
 										{/* <input type="color" /> */}
-										<div className="flex row">
+										<div className="row jc-b">
 											<ColorBox update_function={update_solid_color} color="255,0,0" />
 											<ColorBox update_function={update_solid_color} color="255,128,0" />
 											<ColorBox update_function={update_solid_color} color="255,255,0" />
@@ -341,6 +402,30 @@ const Content = (props) => {
 											<ColorBox update_function={update_solid_color} color="255,0,128" />
 											<ColorBox update_function={update_solid_color} color="255,255,255" />
 										</div>
+										<RGBSlider
+											update_function={update_solid_color}
+											color="red"
+											solid_color={solid_color}
+											set_solid_color={set_solid_color}
+											setting={settings.solidColor}
+											settings={settings}
+										/>
+										<RGBSlider
+											update_function={update_solid_color}
+											color="green"
+											solid_color={solid_color}
+											set_solid_color={set_solid_color}
+											setting={settings.solidColor}
+											settings={settings}
+										/>
+										<RGBSlider
+											update_function={update_solid_color}
+											color="blue"
+											solid_color={solid_color}
+											set_solid_color={set_solid_color}
+											setting={settings.solidColor}
+											settings={settings}
+										/>
 									</div>
 									{/* <ColorPicker />
 									<RGBSlider
