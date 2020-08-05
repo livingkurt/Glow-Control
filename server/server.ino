@@ -38,7 +38,7 @@ ESP8266HTTPUpdateServer httpUpdateServer;
 
 #define MY_NAME "String Lights" //burn kitchen
 #define DATA_PIN D2
-#define SYSTEM_MAX_LEDS 50
+#define SYSTEM_MAX_LEDS 500
 #define LED_TYPE WS2811 //LED String
 #define COLOR_ORDER RGB // LED String
 
