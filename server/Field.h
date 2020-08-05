@@ -35,6 +35,7 @@ typedef struct Field
   uint8_t step;
   FieldGetter getValue;
   FieldGetter getOptions;
+  FieldGetter getQueryURLs;
   FieldSetter setValue;
 };
 
@@ -106,6 +107,12 @@ String getFieldsJson(FieldList fields, uint8_t count)
     {
       json += ",\"options\":[";
       json += field.getOptions();
+      json += "]";
+    }
+    if (field.getQueryURLs)
+    {
+      json += ",\"queryURLs\":[";
+      json += field.getQueryURLs();
       json += "]";
     }
 

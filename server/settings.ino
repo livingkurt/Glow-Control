@@ -80,7 +80,7 @@ void setAutoplayPalette(uint8_t value)
 {
   autoplayPalette = value == 0 ? 0 : 1;
 
-  EEPROM.write(14, autoplayPalette);
+  EEPROM.write(15, autoplayPalette);
   EEPROM.commit();
 
   broadcastInt("autoplayPalette", autoplayPalette);
@@ -89,7 +89,7 @@ void setAutoplayPaletteDuration(uint8_t value)
 {
   autoplayPaletteDuration = value;
 
-  EEPROM.write(15, autoplayPaletteDuration);
+  EEPROM.write(16, autoplayPaletteDuration);
   EEPROM.commit();
 
   autoplayPaletteTimeout = millis() + (autoplayPaletteDuration * 1000);
@@ -119,7 +119,7 @@ void setRandomPaletteMode(uint8_t value)
 {
   randomPaletteMode = value == 0 ? 0 : 1;
 
-  EEPROM.write(17, randomPaletteMode);
+  EEPROM.write(18, randomPaletteMode);
   EEPROM.commit();
 
   broadcastInt("randomPaletteMode", randomPaletteMode);
@@ -193,7 +193,7 @@ void randomPattern(bool rand)
   }
   if (autoplayPattern == 0)
   {
-    EEPROM.write(16, currentPatternIndex);
+    EEPROM.write(17, currentPatternIndex);
     EEPROM.commit();
   }
 
@@ -229,7 +229,7 @@ void randomPalette(bool rand)
   }
   if (autoplayPalette == 0)
   {
-    EEPROM.write(15, currentPaletteIndex);
+    EEPROM.write(19, currentPaletteIndex);
     EEPROM.commit();
   }
 
@@ -284,6 +284,55 @@ void setPaletteName(String name)
     if (paletteNames[i] == name)
     {
       setPalette(i);
+      break;
+    }
+  }
+}
+// void setDevice(uint8_t value)
+// {
+//   if (value >= deviceCount)
+//     value = deviceCount - 1;
+
+//   currentDeviceIndex = value;
+
+//   EEPROM.write(20, currentDeviceIndex);
+//   EEPROM.commit();
+
+//   broadcastInt("device", currentDeviceIndex);
+// }
+
+// void setDeviceName(String name)
+// {
+//   for (uint8_t i = 0; i < deviceCount; i++)
+//   {
+//     if (deviceNames[i] == name)
+//     {
+//       setDevice(i);
+//       break;
+//     }
+//   }
+// }
+
+void setDevice(uint8_t value)
+{
+  if (value >= deviceCount)
+    value = deviceCount - 1;
+
+  currentDeviceIndex = value;
+
+  EEPROM.write(20, currentDeviceIndex);
+  EEPROM.commit();
+
+  broadcastInt("device", currentDeviceIndex);
+}
+
+void setDeviceName(String name)
+{
+  for (uint8_t i = 0; i < deviceCount; i++)
+  {
+    if (devices[i].name == name)
+    {
+      setDevice(i);
       break;
     }
   }

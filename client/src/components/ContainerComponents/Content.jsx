@@ -16,6 +16,7 @@ const Content = (props) => {
 	const [ current_device, set_current_device ] = useState(leds.test);
 	const [ patterns, set_patterns ] = useState([]);
 	const [ palettes, set_palettes ] = useState([]);
+	// const [ devices, set_devices ] = useState([]);
 	const [ rgb, set_rgb ] = useState({});
 	const [ hsv, set_hsv ] = useState({});
 	const [ loading, set_loading ] = useState(true);
@@ -106,10 +107,15 @@ const Content = (props) => {
 			settings.map((setting) => {
 				return (saved_settings[setting.name] = setting);
 			});
-			console.log(saved_settings);
+			console.log(settings[4].options);
 			set_settings(saved_settings);
 			set_patterns(settings[2].options);
 			set_palettes(settings[3].options);
+			// let saved_devices = {};
+			// settings[4].options.map((device) => {
+			// 	return (saved_devices[device.name] = device);
+			// });
+			// set_devices(saved_devices);
 			set_rgb({
 				red: saved_settings.rgb.value.split(',')[0],
 				green: saved_settings.rgb.value.split(',')[1],
@@ -197,8 +203,8 @@ const Content = (props) => {
 				</div>
 				{/* <DropdownSelector
 					update_function={update_leds}
-					data={patterns}
-					setting={settings.pattern}
+					data={devices}
+					setting={settings.device}
 					settings={settings}
 				/> */}
 				{loading ? (

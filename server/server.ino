@@ -118,6 +118,7 @@ unsigned long autoplayPatternTimeout = 0;
 unsigned long autoplayPaletteTimeout = 0;
 
 uint8_t currentPaletteIndex = 0;
+uint8_t currentDeviceIndex = 0;
 
 uint8_t rate = 10;
 uint8_t gHue = 0; // rotating "base color" used by many of the patterns
@@ -164,11 +165,34 @@ PatternAndNameList patterns = {
     {water, "Water"},
     // {showRGB, "RGB"},
     {twinkles, "Twinkles"},
-    {showHSV, "HSV"}
-
-};
+    {showHSV, "HSV"}};
 
 const uint8_t patternCount = ARRAY_SIZE(patterns);
+
+// typedef void (*Device)();
+// typedef Device DeviceList[];
+
+typedef struct
+{
+  String name;
+  String queryURL;
+} DeviceAndName;
+
+typedef DeviceAndName DeviceAndNameList[];
+
+// typedef struct
+// {
+//   String name;
+//   String query_url;
+// } DeviceAndName;
+// typedef DeviceAndName DeviceAndNameList[];
+
+DeviceAndNameList devices = {
+    {"Living Room", "192.168.0.219"},
+    {"Test", "192.168.0.152"},
+    {"Test 2", "192.168.0.60"}};
+
+const uint8_t deviceCount = ARRAY_SIZE(devices);
 
 typedef struct
 {

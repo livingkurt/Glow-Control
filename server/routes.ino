@@ -195,6 +195,19 @@ void run_server()
     setPaletteName(value);
     sendInt(currentPaletteIndex);
   });
+  webServer.on("/device", HTTP_POST, []() {
+    cors_set_access_control_headers();
+    String value = webServer.arg("value");
+    setDevice(value.toInt());
+    sendInt(currentDeviceIndex);
+  });
+
+  webServer.on("/deviceName", HTTP_POST, []() {
+    cors_set_access_control_headers();
+    String value = webServer.arg("value");
+    setDeviceName(value);
+    sendInt(currentDeviceIndex);
+  });
 
   webServer.on("/brightness", HTTP_POST, []() {
     cors_set_access_control_headers();

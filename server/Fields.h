@@ -80,6 +80,54 @@ String getPalettes()
 
   return json;
 }
+String getDevice()
+{
+  return String(currentDeviceIndex);
+}
+
+// String getDevices()
+// {
+//   String json = "";
+
+//   for (uint8_t i = 0; i < deviceCount; i++)
+//   {
+//     // json += "\"" + devices[i].name + "\"" + devices[i].query_url + "\"";
+//     json += "\"" + devices[i].name + "\"";
+//     if (i < deviceCount - 1)
+//       json += ",";
+//   }
+
+//   return json;
+// }
+String getDevices()
+{
+  String json = "";
+
+  for (uint8_t i = 0; i < deviceCount; i++)
+  {
+    // json += "\"" + devices[i].name + "\"" + devices[i].query_url + "\"";
+    // json += "\"" + devices[i].name + "\"";
+    json += "{\"name\":\"" + devices[i].name + "\",\"queryURL\":\"" + devices[i].queryURL + "\"}";
+    if (i < deviceCount - 1)
+      json += ",";
+  }
+
+  return json;
+}
+// String getDeviceAddress()
+// {
+//   String json = "";
+
+//   for (uint8_t i = 0; i < deviceCount; i++)
+//   {
+//     // json += "\"" + devices[i].name + "\"" + devices[i].query_url + "\"";
+//     json += "\"" + devices[i].queryURL + "\"";
+//     if (i < deviceCount - 1)
+//       json += ",";
+//   }
+
+//   return json;
+// }
 
 String getAutoplayPattern()
 {
@@ -174,6 +222,17 @@ FieldList fields = {
     {"brightness", "Brightness", NumberFieldType, 1, 255, 1, getBrightness},
     {"pattern", "Pattern", SelectFieldType, 0, patternCount, 1, getPattern, getPatterns},
     {"palette", "Palette", SelectFieldType, 0, paletteCount, 1, getPalette, getPalettes},
+    {
+        "device",
+        "Device",
+        SelectFieldType,
+        0,
+        deviceCount,
+        1,
+        getDevice,
+        getDevices,
+        // getDeviceAddress,
+    },
     {"speed", "Speed", NumberFieldType, 1, 255, 1, getSpeed},
     {"strobe", "Strobe", NumberFieldType, 0, 255, 1, getStrobe},
     {"blank", "Blank", NumberFieldType, 0, 255, 1, getBlank},
