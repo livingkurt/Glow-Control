@@ -1,0 +1,72 @@
+$background_color: #272727;
+$content_bg_color: #272727;
+$font_color: white;
+$font_size: 1.6rem;
+$validation_color: #ff4a4a;
+$main_font: main_font;
+$heading_font: heading_font;
+$bs_shallow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+$bs_deep: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+$br_small_containers: 1rem;
+$br_medium_containers: 1.5rem;
+$br_large_containers: 2rem;
+
+.btn {
+	box-shadow: $bs_shallow;
+	// background-color: transparent;
+	color: $font_color;
+	border: 0px;
+	font-family: $main_font;
+	border-radius: $br_small_containers;
+	transition: all .5s ease;
+	padding: 10px;
+}
+
+.btn:hover {
+	box-shadow: $bs_deep;
+	background-color: #bebcbc;
+}
+
+.btn.primary {
+	background-color: #888888;
+}
+
+.btn.primary:hover {
+	box-shadow: $bs_deep;
+	background-color: #a5a5a5;
+}
+
+.btn.secondary {
+	background-color: #686767;
+}
+
+.btn.secondary:hover {
+	box-shadow: $bs_deep;
+	background-color: #7c7c7c;
+}
+
+.btn-nav {
+	background-color: #3a3a3a;
+	// box-shadow: unset;
+}
+
+.btn.icon {
+	box-shadow: unset;
+	padding: 6px 10px;
+}
+
+.btn.icon:hover {
+	background-color: gray;
+	box-shadow: $bs_deep;
+}
+
+.button.mobile.nav {
+	background-color: transparent;
+	box-shadow: unset;
+}
+
+.button.nav:hover,
+.button.mobile.nav:hover {
+	box-shadow: $bs_deep;
+	background-color: gray;
+}

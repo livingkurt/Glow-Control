@@ -311,3 +311,180 @@ DEFINE_GRADIENT_PALETTE(gr64_hult_gp){
     201, 1, 86, 72,
     239, 0, 55, 45,
     255, 0, 55, 45};
+
+// Gradient palette "aquamarinemermaid_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/rc/tn/aquamarinemermaid.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 20 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE(aquamarinemermaid_gp){
+    0, 23, 4, 32,
+    63, 98, 31, 52,
+    127, 224, 138, 24,
+    191, 7, 55, 164,
+    255, 23, 4, 32};
+
+// Gradient palette "beautifuldreams_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/rc/tn/beautifuldreams.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 28 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE(beautifuldreams_gp){
+    0, 27, 27, 49,
+    51, 126, 104, 138,
+    76, 64, 85, 133,
+    127, 4, 16, 78,
+    178, 64, 85, 133,
+    204, 126, 104, 138,
+    255, 27, 27, 49};
+
+// Gradient palette "bluefly_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/rc/tn/bluefly.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 16 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE(bluefly_gp){
+    0, 0, 0, 0,
+    63, 0, 39, 64,
+    191, 175, 215, 235,
+    255, 0, 0, 0};
+
+// Gradient palette "fireandice_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/rc/tn/fireandice.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 24 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE(fireandice_gp){
+    0, 80, 2, 1,
+    51, 206, 15, 1,
+    101, 242, 34, 1,
+    153, 16, 67, 128,
+    204, 2, 21, 69,
+    255, 1, 2, 4};
+
+// Gradient palette "halloween_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/rc/tn/halloween.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 16 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE(halloween_gp){
+    0, 173, 53, 1,
+    127, 0, 0, 0,
+    191, 173, 53, 1,
+    255, 173, 53, 1};
+
+// Gradient palette "hangonfatboy_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/rc/tn/hangonfatboy.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 40 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE(hangonfatboy_gp){
+    0, 215, 74, 6,
+    30, 74, 22, 53,
+    61, 18, 6, 27,
+    96, 5, 36, 85,
+    114, 1, 8, 30,
+    140, 1, 8, 30,
+    158, 5, 36, 85,
+    193, 18, 6, 27,
+    224, 74, 22, 53,
+    255, 215, 74, 6};
+
+// Gradient palette "hopegoddess_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/rc/tn/hopegoddess.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 8 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE(hopegoddess_gp){
+    0, 229, 85, 1,
+    255, 36, 3, 32};
+
+// Gradient palette "ildwinds_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/rc/tn/ildwinds.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 20 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE(ildwinds_gp){
+    0, 17, 6, 4,
+    63, 51, 19, 13,
+    127, 177, 138, 120,
+    191, 30, 63, 102,
+    255, 2, 9, 23};
+
+// Gradient palette "catfairy_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/rc/tn/catfairy.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 24 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE(catfairy_gp){
+    0, 74, 124, 85,
+    76, 152, 128, 44,
+    127, 144, 97, 96,
+    178, 100, 72, 102,
+    232, 78, 90, 122,
+    255, 78, 90, 122};
+
+// Gradient palette "mistressnight_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/rc/tn/mistressnight.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 20 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE(mistressnight_gp){
+    0, 1, 5, 29,
+    51, 36, 10, 23,
+    127, 118, 91, 17,
+    204, 36, 10, 23,
+    255, 1, 4, 28};
+
+// Gradient palette "parrot_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/rc/tn/parrot.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 20 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE(parrot_gp){
+    0, 126, 0, 1,
+    114, 197, 168, 16,
+    140, 197, 168, 16,
+    216, 0, 2, 32,
+    255, 0, 2, 32};
+
+// Gradient palette "shyviolet_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/rc/tn/shyviolet.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 28 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE(shyviolet_gp){
+    0, 10, 9, 32,
+    38, 41, 36, 79,
+    76, 103, 107, 188,
+    127, 142, 154, 194,
+    178, 58, 92, 176,
+    216, 19, 51, 158,
+    255, 5, 24, 103};
+
+// Gradient palette "snodraegon_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/rc/tn/snodraegon.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 20 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE(snodraegon_gp){
+    0, 25, 72, 155,
+    63, 35, 95, 172,
+    124, 255, 250, 250,
+    191, 34, 32, 68,
+    255, 27, 25, 59};
+
+// Gradient palette "sunlitwave_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/rc/tn/sunlitwave.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 32 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE(sunlitwave_gp){
+    0, 5, 9, 84,
+    45, 37, 24, 111,
+    81, 16, 5, 59,
+    112, 24, 1, 20,
+    150, 34, 1, 2,
+    198, 175, 36, 7,
+    237, 208, 104, 16,
+    255, 239, 211, 158};

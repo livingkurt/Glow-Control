@@ -195,7 +195,25 @@ const CRGBPalette16 palettes[] = {
     GMT_drywet_gp,
     ib_jul01_gp,
     Colorfull_gp,
-};
+    tubepreview_gp,
+    trove_gp,
+    wildwinds_gp,
+    angelrepose_gp,
+    bambooblossom_gp,
+    butterflyfairy_gp,
+    cloud_gp,
+    healingangel_gp,
+    jeweleddragon_gp,
+    pinkchampagne_gp,
+    pinkfairyrose_gp,
+    spellbound_gp,
+    springangel_gp,
+    tashangel_gp,
+    angelcompassion_gp,
+    qual_mixed_12_gp,
+    mars_sand_dunes01_gp,
+    aurora_borealis_gp,
+    rain_gp};
 
 const uint8_t paletteCount = ARRAY_SIZE(palettes);
 
@@ -217,7 +235,25 @@ const String paletteNames[paletteCount] = {
     "Autumn Water",
     "Faded Apple Tree",
     "Spring Time",
-};
+    "Pale Dawn",
+    "Skittles",
+    "Wind Chimes",
+    "Bubble Gum",
+    "Pink Roses",
+    "Dusk",
+    "Fairy Field",
+    "Pastel",
+    "Orange Fade",
+    "Popsicle",
+    "Apple Blossoms",
+    "Lollypopsicle",
+    "River Rocks",
+    "Arctic Winds",
+    "Navy Cloud",
+    "Desaturation",
+    "Rainy Day",
+    "Aurora Borealis",
+    "LoFi"};
 
 #include "Fields.h"
 

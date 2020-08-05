@@ -195,6 +195,12 @@ const Content = (props) => {
 						Reset
 					</button>
 				</div>
+				{/* <DropdownSelector
+					update_function={update_leds}
+					data={patterns}
+					setting={settings.pattern}
+					settings={settings}
+				/> */}
 				{loading ? (
 					<h1 className="t-a-c">Loading... Make Sure Device is Turned On</h1>
 				) : (
