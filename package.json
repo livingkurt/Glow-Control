@@ -14,7 +14,7 @@
 		"if-env": "^1.0.4",
 		"jsonwebtoken": "^8.5.1",
 		"mongoose": "^5.8.11",
-		"nodemailer": "^6.4.10",
+		"nodemailer": "^6.4.16",
 		"ts-node": "^8.10.2"
 	},
 	"devDependencies": {
